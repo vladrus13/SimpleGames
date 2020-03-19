@@ -15,4 +15,4 @@ Some simple training games
 
 #### 4. [SmallRPG](https://github.com/vladrus13/SimpleGames/tree/master/SmallRPG)
 
-Небольшая RPG игра (без использования прошлого движка на libGDX) на swing. Скоро будет ссылка на wiki игры.
+Небольшая RPG игра (без использования прошлого движка на libGDX) на swing. Скоро будет [wiki](https://github.com/vladrus13/SimpleGames/blob/master/SmallRPG/README.md) игры.
