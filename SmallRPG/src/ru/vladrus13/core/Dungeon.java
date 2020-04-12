@@ -2,9 +2,12 @@ package ru.vladrus13.core;
 
 import ru.vladrus13.core.main.dialog.Dialog;
 import ru.vladrus13.core.main.dungeon.Floor;
+import ru.vladrus13.core.person.Person;
 import ru.vladrus13.core.person.unit.Hero;
 import ru.vladrus13.core.utils.GameService;
+import ru.vladrus13.core.utils.event.EventService;
 import ru.vladrus13.core.utils.exception.GameException;
+import ru.vladrus13.core.utils.picture.FontService;
 import ru.vladrus13.core.utils.ways.Point;
 
 import javax.swing.*;
@@ -28,6 +31,8 @@ public class Dungeon extends JPanel implements ActionListener, MouseListener, Ke
         gameService = new GameService();
         gameService.setCurrentFloor(floor);
         gameService.setHero(hero);
+        gameService.setFontService(new FontService());
+        gameService.setEventService(new EventService());
         JFrame frame = new JFrame();
         frame.setSize(width, height);
         frame.setBackground(Color.BLACK);
@@ -101,7 +106,11 @@ public class Dungeon extends JPanel implements ActionListener, MouseListener, Ke
                         gameService.setDialog(null);
                     }
                 } else {
-                    gameService.setDialog(new Dialog(new String[]{"hello", "hello. hello", "hello. hello. hello"}));
+                    try {
+                        gameService.getEventService().onEnter(gameService);
+                    } catch (GameException gameException) {
+                        gameException.printStackTrace();
+                    }
                 }
                 break;
             default: break;

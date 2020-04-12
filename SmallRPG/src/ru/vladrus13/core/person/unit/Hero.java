@@ -19,7 +19,7 @@ public class Hero extends Person {
     public Hero(int id, Point place, Direction direction) throws GameException {
         super(id, place, direction);
         realPlace = new Point(place.getX() * 32, place.getY() * 32);
-        this.picture = new PictureService().loadUnit(Path.of("assets/pictures/unit/hero"));
+        this.picture = new PictureService().loadUnit(Path.of("assets/pictures/units/hero"));
         this.stats = new Stats();
         this.skills = new Skills();
     }

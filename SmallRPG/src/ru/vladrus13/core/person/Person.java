@@ -1,5 +1,6 @@
 package ru.vladrus13.core.person;
 
+import ru.vladrus13.core.main.dialog.Dialog;
 import ru.vladrus13.core.main.dungeon.Placeable;
 import ru.vladrus13.core.utils.Drawing;
 import ru.vladrus13.core.utils.GameService;
@@ -21,10 +22,18 @@ public class Person extends Placeable implements Drawing {
     protected final int speed = 2;
     protected String name;
 
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public Person(int id, Point place, Direction direction) throws GameException {
         super(id, place);
         name = new UnitService().getNameFromId(id);
-        this.picture = new PictureService().loadUnit(Path.of("assets/pictures/unit/" + name.toLowerCase()));
+        this.picture = new PictureService().loadUnit(Path.of("assets/pictures/units/" + name.toLowerCase()));
         this.realPlace = new Point(place.getX() * 32, place.getY() * 32);
         this.direction = direction;
 
@@ -54,23 +63,18 @@ public class Person extends Placeable implements Drawing {
         if (isWent()) return;
         this.direction = direction;
         Point future = new Point(place.getX(), place.getY());
-        updatePoint(direction, future);
+        future = future.makePoint(direction);
         if (!gameService.getCurrentFloor().isCannotWalk(future)) {
-            updatePoint(direction, place);
+            place = place.makePoint(direction);
             went();
-        }
-    }
-
-    private void updatePoint(Direction direction, Point place) {
-        switch (direction) {
-            case UP: place.incY(-1); break;
-            case DOWN: place.incY(1); break;
-            case LEFT: place.incX(-1); break;
-            case RIGHT: place.incX(1); break;
         }
     }
 
     public boolean isWent() {
         return realPlace.getX() != place.getX() * 32 || realPlace.getY() != place.getY() * 32;
+    }
+
+    public void onEnter(GameService gameService) throws GameException {
+        gameService.setDialog(new Dialog(new String[]{"hello", "hello. hello", "hello. hello. hello"}, new Person[]{this, this, this}, gameService));
     }
 }

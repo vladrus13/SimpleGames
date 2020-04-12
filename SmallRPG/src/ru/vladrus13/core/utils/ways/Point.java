@@ -33,4 +33,19 @@ public class Point {
         return x == point.x &&
                 y == point.y;
     }
+
+    public int distance(Point a) {
+        return Math.abs(a.x - this.x) + Math.abs(a.y - this.y);
+    }
+
+    public Point makePoint(Direction direction) {
+        Point returned = new Point(this.x, this.y);
+        switch (direction) {
+            case UP: returned.incY(-1); break;
+            case DOWN: returned.incY(1); break;
+            case LEFT: returned.incX(-1); break;
+            case RIGHT: returned.incX(1); break;
+        }
+        return returned;
+    }
 }

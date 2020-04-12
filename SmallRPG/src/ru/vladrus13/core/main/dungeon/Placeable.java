@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 public class Placeable implements Drawing {
     protected BufferedImage picture;
-    protected final Point place;
+    protected Point place;
     protected final int id;
 
     public Placeable(int id, Point place) {
