@@ -6,7 +6,7 @@ import ru.vladrus13.core.person.unit.Hero;
 import ru.vladrus13.core.utils.event.EventService;
 import ru.vladrus13.core.utils.picture.FontService;
 
-public class GameService {
+public class DungeonService {
     Floor currentFloor;
     Hero hero;
     Dialog dialog;

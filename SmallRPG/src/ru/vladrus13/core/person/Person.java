@@ -3,7 +3,7 @@ package ru.vladrus13.core.person;
 import ru.vladrus13.core.main.dialog.Dialog;
 import ru.vladrus13.core.main.dungeon.Placeable;
 import ru.vladrus13.core.utils.Drawing;
-import ru.vladrus13.core.utils.GameService;
+import ru.vladrus13.core.utils.DungeonService;
 import ru.vladrus13.core.utils.exception.GameException;
 import ru.vladrus13.core.utils.picture.PictureService;
 import ru.vladrus13.core.utils.unit.UnitService;
@@ -59,12 +59,12 @@ public class Person extends Placeable implements Drawing {
         }
     }
 
-    public void startWent(Direction direction, GameService gameService) {
+    public void startWent(Direction direction, DungeonService dungeonService) {
         if (isWent()) return;
         this.direction = direction;
         Point future = new Point(place.getX(), place.getY());
         future = future.makePoint(direction);
-        if (!gameService.getCurrentFloor().isCannotWalk(future)) {
+        if (!dungeonService.getCurrentFloor().isCannotWalk(future)) {
             place = place.makePoint(direction);
             went();
         }
@@ -74,7 +74,7 @@ public class Person extends Placeable implements Drawing {
         return realPlace.getX() != place.getX() * 32 || realPlace.getY() != place.getY() * 32;
     }
 
-    public void onEnter(GameService gameService) throws GameException {
-        gameService.setDialog(new Dialog(new String[]{"hello", "hello. hello", "hello. hello. hello"}, new Person[]{this, this, this}, gameService));
+    public void onPressEnter(DungeonService dungeonService) throws GameException {
+        dungeonService.setDialog(new Dialog(new String[]{"Привет", "Это миктро версия игры", "Я кассир (это так то неважно, но пусть будет, надо же как то диалоги писать)"}, new Person[]{this, this, this}, dungeonService));
     }
 }

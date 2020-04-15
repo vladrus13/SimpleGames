@@ -5,12 +5,10 @@ import ru.vladrus13.core.utils.exception.GameException;
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class FontService {
-    Map<String, Font> fonts;
+    final Map<String, Font> fonts;
 
     public FontService() {
         fonts = new HashMap<>();
@@ -33,5 +31,19 @@ public class FontService {
 
     public Font getFont(String name, int size) throws GameException {
         return getFont(name).deriveFont(Font.PLAIN, size);
+    }
+
+    public ArrayList<String> splitByWidth(String text, Font font, Graphics graphics) {
+        ArrayList<String> answer = new ArrayList<>();
+        int current = 0, last = 0;
+        while (current != text.length()) {
+            if (graphics.getFontMetrics(font).stringWidth(text.substring(last, current)) > 700) {
+                answer.add(text.substring(last, current));
+                last = current;
+            }
+            current++;
+        }
+        answer.add(text.substring(last, current));
+        return answer;
     }
 }

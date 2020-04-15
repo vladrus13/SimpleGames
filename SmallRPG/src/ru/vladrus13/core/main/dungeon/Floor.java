@@ -20,12 +20,14 @@ public class Floor implements Drawing {
     private final ArrayList<ArrayList<Placeable>> floors;
     private final ArrayList<Person> actors;
     private final ArrayList<Item> items;
-    private int width, height, actorCount, itemCount;
+    private final ArrayList<Event> events;
+    private int width, height, actorCount, itemCount, eventCount;
 
     public Floor(int level) {
         floors = new ArrayList<>();
         actors = new ArrayList<>();
         items = new ArrayList<>();
+        events = new ArrayList<>();
         PlaceableService placeableService = new PlaceableService();
         try {
             BufferedReader bufferedReader = Files.newBufferedReader(Path.of("assets/data/floor/" + level + ".lvl"));
@@ -71,9 +73,8 @@ public class Floor implements Drawing {
                 }
             }
         }
-        for (int i = 0; i < actorCount; i++) {
-            actors.get(i).draw(graphics);
-        }
+        actors.forEach(element -> element.draw(graphics));
+        items.forEach(element -> element.draw(graphics));
     }
 
     public boolean isWall(Point a) {
@@ -88,17 +89,10 @@ public class Floor implements Drawing {
         return actors.stream().anyMatch(placeable -> placeable.getPlace().equals(a));
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public Person getPerson(Point a) {
         if (!isPerson(a)) return null;
-        return (Person) actors.stream().filter(placeable -> placeable.getPlace().equals(a)).findFirst().get();
-    }
-
-    public boolean isItem(Point a) {
-        return getPlaceable(a).getId() > 0;
-    }
-
-    public boolean isEvent(Point a) {
-        return getPlaceable(a).getId() < -1;
+        return actors.stream().filter(placeable -> placeable.getPlace().equals(a)).findFirst().get();
     }
 
     public Placeable getPlaceable(Point a) {
