@@ -41,4 +41,8 @@ public class PictureService {
     public Color getDialogColor() {
         return new Color(97, 183, 207);
     }
+
+    public Color getBackgroundShortMenuColor() {
+        return new Color(0, 64, 180, 200);
+    }
 }

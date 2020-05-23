@@ -9,7 +9,7 @@ import java.awt.event.*;
 public class Game  extends JPanel implements ActionListener, MouseListener, KeyListener {
 
     public enum STATUSGAME {
-        DUNGEON, MENU, BATTLE
+        DUNGEON, MENU
     }
 
     private final Dungeon dungeon;
@@ -22,7 +22,7 @@ public class Game  extends JPanel implements ActionListener, MouseListener, KeyL
     public Game() throws GameException {
         int width = 800;
         int height = 800;
-        dungeon = new Dungeon();
+        dungeon = new Dungeon(this);
         frame = new JFrame();
         frame.setSize(width, height);
         frame.setBackground(Color.BLACK);
@@ -47,10 +47,20 @@ public class Game  extends JPanel implements ActionListener, MouseListener, KeyL
 
     public void setStatusGame(STATUSGAME statusGame) {
         this.statusGame = statusGame;
-        timer.start();
-        frame.addMouseListener(this);
-        frame.addKeyListener(this);
-        frame.requestFocus();
+        switch (statusGame) {
+            case DUNGEON:
+                menu.setVisible(false);
+                timer.start();
+                frame.addMouseListener(this);
+                frame.addKeyListener(this);
+                frame.requestFocus();
+                break;
+            case MENU:
+                frame.removeMouseListener(this);
+                frame.removeKeyListener(this);
+                timer.stop();
+                menu.setVisible(true);
+        }
     }
 
     @Override
