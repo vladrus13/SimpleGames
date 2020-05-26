@@ -3,8 +3,8 @@ package ru.vladrus13.core;
 import java.awt.*;
 
 public class Menu {
-    Button buttonDungeon;
-    Button exit;
+    final Button buttonDungeon;
+    final Button exit;
     Game game;
 
     public Menu(Game game, Frame frame) {

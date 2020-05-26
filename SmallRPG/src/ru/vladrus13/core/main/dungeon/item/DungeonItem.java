@@ -1,4 +1,4 @@
-package ru.vladrus13.core.item;
+package ru.vladrus13.core.main.dungeon.item;
 
 import ru.vladrus13.core.main.dungeon.Placeable;
 import ru.vladrus13.core.utils.Drawing;
@@ -9,9 +9,9 @@ import ru.vladrus13.core.utils.ways.Point;
 import java.awt.*;
 import java.nio.file.Path;
 
-public class Item extends Placeable implements Drawing {
+public class DungeonItem extends Placeable implements Drawing {
 
-    public Item(int id, Point point) {
+    public DungeonItem(int id, Point point) {
         super(id, point);
         loadPicture(new PictureService());
     }
@@ -28,11 +28,11 @@ public class Item extends Placeable implements Drawing {
         graphics.drawImage(picture, 32 * place.getX(), 32 * place.getY(), 32, 32, null);
     }
 
-    public boolean equals(Item other) {
+    public boolean equals(DungeonItem other) {
         return id == other.id;
     }
 
-    public boolean absoluteEquals(Item other) {
+    public boolean absoluteEquals(DungeonItem other) {
         return id == other.id && place.equals(other.place);
     }
 }

@@ -35,6 +35,10 @@ public class Dungeon {
         dungeonService.getEventService().onStart(dungeonService);
     }
 
+    public DungeonService getDungeonService() {
+        return dungeonService;
+    }
+
     public void draw(Graphics graphics) {
         floor.draw(graphics);
         hero.draw(graphics);

@@ -14,7 +14,7 @@ public class Game  extends JPanel implements ActionListener, MouseListener, KeyL
 
     private final Dungeon dungeon;
     private final Menu menu;
-    Timer timer = new Timer(20, this);
+    final Timer timer = new Timer(20, this);
     JFrame frame;
 
     private STATUSGAME statusGame = STATUSGAME.MENU;

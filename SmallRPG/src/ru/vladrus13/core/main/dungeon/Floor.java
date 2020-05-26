@@ -1,6 +1,6 @@
 package ru.vladrus13.core.main.dungeon;
 
-import ru.vladrus13.core.item.Item;
+import ru.vladrus13.core.main.dungeon.item.DungeonItem;
 import ru.vladrus13.core.person.Person;
 import ru.vladrus13.core.utils.Drawing;
 
@@ -19,14 +19,14 @@ public class Floor implements Drawing {
 
     private final ArrayList<ArrayList<Placeable>> floors;
     private final ArrayList<Person> actors;
-    private final ArrayList<Item> items;
+    private final ArrayList<DungeonItem> dungeonItems;
     private final ArrayList<Event> events;
     private int width, height, actorCount, itemCount, eventCount;
 
     public Floor(int level) {
         floors = new ArrayList<>();
         actors = new ArrayList<>();
-        items = new ArrayList<>();
+        dungeonItems = new ArrayList<>();
         events = new ArrayList<>();
         PlaceableService placeableService = new PlaceableService();
         try {
@@ -52,7 +52,7 @@ public class Floor implements Drawing {
             itemCount = Integer.parseInt(line[0]);
             for (int i = 0; i < itemCount; i++) {
                 line = bufferedReader.readLine().split(" ");
-                items.add((Item) placeableService.parseItem(Integer.parseInt(line[0]), new Point(Integer.parseInt(line[1]), Integer.parseInt(line[2]))));
+                dungeonItems.add((DungeonItem) placeableService.parseItem(Integer.parseInt(line[0]), new Point(Integer.parseInt(line[1]), Integer.parseInt(line[2]))));
             }
         } catch (IOException | GameException e) {
             e.printStackTrace();
@@ -74,7 +74,7 @@ public class Floor implements Drawing {
             }
         }
         actors.forEach(element -> element.draw(graphics));
-        items.forEach(element -> element.draw(graphics));
+        dungeonItems.forEach(element -> element.draw(graphics));
     }
 
     public boolean isWall(Point a) {

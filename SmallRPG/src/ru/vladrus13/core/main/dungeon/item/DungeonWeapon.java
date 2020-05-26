@@ -1,21 +1,16 @@
-package ru.vladrus13.core.item.weapon;
+package ru.vladrus13.core.main.dungeon.item;
 
-import ru.vladrus13.core.item.Item;
 import ru.vladrus13.core.utils.exception.GameException;
 import ru.vladrus13.core.utils.picture.PictureService;
 import ru.vladrus13.core.utils.ways.Point;
 
 import java.nio.file.Path;
 
-public class Weapon extends Item {
-    public Weapon(int id, Point point) {
+public class DungeonWeapon extends DungeonItem {
+    public DungeonWeapon(int id, Point point) {
         super(id, point);
     }
-/*
-    public Weapon(int id) {
-        super(id);
-    }
-*/
+
     @Override
     public void loadPicture(PictureService pictureService) {
         try {
