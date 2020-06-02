@@ -1,9 +1,6 @@
 package ru.vladrus13.core.utils.item;
 
-import ru.vladrus13.core.main.dungeon.item.DungeonItem;
-import ru.vladrus13.core.main.dungeon.item.DungeonArmor;
-import ru.vladrus13.core.main.dungeon.item.DungeonPoison;
-import ru.vladrus13.core.main.dungeon.item.DungeonWeapon;
+import ru.vladrus13.core.main.dungeon.item.*;
 import ru.vladrus13.core.main.dungeon.Event;
 import ru.vladrus13.core.main.dungeon.Placeable;
 import ru.vladrus13.core.main.dungeon.Wall;

@@ -14,7 +14,7 @@ public class DungeonArmor extends DungeonItem {
     @Override
     public void loadPicture(PictureService pictureService) {
         try {
-            picture = pictureService.loadImage(Path.of("assets/pictures/item/armor/" + id + ".png"));
+            picture = pictureService.loadImage(Path.of("assets/pictures/items/armors/" + id + ".png"));
         } catch (GameException e) {
             e.printStackTrace();
         }

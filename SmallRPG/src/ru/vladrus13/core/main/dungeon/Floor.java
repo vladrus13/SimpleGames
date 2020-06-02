@@ -1,5 +1,6 @@
 package ru.vladrus13.core.main.dungeon;
 
+import ru.vladrus13.core.inventory.Item;
 import ru.vladrus13.core.main.dungeon.item.DungeonItem;
 import ru.vladrus13.core.person.Person;
 import ru.vladrus13.core.utils.Drawing;
@@ -11,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+import ru.vladrus13.core.utils.DungeonService;
 import ru.vladrus13.core.utils.exception.GameException;
 import ru.vladrus13.core.utils.item.PlaceableService;
 import ru.vladrus13.core.utils.ways.Point;
@@ -95,7 +97,32 @@ public class Floor implements Drawing {
         return actors.stream().filter(placeable -> placeable.getPlace().equals(a)).findFirst().get();
     }
 
+    public boolean isEvent(Point a) { return events.stream().anyMatch(element -> element.getPlace().equals(a)); }
+
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
+    public Event getEvent(Point a) {
+        if (!isEvent(a)) return null;
+        return events.stream().filter(element -> element.getPlace().equals(a)).findFirst().get();
+    }
+
+    public boolean isDungeonItem(Point a) { return dungeonItems.stream().anyMatch(element -> element.getPlace().equals(a)); }
+
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
+    public DungeonItem getDungeonItem(Point a) {
+        if (!isDungeonItem(a)) return null;
+        return dungeonItems.stream().filter(element -> element.getPlace().equals(a)).findFirst().get();
+    }
+
     public Placeable getPlaceable(Point a) {
         return floors.get(a.getX()).get(a.getY());
+    }
+
+    public void eraseItem(Point a, DungeonItem item) {
+        for (int i = 0; i < itemCount; i++) {
+            if (dungeonItems.get(i).getPlace().equals(a) && dungeonItems.get(i).id == item.id) {
+                dungeonItems.remove(i);
+                break;
+            }
+        }
     }
 }

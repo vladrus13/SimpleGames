@@ -15,7 +15,7 @@ public class DungeonPoison extends DungeonItem {
     @Override
     public void loadPicture(PictureService pictureService) {
         try {
-            picture = pictureService.loadImage(Path.of("assets/pictures/item/poison/" + id + ".png"));
+            picture = pictureService.loadImage(Path.of("assets/pictures/items/poisons/" + id + ".png"));
         } catch (GameException e) {
             e.printStackTrace();
         }

@@ -18,6 +18,15 @@ public class EventService {
         to = to.makePoint(hero.getDirection());
         if (floor.isPerson(to)) {
             floor.getPerson(to).onPressEnter(dungeonService);
+        } else {
+            if (floor.isEvent(to)) {
+                floor.getEvent(to).run(dungeonService);
+            } else {
+                if (floor.isDungeonItem(to)) {
+                    dungeonService.getHero().getInventory().addItem(dungeonService.getItemFactory().get(floor.getDungeonItem(to).getId()));
+                    floor.eraseItem(to, floor.getDungeonItem(to));
+                }
+            }
         }
     }
 

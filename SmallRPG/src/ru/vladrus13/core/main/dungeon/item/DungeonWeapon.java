@@ -14,7 +14,7 @@ public class DungeonWeapon extends DungeonItem {
     @Override
     public void loadPicture(PictureService pictureService) {
         try {
-            picture = pictureService.loadImage(Path.of("assets/pictures/item/weapon/" + id + ".png"));
+            picture = pictureService.loadImage(Path.of("assets/pictures/items/weapons/" + id + ".png"));
         } catch (GameException e) {
             e.printStackTrace();
         }

@@ -1,13 +1,11 @@
 package ru.vladrus13.core.inventory;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Inventory {
-    public class Items {
-        private int count = 0;
+    public static class Items {
+        private int count;
         private Item item;
 
         public Items(int count, Item item) {
@@ -17,7 +15,7 @@ public class Inventory {
 
         public Items(Item item) {
             this.item = item;
-            this.count = 0;
+            this.count = 1;
         }
 
         public int getCount() {
@@ -60,7 +58,14 @@ public class Inventory {
     }
 
     public void addItem(Items item) {
-        items.add(item);
+        AtomicBoolean isAdded = new AtomicBoolean(false);
+        items.stream().filter(element -> element.getItem().equals(item.getItem())).forEachOrdered(element -> {
+            isAdded.set(true);
+            element.setCount(element.getCount() + item.getCount());
+        });
+        if (!isAdded.get()) {
+            items.add(item);
+        }
     }
 
     public void addBook(Book book) {

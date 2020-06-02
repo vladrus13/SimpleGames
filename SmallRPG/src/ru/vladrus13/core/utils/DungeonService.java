@@ -1,9 +1,11 @@
 package ru.vladrus13.core.utils;
 
+import ru.vladrus13.core.inventory.ItemFactory;
 import ru.vladrus13.core.main.dialog.Dialog;
 import ru.vladrus13.core.main.dungeon.Floor;
 import ru.vladrus13.core.person.unit.Hero;
 import ru.vladrus13.core.utils.event.EventService;
+
 import ru.vladrus13.core.utils.picture.FontService;
 
 public class DungeonService {
@@ -12,6 +14,11 @@ public class DungeonService {
     Dialog dialog;
     FontService fontService;
     EventService eventService;
+    ItemFactory itemFactory;
+
+    public DungeonService() {
+        itemFactory = new ItemFactory();
+    }
 
     public EventService getEventService() {
         return eventService;
@@ -51,5 +58,13 @@ public class DungeonService {
 
     public void setHero(Hero hero) {
         this.hero = hero;
+    }
+
+    public ItemFactory getItemFactory() {
+        return itemFactory;
+    }
+
+    public void setItemFactory(ItemFactory itemFactory) {
+        this.itemFactory = itemFactory;
     }
 }

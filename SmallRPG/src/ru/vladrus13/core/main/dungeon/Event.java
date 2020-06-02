@@ -1,5 +1,6 @@
 package ru.vladrus13.core.main.dungeon;
 
+import ru.vladrus13.core.utils.DungeonService;
 import ru.vladrus13.core.utils.ways.Point;
 
 public class Event extends Placeable {
@@ -10,7 +11,7 @@ public class Event extends Placeable {
         super(id, point);
     }
 
-    public void run() {
+    public void run(DungeonService dungeonService) {
         // TODO
     }
 }

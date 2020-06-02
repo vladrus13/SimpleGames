@@ -50,9 +50,7 @@ public class Dungeon {
         }
     }
 
-    public void update() {
-        hero.update();
-    }
+    public void update() { hero.update(); }
 
     public void onEnterKeyPressed() {
         if (dungeonService.getDialog() != null) {
