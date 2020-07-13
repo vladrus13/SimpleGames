@@ -29,5 +29,7 @@ public class Placeable implements Drawing {
 
     }
 
-
+    public void setPlace(Point place) {
+        this.place = place;
+    }
 }

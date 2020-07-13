@@ -1,7 +1,7 @@
 package ru.vladrus13.core.utils.item;
 
 import ru.vladrus13.core.main.dungeon.item.*;
-import ru.vladrus13.core.main.dungeon.Event;
+import ru.vladrus13.core.main.dungeon.event.Event;
 import ru.vladrus13.core.main.dungeon.Placeable;
 import ru.vladrus13.core.main.dungeon.Wall;
 import ru.vladrus13.core.person.Person;
@@ -14,10 +14,7 @@ public class PlaceableService {
         if (id < -100) return new Event(id, point);
         if (id < -1) return new Person(id, point, Direction.UP);
         if (id == -1) return new Wall(id, point);
-        if (id == 0) return new DungeonItem(id, point);
-        if (id < 101) return new DungeonWeapon(id, point);
-        if (id < 201) return new DungeonArmor(id, point);
-        if (id < 251) return new DungeonPoison(id, point);
+        if (id > -1 && id < 251) return new DungeonItem(id, point);
         return null;
     }
 }

@@ -39,4 +39,9 @@ public class EventService {
             dungeonService.getHero().startWent(direction, dungeonService);
         }
     }
+
+    public void teleport(int floor, Point point, DungeonService dungeonService) {
+        dungeonService.setCurrentFloor(new Floor(floor));
+        dungeonService.getHero().setPlace(point);
+    }
 }

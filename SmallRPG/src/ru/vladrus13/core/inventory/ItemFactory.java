@@ -1,6 +1,5 @@
 package ru.vladrus13.core.inventory;
 
-import ru.vladrus13.core.main.dungeon.item.DungeonArmor;
 import ru.vladrus13.core.utils.DungeonService;
 import ru.vladrus13.core.utils.exception.GameException;
 

@@ -77,4 +77,6 @@ public class Person extends Placeable implements Drawing {
     public void onPressEnter(DungeonService dungeonService) throws GameException {
         dungeonService.setDialog(new Dialog(new String[]{"Привет", "Это микро версия игры", "Я кассир (это так то неважно, но пусть будет, надо же как то диалоги писать)"}, new Person[]{this, this, this}, dungeonService));
     }
+
+
 }

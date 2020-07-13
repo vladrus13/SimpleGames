@@ -1,6 +1,6 @@
 package ru.vladrus13.core.main.dungeon;
 
-import ru.vladrus13.core.inventory.Item;
+import ru.vladrus13.core.main.dungeon.event.Event;
 import ru.vladrus13.core.main.dungeon.item.DungeonItem;
 import ru.vladrus13.core.person.Person;
 import ru.vladrus13.core.utils.Drawing;
@@ -12,7 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-import ru.vladrus13.core.utils.DungeonService;
 import ru.vladrus13.core.utils.exception.GameException;
 import ru.vladrus13.core.utils.item.PlaceableService;
 import ru.vladrus13.core.utils.ways.Point;
@@ -22,7 +21,7 @@ public class Floor implements Drawing {
     private final ArrayList<ArrayList<Placeable>> floors;
     private final ArrayList<Person> actors;
     private final ArrayList<DungeonItem> dungeonItems;
-    private final ArrayList<Event> events;
+    private final ArrayList<ru.vladrus13.core.main.dungeon.event.Event> events;
     private int width, height, actorCount, itemCount, eventCount;
 
     public Floor(int level) {

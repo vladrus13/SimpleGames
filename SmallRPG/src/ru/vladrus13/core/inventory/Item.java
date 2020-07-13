@@ -36,9 +36,7 @@ public class Item {
         attackOn.accept(dungeonService);
     }
 
-    public void attackingOn(DungeonService dungeonService) {
-        attackingOn.accept(dungeonService);
-    }
+    public void attackingOn(DungeonService dungeonService) { attackingOn.accept(dungeonService); }
 
     public int getId() {
         return id;
