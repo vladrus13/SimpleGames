@@ -18,7 +18,7 @@ public class Item {
     private final Consumer<DungeonService> attackingOn;
     private final ItemType itemType;
 
-    Item(int id, String description, String name, Consumer<DungeonService> usedOn, Consumer<DungeonService> attackOn, Consumer<DungeonService> attackingOn, ItemType itemType) {
+    public Item(int id, String description, String name, Consumer<DungeonService> usedOn, Consumer<DungeonService> attackOn, Consumer<DungeonService> attackingOn, ItemType itemType) {
         this.id = id;
         this.description = description;
         this.name = name;

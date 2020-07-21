@@ -15,7 +15,7 @@ public class Menu {
         buttonDungeon.addActionListener(
                 e -> {
                     setVisible(false);
-                    game.setStatusGame(Game.STATUSGAME.DUNGEON);
+                    game.setStatusGame(Game.STATUS_GAME.DUNGEON);
                 }
         );
         exit.addActionListener(e -> System.exit(0));

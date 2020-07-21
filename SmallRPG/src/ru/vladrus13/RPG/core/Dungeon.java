@@ -1,12 +1,7 @@
 package ru.vladrus13.RPG.core;
 
-import ru.vladrus13.RPG.core.main.dungeon.Floor;
-import ru.vladrus13.RPG.core.person.unit.Hero;
 import ru.vladrus13.RPG.core.utils.DungeonService;
-import ru.vladrus13.RPG.core.utils.event.EventService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.core.utils.picture.FontService;
-import ru.vladrus13.RPG.core.utils.ways.Point;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -15,8 +10,6 @@ import static ru.vladrus13.RPG.core.utils.ways.Direction.*;
 
 public class Dungeon {
 
-    private final Floor floor;
-    private final Hero hero;
     private final DungeonService dungeonService;
     private final ShortMenu shortMenu;
     private final Game game;
@@ -24,14 +17,9 @@ public class Dungeon {
 
     public Dungeon(Game game) throws GameException {
         this.game = game;
-        floor = new Floor(2);
-        hero = new Hero(0, new Point(1, 1), UP);
         shortMenu = new ShortMenu(this);
         dungeonService = new DungeonService();
-        dungeonService.setCurrentFloor(floor);
-        dungeonService.setHero(hero);
-        dungeonService.setFontService(new FontService());
-        dungeonService.setEventService(new EventService());
+        dungeonService.setCurrentFloor(1);
         dungeonService.getEventService().onStart(dungeonService);
     }
 
@@ -40,8 +28,8 @@ public class Dungeon {
     }
 
     public void draw(Graphics graphics) {
-        floor.draw(graphics);
-        hero.draw(graphics);
+        dungeonService.getCurrentFloor().draw(graphics);
+        dungeonService.getHero().draw(graphics);
         if (dungeonService.getDialog() != null) {
             dungeonService.getDialog().draw(graphics);
         }
@@ -50,7 +38,7 @@ public class Dungeon {
         }
     }
 
-    public void update() { hero.update(); }
+    public void update() { dungeonService.getHero().update(); }
 
     public void onEnterKeyPressed() {
         if (dungeonService.getDialog() != null) {
@@ -103,6 +91,6 @@ public class Dungeon {
     }
 
     public void exitToMenu() {
-        game.setStatusGame(Game.STATUSGAME.MENU);
+        game.setStatusGame(Game.STATUS_GAME.MENU);
     }
 }

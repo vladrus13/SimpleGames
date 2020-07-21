@@ -18,13 +18,19 @@ import ru.vladrus13.RPG.core.utils.ways.Point;
 
 public class Floor implements Drawing {
 
+    private final String name;
     private final ArrayList<ArrayList<Placeable>> floors;
     private final ArrayList<Person> actors;
     private final ArrayList<DungeonItem> dungeonItems;
     private final ArrayList<ru.vladrus13.RPG.core.main.dungeon.event.Event> events;
     private int width, height, actorCount, itemCount, eventCount;
 
+    /**
+     * @deprecated must be
+     * @param level that is
+     */
     public Floor(int level) {
+        name = "";
         floors = new ArrayList<>();
         actors = new ArrayList<>();
         dungeonItems = new ArrayList<>();
@@ -58,6 +64,19 @@ public class Floor implements Drawing {
         } catch (IOException | GameException e) {
             e.printStackTrace();
         }
+    }
+
+    public Floor(ArrayList<ArrayList<Placeable>> floors, ArrayList<Person> actors, ArrayList<DungeonItem> dungeonItems, ArrayList<Event> events, String name) {
+        this.name = name;
+        this.floors = floors;
+        width = floors.size();
+        height = (width == 0 ? 0 : floors.get(0).size());
+        this.actors = actors;
+        actorCount = actors.size();
+        this.dungeonItems = dungeonItems;
+        itemCount = dungeonItems.size();
+        this.events = events;
+        eventCount = events.size();
     }
 
     @Override

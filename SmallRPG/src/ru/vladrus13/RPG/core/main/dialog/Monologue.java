@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-public class Monolog implements Drawing {
+public class Monologue implements Drawing {
 
     private ArrayList<String> text;
     private final String fullText;
@@ -22,7 +22,7 @@ public class Monolog implements Drawing {
     private final BufferedImage faceAuthor;
     private final FontService fontService;
 
-    public Monolog(String text, Person author, DungeonService dungeonService) throws GameException {
+    public Monologue(String text, Person author, DungeonService dungeonService) throws GameException {
         fontService = dungeonService.getFontService();
         PixelFontGame = fontService.getFont("PixelFontGame", 36);
         WriterFont = fontService.getFont("WriterFont", 36);

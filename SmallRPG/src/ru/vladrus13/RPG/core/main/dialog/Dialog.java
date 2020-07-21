@@ -9,22 +9,22 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Dialog implements Drawing {
-    private final ArrayList<Monolog> monologs;
+    private final ArrayList<Monologue> monologues;
     int current;
 
     public Dialog(String[] text, Person[] author, DungeonService dungeonService) throws GameException {
         if (text.length != author.length) {
             throw new GameException("Text and author sizes aren't equals!");
         }
-        ArrayList<Monolog> monologs1 = new ArrayList<>();
+        ArrayList<Monologue> monologues1 = new ArrayList<>();
         for (int i = 0; i < text.length; i++) {
-            monologs1.add(new Monolog(text[i], author[i], dungeonService));
+            monologues1.add(new Monologue(text[i], author[i], dungeonService));
         }
-        monologs = monologs1;
+        monologues = monologues1;
     }
 
     public boolean hasNext() {
-        return current + 1 < monologs.size();
+        return current + 1 < monologues.size();
     }
 
     public void next() {
@@ -33,6 +33,6 @@ public class Dialog implements Drawing {
 
     @Override
     public void draw(Graphics graphics) {
-        monologs.get(current).draw(graphics);
+        monologues.get(current).draw(graphics);
     }
 }

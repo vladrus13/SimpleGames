@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 public class Game  extends JPanel implements ActionListener, MouseListener, KeyListener {
 
-    public enum STATUSGAME {
+    public enum STATUS_GAME {
         DUNGEON, MENU
     }
 
@@ -17,7 +17,7 @@ public class Game  extends JPanel implements ActionListener, MouseListener, KeyL
     final Timer timer = new Timer(20, this);
     JFrame frame;
 
-    private STATUSGAME statusGame = STATUSGAME.MENU;
+    private STATUS_GAME statusGame = STATUS_GAME.MENU;
 
     public Game() throws GameException {
         int width = 800;
@@ -45,7 +45,7 @@ public class Game  extends JPanel implements ActionListener, MouseListener, KeyL
         repaint();
     }
 
-    public void setStatusGame(STATUSGAME statusGame) {
+    public void setStatusGame(STATUS_GAME statusGame) {
         this.statusGame = statusGame;
         switch (statusGame) {
             case DUNGEON:
@@ -67,14 +67,14 @@ public class Game  extends JPanel implements ActionListener, MouseListener, KeyL
     public void paint(Graphics graphics) {
         super.paint(graphics);
         super.paintComponents(graphics);
-        if (statusGame == STATUSGAME.DUNGEON) {
+        if (statusGame == STATUS_GAME.DUNGEON) {
             dungeon.draw(graphics);
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (statusGame == STATUSGAME.DUNGEON) {
+        if (statusGame == STATUS_GAME.DUNGEON) {
             dungeon.update();
             repaint();
         }
@@ -85,7 +85,7 @@ public class Game  extends JPanel implements ActionListener, MouseListener, KeyL
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (statusGame == STATUSGAME.DUNGEON) {
+        if (statusGame == STATUS_GAME.DUNGEON) {
             dungeon.keyPressed(e);
         }
     }

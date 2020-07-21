@@ -1,5 +1,7 @@
-package ru.vladrus13.RPG.core.inventory;
+package ru.vladrus13.RPG.game;
 
+import ru.vladrus13.RPG.core.inventory.Inventory;
+import ru.vladrus13.RPG.core.inventory.Item;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 

@@ -14,7 +14,7 @@ public class PlaceableService {
         if (id < -100) return new Event(id, point);
         if (id < -1) return new Person(id, point, Direction.UP);
         if (id == -1) return new Wall(id, point);
-        if (id > -1 && id < 251) return new DungeonItem(id, point);
+        if (id < 251) return new DungeonItem(id, point);
         return null;
     }
 }

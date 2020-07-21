@@ -40,8 +40,8 @@ public class EventService {
         }
     }
 
-    public void teleport(int floor, Point point, DungeonService dungeonService) {
-        dungeonService.setCurrentFloor(new Floor(floor));
-        dungeonService.getHero().setPlace(point);
+    public void teleport(int floor, Point point, Direction direction, DungeonService dungeonService) {
+        dungeonService.setCurrentFloor(floor);
+        dungeonService.getHero().teleport(point, direction);
     }
 }

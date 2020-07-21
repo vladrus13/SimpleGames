@@ -13,11 +13,9 @@ import java.nio.file.Path;
 
 public class Hero extends Person {
 
-    private int floor;
     protected final Stats stats;
     protected final Skills skills;
     protected final Inventory inventory;
-    protected boolean canMove;
 
     public Hero(int id, Point place, Direction direction) throws GameException {
         super(id, place, direction);
