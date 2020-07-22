@@ -78,4 +78,8 @@ public class DungeonService {
     public ItemFactory getItemFactory() {
         return itemFactory;
     }
+
+    public EventFactory getEventFactory() {
+        return eventFactory;
+    }
 }

@@ -10,6 +10,7 @@ import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import static ru.vladrus13.RPG.core.utils.ways.Direction.DOWN;
@@ -30,26 +31,32 @@ public class FloorFactory {
     }
 
     private ArrayList<ArrayList<Title>> getTitles(int[][] nonParsedTitles) {
+        int width = nonParsedTitles.length, height = 0;
+        for (int[] nonParsedTitle : nonParsedTitles) {
+            height = Math.max(height, nonParsedTitle.length);
+        }
         ArrayList<ArrayList<Title>> titles = new ArrayList<>();
+        Title[][] baseTitles = new Title[height][width];
         for (int i = 0; i < nonParsedTitles.length; i++) {
-            ArrayList<Title> temp = new ArrayList<>();
             for (int j = 0; j < nonParsedTitles[i].length; j++) {
-                temp.add(new Title(nonParsedTitles[i][j], new Point(i, j)));
+                baseTitles[j][i] = new Title(nonParsedTitles[i][j], new Point(j, i));
             }
+        }
+        for (Title[] baseTitle : baseTitles) {
+            ArrayList<Title> temp = new ArrayList<>(Arrays.asList(baseTitle));
             titles.add(temp);
         }
-        return titles; // TODO fix bag with transpose matrix
+        return titles;
     }
 
     private Floor floor1() {
         String name = "First floor";
         ArrayList<ArrayList<Title>> titles;
         int[][] nonParsedTitles = {
-                {1, 1, 1, 1},
-                {1, 0, 0, 1},
-                {1, 0, 0, 1},
-                {1, 2, 0, 1},
-                {1, 1, 1, 1}
+                {1, 1, 1, 1, 1},
+                {1, 0, 0, 2, 1},
+                {1, 0, 0, 0, 1},
+                {1, 1, 1, 1, 1}
         };
         titles = getTitles(nonParsedTitles);
         ArrayList<Person> actors = new ArrayList<>();
@@ -63,14 +70,14 @@ public class FloorFactory {
         ArrayList<ArrayList<Title>> titles;
         int[][] nonParsedTitles = {
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-                {1, 3, 0, 0, 0, 0, 0, 0, 0, 1},
-                {1, 0, 1, 1, 0, 1, 1, 0, 0, 1},
-                {1, 0, 1, 1, 0, 1, 1, 0, 0, 1},
+                {1, 3, 0, 0, 0, 1, 1, 1, 0, 1},
+                {1, 0, 1, 1, 0, 1, 0, 1, 0, 1},
+                {1, 0, 1, 1, 0, 1, 1, 1, 0, 1},
                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                {1, 0, 1, 1, 1, 0, 1, 1, 1, 1},
-                {1, 0, 1, 0, 1, 0, 1, 0, 1, 1},
-                {1, 0, 1, 1, 1, 0, 1, 1, 1, 1},
+                {1, 0, 1, 1, 0, 0, 0, 0, 0, 1},
+                {1, 0, 1, 1, 0, 0, 1, 1, 1, 1},
+                {1, 0, 0, 0, 0, 0, 1, 0, 1, 1},
+                {1, 0, 0, 0, 0, 0, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
         };
         titles = getTitles(nonParsedTitles);

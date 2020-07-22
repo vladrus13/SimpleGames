@@ -45,6 +45,7 @@ public class Dungeon {
             if (dungeonService.getDialog().hasNext()) {
                 dungeonService.getDialog().next();
             } else {
+                dungeonService.getHero().setPause(false);
                 dungeonService.setDialog(null);
             }
         } else {

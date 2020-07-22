@@ -31,8 +31,8 @@ public class EventService {
         }
     }
 
-    public void onStart(DungeonService dungeonService) throws GameException {
-        dungeonService.setDialog(new Dialog(new String[]{"Где я?"}, new Person[]{dungeonService.getHero()}, dungeonService));
+    public void onStart(DungeonService dungeonService) {
+        dungeonService.getEventFactory().get("onStart").run(dungeonService);
     }
 
     public void move(Direction direction, DungeonService dungeonService) {
