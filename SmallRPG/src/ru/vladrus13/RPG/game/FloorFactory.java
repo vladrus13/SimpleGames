@@ -1,7 +1,7 @@
 package ru.vladrus13.RPG.game;
 
 import ru.vladrus13.RPG.core.main.dungeon.Floor;
-import ru.vladrus13.RPG.core.main.dungeon.Title;
+import ru.vladrus13.RPG.core.main.dungeon.Tile;
 import ru.vladrus13.RPG.core.main.dungeon.event.Event;
 import ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent;
 import ru.vladrus13.RPG.core.main.dungeon.item.DungeonItem;
@@ -30,45 +30,45 @@ public class FloorFactory {
         }
     }
 
-    private ArrayList<ArrayList<Title>> getTitles(int[][] nonParsedTitles) {
-        int width = nonParsedTitles.length, height = 0;
-        for (int[] nonParsedTitle : nonParsedTitles) {
-            height = Math.max(height, nonParsedTitle.length);
+    private ArrayList<ArrayList<Tile>> getTiles(int[][] nonParsedTiles) {
+        int width = nonParsedTiles.length, height = 0;
+        for (int[] nonParsedTile : nonParsedTiles) {
+            height = Math.max(height, nonParsedTile.length);
         }
-        ArrayList<ArrayList<Title>> titles = new ArrayList<>();
-        Title[][] baseTitles = new Title[height][width];
-        for (int i = 0; i < nonParsedTitles.length; i++) {
-            for (int j = 0; j < nonParsedTitles[i].length; j++) {
-                baseTitles[j][i] = new Title(nonParsedTitles[i][j], new Point(j, i));
+        ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
+        Tile[][] baseTiles = new Tile[height][width];
+        for (int i = 0; i < nonParsedTiles.length; i++) {
+            for (int j = 0; j < nonParsedTiles[i].length; j++) {
+                baseTiles[j][i] = new Tile(nonParsedTiles[i][j], new Point(j, i));
             }
         }
-        for (Title[] baseTitle : baseTitles) {
-            ArrayList<Title> temp = new ArrayList<>(Arrays.asList(baseTitle));
-            titles.add(temp);
+        for (Tile[] baseTile : baseTiles) {
+            ArrayList<Tile> temp = new ArrayList<>(Arrays.asList(baseTile));
+            tiles.add(temp);
         }
-        return titles;
+        return tiles;
     }
 
     private Floor floor1() {
         String name = "First floor";
-        ArrayList<ArrayList<Title>> titles;
-        int[][] nonParsedTitles = {
+        ArrayList<ArrayList<Tile>> tiles;
+        int[][] nonParsedTiles = {
                 {1, 1, 1, 1, 1},
                 {1, 0, 0, 2, 1},
                 {1, 0, 0, 0, 1},
                 {1, 1, 1, 1, 1}
         };
-        titles = getTitles(nonParsedTitles);
+        tiles = getTiles(nonParsedTiles);
         ArrayList<Person> actors = new ArrayList<>();
         ArrayList<DungeonItem> dungeonItems = new ArrayList<>();
         ArrayList<Event> events = new ArrayList<>(Collections.singletonList(new Event(0, new Point(3, 1), TypeActiveEvent.ON_STEP, dungeonService -> dungeonService.getEventService().teleport(1, new Point(1, 1), DOWN, dungeonService))));
-        return new Floor(name, titles, actors, dungeonItems, events);
+        return new Floor(name, tiles, actors, dungeonItems, events);
     }
 
     private Floor floor2() throws GameException {
         String name = "Pirate floor";
-        ArrayList<ArrayList<Title>> titles;
-        int[][] nonParsedTitles = {
+        ArrayList<ArrayList<Tile>> tiles;
+        int[][] nonParsedTiles = {
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                 {1, 3, 0, 0, 0, 1, 1, 1, 0, 1},
                 {1, 0, 1, 1, 0, 1, 0, 1, 0, 1},
@@ -80,11 +80,11 @@ public class FloorFactory {
                 {1, 0, 0, 0, 0, 0, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
         };
-        titles = getTitles(nonParsedTitles);
+        tiles = getTiles(nonParsedTiles);
         ArrayList<Person> actors = new ArrayList<>(Collections.singletonList(new Person(-2, new Point(5, 6), UP)));
         ArrayList<DungeonItem> dungeonItems = new ArrayList<>(Collections.singletonList(new DungeonItem(1, new Point(1, 9))));
         ArrayList<Event> events = new ArrayList<>(Collections.singletonList(new Event(0, new Point(1, 1), TypeActiveEvent.ON_STEP, dungeonService -> dungeonService.getEventService().teleport(0, new Point(3, 1), DOWN, dungeonService))));
-        return new Floor(name, titles, actors, dungeonItems, events);
+        return new Floor(name, tiles, actors, dungeonItems, events);
     }
 
     public Floor getCurrentFloor(int floor) throws GameException {

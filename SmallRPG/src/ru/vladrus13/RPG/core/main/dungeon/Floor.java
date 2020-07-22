@@ -14,18 +14,18 @@ import ru.vladrus13.RPG.core.utils.ways.Point;
 public class Floor implements Drawing {
 
     private final String name;
-    private final ArrayList<ArrayList<Title>> titles;
+    private final ArrayList<ArrayList<Tile>> tiles;
     /*
-        Why titles is table, but actors and others just list with points? Because titles.size = width * height,
+        Why tiles is table, but actors and others just list with points? Because tiles.size = width * height,
         however very rarely when the number of actors is greater than the width or height
      */
     private final ArrayList<Person> actors;
     private final ArrayList<DungeonItem> dungeonItems;
     private final ArrayList<Event> events;
 
-    public Floor(String name, ArrayList<ArrayList<Title>> titles, ArrayList<Person> actors, ArrayList<DungeonItem> dungeonItems, ArrayList<Event> events) {
+    public Floor(String name, ArrayList<ArrayList<Tile>> tiles, ArrayList<Person> actors, ArrayList<DungeonItem> dungeonItems, ArrayList<Event> events) {
         this.name = name;
-        this.titles = titles;
+        this.tiles = tiles;
         this.actors = actors;
         this.dungeonItems = dungeonItems;
         this.events = events;
@@ -33,12 +33,12 @@ public class Floor implements Drawing {
 
     @Override
     public void draw(Graphics graphics) {
-        for (int i = 0; i < titles.size(); i++) {
-            for (int j = 0; j < titles.get(i).size(); j++) {
-                if (titles.get(i).get(j) != null) {
+        for (int i = 0; i < tiles.size(); i++) {
+            for (int j = 0; j < tiles.get(i).size(); j++) {
+                if (tiles.get(i).get(j) != null) {
                     graphics.setColor(Color.WHITE);
                     graphics.fillRect(32 * i, 32 * j, 32, 32);
-                    titles.get(i).get(j).draw(graphics);
+                    tiles.get(i).get(j).draw(graphics);
                 } else {
                     graphics.setColor(Color.DARK_GRAY);
                     graphics.fillRect(32 * i, 32 * j, 32, 32);
@@ -88,7 +88,7 @@ public class Floor implements Drawing {
     }
 
     public Placeable getPlaceable(Point a) {
-        return titles.get(a.getX()).get(a.getY());
+        return tiles.get(a.getX()).get(a.getY());
     }
 
     public void eraseItem(Point a, DungeonItem item) {

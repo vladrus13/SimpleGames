@@ -124,7 +124,7 @@ public class ShortMenu implements Drawing {
                 if (books.isEmpty()) {
                     graphics.drawString("Пусто!", 120, 30);
                 } else {
-                    graphics.drawString(books.get(countSkipBook).getTitle(), 120, 30);
+                    graphics.drawString(books.get(countSkipBook).getTile(), 120, 30);
                     graphics.setFont(writerFont);
                     drawBook(books.get(countSkipBook), 80, 40, 420, 20, graphics);
                 }

@@ -75,7 +75,7 @@ public class Person extends Placeable implements Drawing {
             case RIGHT: realPlace.incX(speed); break;
         }
         if (!isWent()) {
-            dungeonService.getEventService().onTitleStep(dungeonService);
+            dungeonService.getEventService().onTileStep(dungeonService);
         }
     }
 

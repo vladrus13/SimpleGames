@@ -3,12 +3,12 @@ package ru.vladrus13.RPG.core.inventory;
 public class Book {
 
     private final int id;
-    private final String title;
+    private final String tile;
     private final String[] entry;
 
-    public Book(int id, String title, String[] entry) {
+    public Book(int id, String tile, String[] entry) {
         this.id = id;
-        this.title = title;
+        this.tile = tile;
         this.entry = entry;
     }
 
@@ -16,8 +16,8 @@ public class Book {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTile() {
+        return tile;
     }
 
     public String[] getEntry() {

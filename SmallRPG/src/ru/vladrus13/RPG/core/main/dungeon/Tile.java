@@ -8,15 +8,15 @@ import ru.vladrus13.RPG.core.utils.ways.Point;
 import java.awt.*;
 import java.nio.file.Path;
 
-public class Title extends Placeable implements Drawing {
-    public Title(int id, Point place) {
+public class Tile extends Placeable implements Drawing {
+    public Tile(int id, Point place) {
         super(id, place);
         loadPicture(new PictureService());
     }
 
     public void loadPicture(PictureService pictureService) {
         try {
-            picture = pictureService.loadImage(Path.of("assets/pictures/titles/" + id + ".png"));
+            picture = pictureService.loadImage(Path.of("assets/pictures/tiles/" + id + ".png"));
         } catch (GameException e) {
             e.printStackTrace();
         }

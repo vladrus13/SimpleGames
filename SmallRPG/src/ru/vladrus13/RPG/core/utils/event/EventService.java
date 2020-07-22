@@ -1,9 +1,7 @@
 package ru.vladrus13.RPG.core.utils.event;
 
-import ru.vladrus13.RPG.core.main.dialog.Dialog;
 import ru.vladrus13.RPG.core.main.dungeon.Floor;
 import ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent;
-import ru.vladrus13.RPG.core.person.Person;
 import ru.vladrus13.RPG.core.person.unit.Hero;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
@@ -20,8 +18,8 @@ public class EventService {
         if (floor.isPerson(to)) {
             floor.getPerson(to).onPressEnter(dungeonService);
         } else {
-            if (floor.isEvent(to, element -> element.getTypeActiveEvent() == TypeActiveEvent.ENTER_ONE_TITLE)) {
-                floor.getEvent(to, element -> element.getTypeActiveEvent() == TypeActiveEvent.ENTER_ONE_TITLE).run(dungeonService);
+            if (floor.isEvent(to, element -> element.getTypeActiveEvent() == TypeActiveEvent.ENTER_ONE_TILE)) {
+                floor.getEvent(to, element -> element.getTypeActiveEvent() == TypeActiveEvent.ENTER_ONE_TILE).run(dungeonService);
             } else {
                 if (floor.isDungeonItem(to)) {
                     dungeonService.getHero().getInventory().addItem(dungeonService.getItemFactory().get(floor.getDungeonItem(to).getId()));
@@ -46,7 +44,7 @@ public class EventService {
         dungeonService.getHero().teleport(point, direction);
     }
 
-    public void onTitleStep(DungeonService dungeonService) {
+    public void onTileStep(DungeonService dungeonService) {
         Hero hero = dungeonService.getHero();
         Floor floor = dungeonService.getCurrentFloor();
         Point to = hero.getPlace();
