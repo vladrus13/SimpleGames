@@ -6,87 +6,39 @@ import ru.vladrus13.RPG.core.person.Person;
 import ru.vladrus13.RPG.core.utils.Drawing;
 
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
-import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.core.utils.item.PlaceableService;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
 public class Floor implements Drawing {
 
     private final String name;
-    private final ArrayList<ArrayList<Placeable>> floors;
+    private final ArrayList<ArrayList<Title>> titles;
+    /*
+        Why titles is table, but actors and others just list with points? Because titles.size = width * height,
+        however very rarely when the number of actors is greater than the width or height
+     */
     private final ArrayList<Person> actors;
     private final ArrayList<DungeonItem> dungeonItems;
-    private final ArrayList<ru.vladrus13.RPG.core.main.dungeon.event.Event> events;
-    private int width, height, actorCount, itemCount, eventCount;
+    private final ArrayList<Event> events;
 
-    /**
-     * @deprecated must be
-     * @param level that is
-     */
-    public Floor(int level) {
-        name = "";
-        floors = new ArrayList<>();
-        actors = new ArrayList<>();
-        dungeonItems = new ArrayList<>();
-        events = new ArrayList<>();
-        PlaceableService placeableService = new PlaceableService();
-        try {
-            BufferedReader bufferedReader = Files.newBufferedReader(Path.of("assets/data/floor/" + level + ".lvl"));
-            String[] line = bufferedReader.readLine().split(" ");
-            width = Integer.parseInt(line[0]);
-            height = Integer.parseInt(line[1]);
-            for (int i = 0; i < width; i++) {
-                ArrayList<Placeable> temp = new ArrayList<>();
-                line = bufferedReader.readLine().split(" ");
-                for (int j = 0; j < height; j++) {
-                    temp.add(placeableService.parseItem(Integer.parseInt(line[j]), new Point(i, j)));
-                }
-                floors.add(temp);
-            }
-            line = bufferedReader.readLine().split(" ");
-            actorCount = Integer.parseInt(line[0]);
-            for (int i = 0; i < actorCount; i++) {
-                line = bufferedReader.readLine().split(" ");
-                actors.add((Person) placeableService.parseItem(Integer.parseInt(line[0]), new Point(Integer.parseInt(line[1]), Integer.parseInt(line[2]))));
-            }
-            line = bufferedReader.readLine().split(" ");
-            itemCount = Integer.parseInt(line[0]);
-            for (int i = 0; i < itemCount; i++) {
-                line = bufferedReader.readLine().split(" ");
-                dungeonItems.add((DungeonItem) placeableService.parseItem(Integer.parseInt(line[0]), new Point(Integer.parseInt(line[1]), Integer.parseInt(line[2]))));
-            }
-        } catch (IOException | GameException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Floor(ArrayList<ArrayList<Placeable>> floors, ArrayList<Person> actors, ArrayList<DungeonItem> dungeonItems, ArrayList<Event> events, String name) {
+    public Floor(String name, ArrayList<ArrayList<Title>> titles, ArrayList<Person> actors, ArrayList<DungeonItem> dungeonItems, ArrayList<Event> events) {
         this.name = name;
-        this.floors = floors;
-        width = floors.size();
-        height = (width == 0 ? 0 : floors.get(0).size());
+        this.titles = titles;
         this.actors = actors;
-        actorCount = actors.size();
         this.dungeonItems = dungeonItems;
-        itemCount = dungeonItems.size();
         this.events = events;
-        eventCount = events.size();
     }
 
     @Override
     public void draw(Graphics graphics) {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                if (floors.get(i).get(j) != null) {
+        for (int i = 0; i < titles.size(); i++) {
+            for (int j = 0; j < titles.get(i).size(); j++) {
+                if (titles.get(i).get(j) != null) {
                     graphics.setColor(Color.WHITE);
                     graphics.fillRect(32 * i, 32 * j, 32, 32);
-                    floors.get(i).get(j).draw(graphics);
+                    titles.get(i).get(j).draw(graphics);
                 } else {
                     graphics.setColor(Color.DARK_GRAY);
                     graphics.fillRect(32 * i, 32 * j, 32, 32);
@@ -98,7 +50,7 @@ public class Floor implements Drawing {
     }
 
     public boolean isWall(Point a) {
-        return getPlaceable(a).getId() == -1;
+        return getPlaceable(a).getId() == 1;
     }
 
     public boolean isCannotWalk(Point a) {
@@ -115,15 +67,19 @@ public class Floor implements Drawing {
         return actors.stream().filter(placeable -> placeable.getPlace().equals(a)).findFirst().get();
     }
 
-    public boolean isEvent(Point a) { return events.stream().anyMatch(element -> element.getPlace().equals(a)); }
+    public boolean isEvent(Point a, Predicate <Event> filter) {
+        return events.stream().filter(filter).anyMatch(element -> element.getPlace().equals(a));
+    }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
-    public Event getEvent(Point a) {
-        if (!isEvent(a)) return null;
+    public Event getEvent(Point a, Predicate <Event> filter) {
+        if (!isEvent(a, filter)) return null;
         return events.stream().filter(element -> element.getPlace().equals(a)).findFirst().get();
     }
 
-    public boolean isDungeonItem(Point a) { return dungeonItems.stream().anyMatch(element -> element.getPlace().equals(a)); }
+    public boolean isDungeonItem(Point a) {
+        return dungeonItems.stream().anyMatch(element -> element.getPlace().equals(a));
+    }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     public DungeonItem getDungeonItem(Point a) {
@@ -132,11 +88,11 @@ public class Floor implements Drawing {
     }
 
     public Placeable getPlaceable(Point a) {
-        return floors.get(a.getX()).get(a.getY());
+        return titles.get(a.getX()).get(a.getY());
     }
 
     public void eraseItem(Point a, DungeonItem item) {
-        for (int i = 0; i < itemCount; i++) {
+        for (int i = 0; i < dungeonItems.size(); i++) {
             if (dungeonItems.get(i).getPlace().equals(a) && dungeonItems.get(i).id == item.id) {
                 dungeonItems.remove(i);
                 break;

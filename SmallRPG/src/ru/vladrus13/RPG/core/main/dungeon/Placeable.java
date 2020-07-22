@@ -26,7 +26,7 @@ public class Placeable implements Drawing {
 
     @Override
     public void draw(Graphics graphics) {
-
+        // do nothing, just override this
     }
 
     public void setPlace(Point place) {

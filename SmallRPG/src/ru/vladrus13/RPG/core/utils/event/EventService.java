@@ -2,6 +2,7 @@ package ru.vladrus13.RPG.core.utils.event;
 
 import ru.vladrus13.RPG.core.main.dialog.Dialog;
 import ru.vladrus13.RPG.core.main.dungeon.Floor;
+import ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent;
 import ru.vladrus13.RPG.core.person.Person;
 import ru.vladrus13.RPG.core.person.unit.Hero;
 import ru.vladrus13.RPG.core.utils.DungeonService;
@@ -19,8 +20,8 @@ public class EventService {
         if (floor.isPerson(to)) {
             floor.getPerson(to).onPressEnter(dungeonService);
         } else {
-            if (floor.isEvent(to)) {
-                floor.getEvent(to).run(dungeonService);
+            if (floor.isEvent(to, element -> element.getTypeActiveEvent() == TypeActiveEvent.ENTER_ONE_TITLE)) {
+                floor.getEvent(to, element -> element.getTypeActiveEvent() == TypeActiveEvent.ENTER_ONE_TITLE).run(dungeonService);
             } else {
                 if (floor.isDungeonItem(to)) {
                     dungeonService.getHero().getInventory().addItem(dungeonService.getItemFactory().get(floor.getDungeonItem(to).getId()));
@@ -43,5 +44,14 @@ public class EventService {
     public void teleport(int floor, Point point, Direction direction, DungeonService dungeonService) {
         dungeonService.setCurrentFloor(floor);
         dungeonService.getHero().teleport(point, direction);
+    }
+
+    public void onTitleStep(DungeonService dungeonService) {
+        Hero hero = dungeonService.getHero();
+        Floor floor = dungeonService.getCurrentFloor();
+        Point to = hero.getPlace();
+        if (floor.isEvent(to, element -> element.getTypeActiveEvent() == TypeActiveEvent.ON_STEP)) {
+            floor.getEvent(to, element -> element.getTypeActiveEvent() == TypeActiveEvent.ON_STEP).run(dungeonService);
+        }
     }
 }

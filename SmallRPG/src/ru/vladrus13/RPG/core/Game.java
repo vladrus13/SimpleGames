@@ -75,7 +75,7 @@ public class Game  extends JPanel implements ActionListener, MouseListener, KeyL
     @Override
     public void actionPerformed(ActionEvent e) {
         if (statusGame == STATUS_GAME.DUNGEON) {
-            dungeon.update();
+            dungeon.update(dungeon.getDungeonService());
             repaint();
         }
     }

@@ -19,7 +19,7 @@ public class Dungeon {
         this.game = game;
         shortMenu = new ShortMenu(this);
         dungeonService = new DungeonService();
-        dungeonService.setCurrentFloor(1);
+        dungeonService.setCurrentFloor(0);
         dungeonService.getEventService().onStart(dungeonService);
     }
 
@@ -38,7 +38,7 @@ public class Dungeon {
         }
     }
 
-    public void update() { dungeonService.getHero().update(); }
+    public void update(DungeonService dungeonService) { dungeonService.getHero().update(dungeonService); }
 
     public void onEnterKeyPressed() {
         if (dungeonService.getDialog() != null) {

@@ -33,7 +33,7 @@ public class DungeonService {
         fontService = new FontService();
         System.out.println("Loading events service...");
         eventService = new EventService();
-        System.out.println("Loading hero service");
+        System.out.println("Loading hero service...");
         heroService = new HeroService();
     }
 

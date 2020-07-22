@@ -7,12 +7,17 @@ import ru.vladrus13.RPG.core.utils.ways.Point;
 import java.util.function.Consumer;
 
 public class Event extends Placeable {
-    protected Point place;
-    protected int id;
-    protected Consumer<DungeonService> event;
+    private final Consumer<DungeonService> event;
+    private final TypeActiveEvent typeActiveEvent;
 
-    public Event(int id, Point point) {
+    public Event(int id, Point point, TypeActiveEvent typeActiveEvent, Consumer<DungeonService> event) {
         super(id, point);
+        this.event = event;
+        this.typeActiveEvent = typeActiveEvent;
+    }
+
+    public TypeActiveEvent getTypeActiveEvent() {
+        return typeActiveEvent;
     }
 
     public void run(DungeonService dungeonService) {
