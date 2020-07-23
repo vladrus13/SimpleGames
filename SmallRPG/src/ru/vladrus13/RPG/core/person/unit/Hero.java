@@ -74,7 +74,7 @@ public class Hero extends Person implements KeyTaker {
                 break;
             case KeyEvent.VK_RIGHT:
                 startWent(RIGHT, dungeonService);
-                breaenient
+                break;
             case KeyEvent.VK_ENTER:
                 try {
                     onPressEnter(dungeonService);
