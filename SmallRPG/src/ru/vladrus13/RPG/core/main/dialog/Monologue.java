@@ -1,7 +1,7 @@
 package ru.vladrus13.RPG.core.main.dialog;
 
 import ru.vladrus13.RPG.core.person.Person;
-import ru.vladrus13.RPG.core.utils.Drawing;
+import ru.vladrus13.RPG.core.utils.picture.Drawing;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.picture.FontService;
@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-public class Monologue implements Drawing {
+public class Monologue extends Drawing {
 
     private ArrayList<String> text;
     private final String fullText;

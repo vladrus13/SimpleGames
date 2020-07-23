@@ -1,6 +1,5 @@
 package ru.vladrus13.RPG.core.main.dungeon;
 
-import ru.vladrus13.RPG.core.utils.Drawing;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.picture.PictureService;
 import ru.vladrus13.RPG.core.utils.ways.Point;
@@ -8,7 +7,7 @@ import ru.vladrus13.RPG.core.utils.ways.Point;
 import java.awt.*;
 import java.nio.file.Path;
 
-public class Tile extends Placeable implements Drawing {
+public class Tile extends Placeable {
     public Tile(int id, Point place) {
         super(id, place);
         loadPicture(new PictureService());

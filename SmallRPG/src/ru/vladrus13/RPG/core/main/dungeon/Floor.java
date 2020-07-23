@@ -3,7 +3,7 @@ package ru.vladrus13.RPG.core.main.dungeon;
 import ru.vladrus13.RPG.core.main.dungeon.event.Event;
 import ru.vladrus13.RPG.core.main.dungeon.item.DungeonItem;
 import ru.vladrus13.RPG.core.person.Person;
-import ru.vladrus13.RPG.core.utils.Drawing;
+import ru.vladrus13.RPG.core.utils.picture.Drawing;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
-public class Floor implements Drawing {
+public class Floor extends Drawing {
 
     private final String name;
     private final ArrayList<ArrayList<Tile>> tiles;

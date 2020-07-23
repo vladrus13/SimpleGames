@@ -2,10 +2,10 @@ package ru.vladrus13.RPG.core.person;
 
 import ru.vladrus13.RPG.core.main.dialog.Dialog;
 import ru.vladrus13.RPG.core.main.dungeon.Placeable;
-import ru.vladrus13.RPG.core.utils.Drawing;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.picture.PictureService;
+import ru.vladrus13.RPG.core.utils.picture.Updating;
 import ru.vladrus13.RPG.core.utils.unit.UnitService;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
 import ru.vladrus13.RPG.core.utils.ways.Point;
@@ -17,13 +17,12 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
-public class Person extends Placeable implements Drawing {
+public class Person extends Placeable implements Updating {
     protected Point realPlace;
     protected Map<Direction, BufferedImage> picture;
     protected Direction direction;
     protected final int speed = 2;
     protected String name;
-    protected boolean pause = false;
     protected final Queue<Direction> directionQueue;
 
     public Direction getDirection() {
@@ -80,7 +79,7 @@ public class Person extends Placeable implements Drawing {
     }
 
     public void startWent(Direction direction, DungeonService dungeonService) {
-        if (isWent() || pause) return;
+        if (isWent()) return;
         this.direction = direction;
         Point future = new Point(place.getX(), place.getY());
         future = future.makePoint(direction);
@@ -96,10 +95,6 @@ public class Person extends Placeable implements Drawing {
 
     public void onPressEnter(DungeonService dungeonService) throws GameException {
         dungeonService.setDialog(new Dialog(new String[]{"Привет", "Это микро версия игры", "Я кассир (это так то неважно, но пусть будет, надо же как то диалоги писать)"}, new Person[]{this, this, this}, dungeonService));
-    }
-
-    public void setPause(boolean pause) {
-        this.pause = pause;
     }
 
     public void setPoint(Point place) {

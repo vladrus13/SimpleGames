@@ -3,9 +3,10 @@ package ru.vladrus13.RPG.core;
 import ru.vladrus13.RPG.core.inventory.Book;
 import ru.vladrus13.RPG.core.inventory.Inventory;
 import ru.vladrus13.RPG.core.inventory.Item;
-import ru.vladrus13.RPG.core.utils.Drawing;
+import ru.vladrus13.RPG.core.utils.picture.Drawing;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.picture.FontService;
+import ru.vladrus13.RPG.core.utils.picture.KeyTaker;
 import ru.vladrus13.RPG.core.utils.picture.PictureService;
 
 import java.awt.*;
@@ -15,7 +16,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class ShortMenu implements Drawing {
+public class ShortMenu extends Drawing implements KeyTaker {
 
     public enum StatusShortMenu {
         MAIN, BOOK, INVENTORY
@@ -139,7 +140,11 @@ public class ShortMenu implements Drawing {
                 switch (keyCode) {
                     case KeyEvent.VK_ESCAPE:
                     case KeyEvent.VK_1:
-                        dungeon.notShortMenu();
+                        try {
+                            dungeon.notShortMenu();
+                        } catch (GameException e) {
+                            e.printStackTrace();
+                        }
                         reloadBooksAndItems();
                         break;
                     case KeyEvent.VK_2:
@@ -151,7 +156,11 @@ public class ShortMenu implements Drawing {
                         statusShortMenu = StatusShortMenu.INVENTORY;
                         break;
                     case KeyEvent.VK_4:
-                        dungeon.notShortMenu();
+                        try {
+                            dungeon.notShortMenu();
+                        } catch (GameException e) {
+                            e.printStackTrace();
+                        }
                         dungeon.exitToMenu();
                     default:
                         break;

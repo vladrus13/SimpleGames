@@ -1,25 +1,30 @@
 package ru.vladrus13.RPG.core;
 
+import ru.vladrus13.RPG.core.utils.picture.Drawing;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
+import ru.vladrus13.RPG.core.utils.picture.KeyTaker;
 
 import java.awt.*;
 import java.awt.event.*;
-
-import static ru.vladrus13.RPG.core.utils.ways.Direction.*;
+import java.util.*;
 
 public class Dungeon {
 
+    private final LinkedList<Drawing> drawings;
+    private final Deque<KeyTaker> focus;
     private final DungeonService dungeonService;
-    private final ShortMenu shortMenu;
     private final Game game;
-    private boolean isOnShortMenu = false;
 
     public Dungeon(Game game) throws GameException {
         this.game = game;
-        shortMenu = new ShortMenu(this);
-        dungeonService = new DungeonService();
+        dungeonService = new DungeonService(this);
+        drawings = new LinkedList<>();
         dungeonService.setCurrentFloor(0);
+        drawings.addAll(Arrays.asList(dungeonService.getHero(), dungeonService.getDialog(), dungeonService.getShortMenu()));
+        focus = new ArrayDeque<>();
+        focus.add(dungeonService.getHero());
+
         dungeonService.getEventService().onStart(dungeonService);
     }
 
@@ -28,70 +33,64 @@ public class Dungeon {
     }
 
     public void draw(Graphics graphics) {
-        dungeonService.getCurrentFloor().draw(graphics);
-        dungeonService.getHero().draw(graphics);
-        if (dungeonService.getDialog() != null) {
-            dungeonService.getDialog().draw(graphics);
-        }
-        if (isOnShortMenu) {
-            shortMenu.draw(graphics);
+        for (Drawing drawing : drawings) {
+            if (drawing != null && drawing.isDrawing()) {
+                drawing.draw(graphics);
+            }
         }
     }
 
-    public void update(DungeonService dungeonService) { dungeonService.getHero().update(dungeonService); }
-
-    public void onEnterKeyPressed() {
-        if (dungeonService.getDialog() != null) {
-            if (dungeonService.getDialog().hasNext()) {
-                dungeonService.getDialog().next();
-            } else {
-                dungeonService.getHero().setPause(false);
-                dungeonService.setDialog(null);
-            }
-        } else {
-            try {
-                dungeonService.getEventService().onPressEnter(dungeonService);
-            } catch (GameException gameException) {
-                gameException.printStackTrace();
-            }
-        }
+    public void update(DungeonService dungeonService) {
+        dungeonService.getHero().update(dungeonService);
     }
 
     public void keyPressed(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-        if (isOnShortMenu) {
-            shortMenu.keyPressed(e);
-        } else {
-            switch (keyCode) {
-                case KeyEvent.VK_UP:
-                    dungeonService.getEventService().move(UP, dungeonService);
-                    break;
-                case KeyEvent.VK_DOWN:
-                    dungeonService.getEventService().move(DOWN, dungeonService);
-                    break;
-                case KeyEvent.VK_LEFT:
-                    dungeonService.getEventService().move(LEFT, dungeonService);
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    dungeonService.getEventService().move(RIGHT, dungeonService);
-                    break;
-                case KeyEvent.VK_ENTER:
-                    onEnterKeyPressed();
-                    break;
-                case KeyEvent.VK_ESCAPE:
-                    isOnShortMenu = true;
-                    break;
-                default:
-                    break;
-            }
+        if (!focus.isEmpty()) {
+            focus.getFirst().keyPressed(e);
         }
     }
 
-    public void notShortMenu() {
-        isOnShortMenu = false;
+    public void notShortMenu() throws GameException {
+        dungeonService.getShortMenu().setDrawing(false);
+        removeFocus(dungeonService.getShortMenu());
     }
 
     public void exitToMenu() {
         game.setStatusGame(Game.STATUS_GAME.MENU);
     }
+
+    public void addDrawing(Drawing drawing) {
+        drawings.add(drawing);
+    }
+
+    public void removeDrawing(Drawing drawing) {
+        drawings.remove(drawing);
+    }
+
+    public void replaceDrawing(Drawing from, Drawing to) {
+        if (from == null) {
+            drawings.add(to);
+        } else {
+            int pos = drawings.indexOf(from);
+            if (pos == -1) {
+                addDrawing(to);
+            } else {
+                drawings.set(pos, to);
+            }
+        }
+    }
+
+    public void addFocus(KeyTaker keyTaker) {
+        this.focus.addFirst(keyTaker);
+    }
+
+    public void removeFocus(KeyTaker keyTaker) throws GameException {
+        if (focus.getFirst() != keyTaker) {
+            throw new GameException(keyTaker.toString() + "is not first on focus!");
+        } else {
+            focus.pollFirst();
+        }
+    }
+
+
 }

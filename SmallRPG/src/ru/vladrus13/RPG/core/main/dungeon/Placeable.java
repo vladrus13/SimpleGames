@@ -1,12 +1,12 @@
 package ru.vladrus13.RPG.core.main.dungeon;
 
-import ru.vladrus13.RPG.core.utils.Drawing;
+import ru.vladrus13.RPG.core.utils.picture.Drawing;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Placeable implements Drawing {
+public class Placeable extends Drawing {
     protected BufferedImage picture;
     protected Point place;
     protected final int id;
@@ -29,7 +29,4 @@ public class Placeable implements Drawing {
         // do nothing, just override this
     }
 
-    public void setPlace(Point place) {
-        this.place = place;
-    }
 }
