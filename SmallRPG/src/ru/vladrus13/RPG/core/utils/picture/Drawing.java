@@ -1,6 +1,5 @@
 package ru.vladrus13.RPG.core.utils.picture;
 
-
 import java.awt.*;
 
 public abstract class Drawing {

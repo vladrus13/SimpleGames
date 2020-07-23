@@ -1,12 +1,18 @@
 package ru.vladrus13.RPG.game;
 
+import ru.vladrus13.RPG.core.main.dialog.Choose;
 import ru.vladrus13.RPG.core.main.dialog.Dialog;
 import ru.vladrus13.RPG.core.main.dungeon.event.Event;
 import ru.vladrus13.RPG.core.person.Person;
+import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.function.Consumer;
 
 import static ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent.TRIGGERED;
 
@@ -22,6 +28,38 @@ public class EventFactory {
             } catch (GameException e) {
                 e.printStackTrace();
             }
+        }));
+
+        events.put("PirateDialog", new Event(1, new Point(0, 0), TRIGGERED, dungeonService -> {
+            Consumer<DungeonService> onHistoryClick = dungeonService1 -> {
+                try {
+                    dungeonService.setDialog(new Dialog(new String[]{"Привет",
+                            "Это микро версия игры",
+                            "Я кассир (это так то неважно, но пусть будет, надо же как то диалоги писать)"},
+                            new Person[]{dungeonService.getHero(), dungeonService.getHero(), dungeonService.getHero()}, dungeonService));
+                } catch (GameException e) {
+                    e.printStackTrace();
+                }
+            };
+            Consumer<DungeonService> onExitClick = dungeonService1 -> {
+                try {
+                    dungeonService.setDialog(new Dialog(new String[]{"Прощай"},
+                            new Person[]{dungeonService.getHero()}, dungeonService));
+                } catch (GameException e) {
+                    e.printStackTrace();
+                }
+            };
+            Choose start;
+            try {
+                start = new Choose(new ArrayList<>(Arrays.asList("Грустная история", "Пока")),
+                        new ArrayList<>(Arrays.asList(onHistoryClick, onExitClick)), dungeonService);
+            } catch (GameException e) {
+                e.printStackTrace();
+                return;
+                // TODO return?
+            }
+            dungeonService.getDungeon().addDrawing(start);
+            dungeonService.getDungeon().addFocus(start);
         }));
     }
 

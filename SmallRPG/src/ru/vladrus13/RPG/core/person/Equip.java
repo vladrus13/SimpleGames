@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class Equip {
     private final ArrayList<DungeonItem> dungeonItems;
 
-
     public Equip(ArrayList<DungeonItem> dungeonItems) {
         this.dungeonItems = dungeonItems;
     }

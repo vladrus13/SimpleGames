@@ -4,7 +4,6 @@ import ru.vladrus13.RPG.core.buff.Skill;
 
 import java.util.ArrayList;
 
-
 public class Skills {
     private final ArrayList<Skill> skills;
 

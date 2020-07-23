@@ -96,6 +96,4 @@ public class Dungeon {
             focus.pollFirst();
         }
     }
-
-
 }
