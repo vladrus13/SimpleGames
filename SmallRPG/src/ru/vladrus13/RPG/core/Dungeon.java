@@ -4,6 +4,7 @@ import ru.vladrus13.RPG.core.utils.picture.Drawing;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.picture.KeyTaker;
+import ru.vladrus13.RPG.core.utils.picture.Updating;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -41,7 +42,11 @@ public class Dungeon {
     }
 
     public void update(DungeonService dungeonService) {
-        dungeonService.getHero().update(dungeonService);
+        for (Drawing drawing : drawings) {
+            if (drawing instanceof Updating && !drawing.isPause()) {
+                ((Updating) drawing).update(dungeonService);
+            }
+        }
     }
 
     public void keyPressed(KeyEvent e) {

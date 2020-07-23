@@ -18,7 +18,6 @@ public class EventFactory {
         events = new HashMap<>();
         events.put("onStart", new Event(0, new Point(0, 0), TRIGGERED, dungeonService -> {
             try {
-                dungeonService.getHero().setPause(true);
                 dungeonService.setDialog(new Dialog(new String[]{"Где я?"}, new Person[]{dungeonService.getHero()}, dungeonService));
             } catch (GameException e) {
                 e.printStackTrace();
