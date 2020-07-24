@@ -33,6 +33,10 @@ public class FontService {
         return getFont(name).deriveFont(Font.PLAIN, size);
     }
 
+    public int fontWidth(String text, Font font, Graphics graphics) {
+        return graphics.getFontMetrics(font).stringWidth(text);
+    }
+
     public ArrayList<String> splitByWidth(String text, Font font, Graphics graphics) {
         ArrayList<String> answer = new ArrayList<>();
         int current = 0, last = 0;

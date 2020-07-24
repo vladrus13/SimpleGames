@@ -25,7 +25,7 @@ public class Game  extends JPanel implements ActionListener, MouseListener, KeyL
         dungeon = new Dungeon(this);
         frame = new JFrame();
         frame.setSize(width, height);
-        frame.setBackground(Color.BLACK);
+        frame.setBackground(Color.DARK_GRAY);
         frame.setLocationRelativeTo(null);
         frame.pack();
         Insets insets = frame.getInsets();
