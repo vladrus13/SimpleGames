@@ -8,8 +8,11 @@ import java.awt.*;
 import java.nio.file.Path;
 
 public class Tile extends Placeable {
+    private final boolean isWalked;
+
     public Tile(int id, Point place) {
         super(id, place);
+        isWalked = id != 1;
         loadPicture(new PictureService());
     }
 
@@ -23,5 +26,9 @@ public class Tile extends Placeable {
 
     public void draw(Graphics graphics) {
         graphics.drawImage(picture, 32 * place.getX(), 32 * place.getY(), 32, 32, null);
+    }
+
+    public boolean isWalked() {
+        return isWalked;
     }
 }

@@ -50,7 +50,7 @@ public class Floor extends Drawing {
     }
 
     public boolean isWall(Point a) {
-        return getPlaceable(a).getId() == 1;
+        return !getPlaceable(a).isWalked();
     }
 
     public boolean isCannotWalk(Point a) {
@@ -87,7 +87,7 @@ public class Floor extends Drawing {
         return dungeonItems.stream().filter(element -> element.getPlace().equals(a)).findFirst().get();
     }
 
-    public Placeable getPlaceable(Point a) {
+    public Tile getPlaceable(Point a) {
         return tiles.get(a.getX()).get(a.getY());
     }
 
