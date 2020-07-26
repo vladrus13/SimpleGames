@@ -26,7 +26,7 @@ public class Dungeon {
         focus = new ArrayDeque<>();
         focus.add(dungeonService.getHero());
 
-        dungeonService.getEventService().onStart(dungeonService);
+        dungeonService.getEventFactory().get("onStart").run(dungeonService);
     }
 
     public DungeonService getDungeonService() {

@@ -9,10 +9,6 @@ import ru.vladrus13.RPG.core.utils.ways.Point;
 
 public class EventService {
 
-    public void onStart(DungeonService dungeonService) {
-        dungeonService.getEventFactory().get("onStart").run(dungeonService);
-    }
-
     public void teleport(int floor, Point point, Direction direction, DungeonService dungeonService) {
         dungeonService.setCurrentFloor(floor);
         dungeonService.getHero().teleport(point, direction);
@@ -26,4 +22,6 @@ public class EventService {
             floor.getEvent(to, element -> element.getTypeActiveEvent() == TypeActiveEvent.ON_STEP).run(dungeonService);
         }
     }
+
+
 }

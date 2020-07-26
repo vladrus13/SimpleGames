@@ -3,6 +3,7 @@ package ru.vladrus13.RPG.core.utils;
 import ru.vladrus13.RPG.core.Dungeon;
 import ru.vladrus13.RPG.core.ShortMenu;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
+import ru.vladrus13.RPG.core.utils.picture.PictureService;
 import ru.vladrus13.RPG.game.*;
 import ru.vladrus13.RPG.core.main.dialog.Dialog;
 import ru.vladrus13.RPG.core.main.dungeon.Floor;
@@ -24,11 +25,16 @@ public class DungeonService {
     private final HeroService heroService;
     private final ShopFactory shopFactory;
     private final PersonService personService;
+    private final PictureService pictureService;
 
     public DungeonService(Dungeon dungeon) throws GameException {
         this.dungeon = dungeon;
         shortMenu = new ShortMenu(dungeon);
         shortMenu.setDrawing(false);
+
+        System.out.println("Loading picture service");
+        pictureService = new PictureService();
+
         System.out.println("Loading fonts service...");
         fontService = new FontService();
 
@@ -97,10 +103,6 @@ public class DungeonService {
         return heroService.getHero();
     }
 
-    public void setHero(Hero hero) {
-        heroService.setHero(hero);
-    }
-
     public ItemFactory getItemFactory() {
         return itemFactory;
     }
@@ -123,5 +125,9 @@ public class DungeonService {
 
     public PersonService getPersonService() {
         return personService;
+    }
+
+    public PictureService getPictureService() {
+        return pictureService;
     }
 }

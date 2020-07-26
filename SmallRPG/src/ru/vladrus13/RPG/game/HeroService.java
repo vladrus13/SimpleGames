@@ -4,7 +4,7 @@ import ru.vladrus13.RPG.core.person.unit.Hero;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
-import static ru.vladrus13.RPG.core.utils.ways.Direction.UP;
+import static ru.vladrus13.RPG.core.utils.ways.Direction.*;
 
 public class HeroService {
     Hero hero;
