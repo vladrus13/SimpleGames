@@ -21,7 +21,7 @@ public class ItemFactory {
 
     private final Item[] items = new Item[itemCount];
 
-    public Inventory.Items get(int id) throws GameException {
+    public Inventory.Items getWithCount(int id) throws GameException {
         if (id >= itemCount) {
             throw new GameException("Get wrong id more than item's count");
         } else {
@@ -29,6 +29,18 @@ public class ItemFactory {
                 throw new GameException("Item with id: " + id + " is null");
             } else {
                 return new Inventory.Items(1, items[id]);
+            }
+        }
+    }
+
+    public Item get(int id) throws GameException {
+        if (id >= itemCount) {
+            throw new GameException("Get wrong id more than item's count");
+        } else {
+            if (items[id] == null) {
+                throw new GameException("Item with id: " + id + " is null");
+            } else {
+                return items[id];
             }
         }
     }

@@ -49,6 +49,7 @@ public class Inventory {
         }
     }
 
+    private int money = 0;
     private final Set<Items> items;
     private final ArrayList <Book> books;
 
@@ -78,5 +79,19 @@ public class Inventory {
 
     public ArrayList<Book> getBooks() {
         return books;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public boolean subtract(int money) {
+        if (this.money < money) return false;
+        this.money -= money;
+        return true;
     }
 }

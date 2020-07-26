@@ -3,10 +3,7 @@ package ru.vladrus13.RPG.core.utils;
 import ru.vladrus13.RPG.core.Dungeon;
 import ru.vladrus13.RPG.core.ShortMenu;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.game.EventFactory;
-import ru.vladrus13.RPG.game.FloorFactory;
-import ru.vladrus13.RPG.game.HeroService;
-import ru.vladrus13.RPG.game.ItemFactory;
+import ru.vladrus13.RPG.game.*;
 import ru.vladrus13.RPG.core.main.dialog.Dialog;
 import ru.vladrus13.RPG.core.main.dungeon.Floor;
 import ru.vladrus13.RPG.core.person.unit.Hero;
@@ -25,23 +22,36 @@ public class DungeonService {
     private final ItemFactory itemFactory;
     private final FloorFactory floorFactory;
     private final HeroService heroService;
+    private final ShopFactory shopFactory;
+    private final PersonService personService;
 
     public DungeonService(Dungeon dungeon) throws GameException {
         this.dungeon = dungeon;
         shortMenu = new ShortMenu(dungeon);
         shortMenu.setDrawing(false);
-        System.out.println("Loading items factory...");
-        itemFactory = new ItemFactory();
-        System.out.println("Loading events factory...");
-        eventFactory = new EventFactory();
-        System.out.println("Loading floors factory...");
-        floorFactory = new FloorFactory();
         System.out.println("Loading fonts service...");
         fontService = new FontService();
-        System.out.println("Loading events service...");
-        eventService = new EventService();
+
+        System.out.println("Loading items factory...");
+        itemFactory = new ItemFactory();
+
+        System.out.println("Loading person service...");
+        personService = new PersonService();
+
         System.out.println("Loading hero service...");
         heroService = new HeroService(this);
+
+        System.out.println("Loading events factory...");
+        eventFactory = new EventFactory();
+
+        System.out.println("Loading floors factory...");
+        floorFactory = new FloorFactory(this);
+
+        System.out.println("Loading events service...");
+        eventService = new EventService();
+
+        System.out.println("Loading shop service...");
+        shopFactory = new ShopFactory(this);
     }
 
     public EventService getEventService() {
@@ -105,5 +115,13 @@ public class DungeonService {
 
     public ShortMenu getShortMenu() {
         return shortMenu;
+    }
+
+    public ShopFactory getShopFactory() {
+        return shopFactory;
+    }
+
+    public PersonService getPersonService() {
+        return personService;
     }
 }

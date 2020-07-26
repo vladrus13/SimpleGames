@@ -15,7 +15,7 @@ public class Choose extends Drawing implements KeyTaker {
 
     Button[] buttons;
     private final DungeonService dungeonService;
-    int choosen = 0;
+    int chooses = 0;
     private final int X_START_BUTTON = 50;
     private final int X_FINISH_BUTTON = 750;
     private final int HEIGHT_BUTTON = 50;
@@ -58,14 +58,14 @@ public class Choose extends Drawing implements KeyTaker {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case KeyEvent.VK_UP:
-                buttons[choosen].setChoose(false);
-                choosen = (choosen + buttons.length - 1) % buttons.length;
-                buttons[choosen].setChoose(true);
+                buttons[chooses].setChoose(false);
+                chooses = (chooses + buttons.length - 1) % buttons.length;
+                buttons[chooses].setChoose(true);
                 break;
             case KeyEvent.VK_DOWN:
-                buttons[choosen].setChoose(false);
-                choosen = (choosen + 1) % buttons.length;
-                buttons[choosen].setChoose(true);
+                buttons[chooses].setChoose(false);
+                chooses = (chooses + 1) % buttons.length;
+                buttons[chooses].setChoose(true);
                 break;
             case KeyEvent.VK_ENTER:
                 dungeonService.getDungeon().removeDrawing(this);
@@ -74,7 +74,16 @@ public class Choose extends Drawing implements KeyTaker {
                 } catch (GameException gameException) {
                     gameException.printStackTrace();
                 }
-                buttons[choosen].keyPressed(e);
+                buttons[chooses].keyPressed(e);
+                break;
+            case KeyEvent.VK_ESCAPE:
+                dungeonService.getDungeon().removeDrawing(this);
+                try {
+                    dungeonService.getDungeon().removeFocus(this);
+                } catch (GameException gameException) {
+                    gameException.printStackTrace();
+                }
+                break;
         }
     }
 }

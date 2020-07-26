@@ -26,8 +26,8 @@ public class Hero extends Person implements KeyTaker {
     protected final Inventory inventory;
     protected final DungeonService dungeonService;
 
-    public Hero(int id, Point place, Direction direction, DungeonService dungeonService) throws GameException {
-        super(id, place, direction);
+    public Hero(int id, Point place, Direction direction, DungeonService dungeonService, String name) {
+        super(id, place, direction, name);
         realPlace = new Point(place.getX() * 32, place.getY() * 32);
         this.picture = new PictureService().loadUnit(Path.of("assets/pictures/units/hero"));
         this.stats = new Stats();
@@ -52,7 +52,7 @@ public class Hero extends Person implements KeyTaker {
                 floor.getEvent(to, element -> element.getTypeActiveEvent() == TypeActiveEvent.ENTER_ONE_TILE).run(dungeonService);
             } else {
                 if (floor.isDungeonItem(to)) {
-                    dungeonService.getHero().getInventory().addItem(dungeonService.getItemFactory().get(floor.getDungeonItem(to).getId()));
+                    dungeonService.getHero().getInventory().addItem(dungeonService.getItemFactory().getWithCount(floor.getDungeonItem(to).getId()));
                     floor.eraseItem(to, floor.getDungeonItem(to));
                 }
             }

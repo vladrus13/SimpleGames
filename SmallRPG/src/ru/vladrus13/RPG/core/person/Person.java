@@ -1,12 +1,10 @@
 package ru.vladrus13.RPG.core.person;
 
-import ru.vladrus13.RPG.core.main.dialog.Dialog;
 import ru.vladrus13.RPG.core.main.dungeon.Placeable;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.picture.PictureService;
 import ru.vladrus13.RPG.core.utils.picture.Updating;
-import ru.vladrus13.RPG.core.utils.unit.UnitService;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
@@ -22,7 +20,7 @@ public class Person extends Placeable implements Updating {
     protected Map<Direction, BufferedImage> picture;
     protected Direction direction;
     protected final int speed = 2;
-    protected String name;
+    protected final String name;
     protected final Queue<Direction> directionQueue;
 
     public Direction getDirection() {
@@ -31,15 +29,6 @@ public class Person extends Placeable implements Updating {
 
     public String getName() {
         return name;
-    }
-
-    public Person(int id, Point place, Direction direction) throws GameException {
-        super(id, place);
-        name = new UnitService().getNameFromId(id);
-        this.picture = new PictureService().loadUnit(Path.of("assets/pictures/units/" + name.toLowerCase()));
-        this.realPlace = new Point(place.getX() * 32, place.getY() * 32);
-        this.direction = direction;
-        directionQueue = new LinkedList<>();
     }
 
     public Person(int id, Point place, Direction direction, String name) {

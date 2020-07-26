@@ -6,6 +6,7 @@ import ru.vladrus13.RPG.core.main.dungeon.event.Event;
 import ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent;
 import ru.vladrus13.RPG.core.main.dungeon.item.DungeonItem;
 import ru.vladrus13.RPG.core.person.Person;
+import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
@@ -19,15 +20,13 @@ import static ru.vladrus13.RPG.core.utils.ways.Direction.UP;
 public class FloorFactory {
 
     private final Floor[] floors;
+    private final DungeonService dungeonService;
 
-    public FloorFactory() {
+    public FloorFactory(DungeonService dungeonService) {
+        this.dungeonService = dungeonService;
         floors = new Floor[2];
-        try {
-            floors[0] = floor1();
-            floors[1] = floor2();
-        } catch (GameException e) {
-            e.printStackTrace();
-        }
+        floors[0] = floor1();
+        floors[1] = floor2();
     }
 
     private ArrayList<ArrayList<Tile>> getTiles(int[][] nonParsedTiles) {
@@ -65,7 +64,7 @@ public class FloorFactory {
         return new Floor(name, tiles, actors, dungeonItems, events);
     }
 
-    private Floor floor2() throws GameException {
+    private Floor floor2() {
         String name = "Pirate floor";
         ArrayList<ArrayList<Tile>> tiles;
         int[][] nonParsedTiles = {
@@ -81,7 +80,7 @@ public class FloorFactory {
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
         };
         tiles = getTiles(nonParsedTiles);
-        ArrayList<Person> actors = new ArrayList<>(Collections.singletonList(new Person(-2, new Point(5, 6), UP)));
+        ArrayList<Person> actors = new ArrayList<>(Collections.singletonList(dungeonService.getPersonService().get(2, new Point(5, 6), UP)));
         ArrayList<DungeonItem> dungeonItems = new ArrayList<>(Collections.singletonList(new DungeonItem(1, new Point(1, 9))));
         ArrayList<Event> events = new ArrayList<>(Collections.singletonList(new Event(0, new Point(1, 1), TypeActiveEvent.ON_STEP, dungeonService -> dungeonService.getEventService().teleport(0, new Point(3, 1), DOWN, dungeonService))));
         return new Floor(name, tiles, actors, dungeonItems, events);

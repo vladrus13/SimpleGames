@@ -33,6 +33,8 @@ public class Floor extends Drawing {
 
     @Override
     public void draw(Graphics graphics) {
+        graphics.setColor(Color.CYAN);
+        graphics.fillRect(0, 0, 800, 800);
         for (int i = 0; i < tiles.size(); i++) {
             for (int j = 0; j < tiles.get(i).size(); j++) {
                 if (tiles.get(i).get(j) != null) {

@@ -3,12 +3,12 @@ package ru.vladrus13.RPG.game;
 import ru.vladrus13.RPG.core.main.dialog.Choose;
 import ru.vladrus13.RPG.core.main.dialog.Dialog;
 import ru.vladrus13.RPG.core.main.dungeon.event.Event;
+import ru.vladrus13.RPG.core.main.frame.shop.Shop;
 import ru.vladrus13.RPG.core.person.Person;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -33,7 +33,8 @@ public class EventFactory {
         events.put("PirateDialog", new Event(1, new Point(0, 0), TRIGGERED, dungeonService -> {
             Consumer<DungeonService> onHistoryClick = dungeonService1 -> {
                 try {
-                    dungeonService.setDialog(new Dialog(new String[]{"Привет",
+                    dungeonService.setDialog(new Dialog(new String[]{
+                            "Привет",
                             "Это микро версия игры",
                             "Я кассир (это так то неважно, но пусть будет, надо же как то диалоги писать)"},
                             new Person[]{dungeonService.getHero(), dungeonService.getHero(), dungeonService.getHero()}, dungeonService));
@@ -49,14 +50,26 @@ public class EventFactory {
                     e.printStackTrace();
                 }
             };
+
+            Consumer<DungeonService> pirateShop = dungeonService1 -> {
+                Shop shop;
+                try {
+                    shop = dungeonService1.getShopFactory().get("PirateShop");
+                } catch (GameException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                dungeonService1.getDungeon().addFocus(shop);
+                dungeonService1.getDungeon().addDrawing(shop);
+            };
+
             Choose start;
             try {
-                start = new Choose(new ArrayList<>(Arrays.asList("Грустная история", "Пока")),
-                        new ArrayList<>(Arrays.asList(onHistoryClick, onExitClick)), dungeonService);
+                start = new Choose(new ArrayList<>(Arrays.asList("Грустная история", "Пока", "Shop")),
+                        new ArrayList<>(Arrays.asList(onHistoryClick, onExitClick, pirateShop)), dungeonService);
             } catch (GameException e) {
                 e.printStackTrace();
                 return;
-                // TODO return?
             }
             dungeonService.getDungeon().addDrawing(start);
             dungeonService.getDungeon().addFocus(start);

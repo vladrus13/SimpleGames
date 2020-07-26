@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Game  extends JPanel implements ActionListener, MouseListener, KeyListener {
+public class Game extends JPanel implements ActionListener, MouseListener, KeyListener {
 
     public enum STATUS_GAME {
         DUNGEON, MENU
