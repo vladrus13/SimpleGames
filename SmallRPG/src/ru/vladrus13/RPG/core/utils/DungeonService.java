@@ -26,6 +26,7 @@ public class DungeonService {
     private final ShopFactory shopFactory;
     private final PersonService personService;
     private final PictureService pictureService;
+    private final SoundFactory soundFactory;
 
     public DungeonService(Dungeon dungeon) throws GameException {
         this.dungeon = dungeon;
@@ -55,6 +56,9 @@ public class DungeonService {
 
         System.out.println("Loading events service...");
         eventService = new EventService();
+
+        System.out.println("Loading sound factory...");
+        soundFactory = new SoundFactory();
 
         System.out.println("Loading shop service...");
         shopFactory = new ShopFactory(this);
@@ -129,5 +133,9 @@ public class DungeonService {
 
     public PictureService getPictureService() {
         return pictureService;
+    }
+
+    public SoundFactory getSoundFactory() {
+        return soundFactory;
     }
 }

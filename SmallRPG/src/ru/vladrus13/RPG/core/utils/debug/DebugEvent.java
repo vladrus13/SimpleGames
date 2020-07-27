@@ -26,7 +26,7 @@ public class DebugEvent implements KeyTaker {
             try {
                 dungeonService.getDungeon().addDrawing(new Animation(
                         dungeonService.getPictureService().loadImage(Path.of("assets/pictures/animations/temp.png")),
-                        100, new Point(1, 1), new Point(192, 192)));
+                        100, new Point(1, 1), new Point(192, 192), new Point(32, 32)));
             } catch (GameException gameException) {
                 gameException.printStackTrace();
             }

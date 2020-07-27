@@ -32,6 +32,8 @@ public class Dungeon {
         focus.add(dungeonService.getHero());
         debugEvent = new DebugEvent(dungeonService);
 
+        dungeonService.getSoundFactory().play("MainTheme");
+
         dungeonService.getEventFactory().get("onStart").run(dungeonService);
     }
 
