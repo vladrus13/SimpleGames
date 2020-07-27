@@ -1,5 +1,6 @@
 package ru.vladrus13.RPG.core;
 
+import ru.vladrus13.RPG.core.utils.debug.DebugEvent;
 import ru.vladrus13.RPG.core.utils.picture.Drawing;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
@@ -9,13 +10,16 @@ import ru.vladrus13.RPG.core.utils.picture.Updating;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class Dungeon {
 
     private final LinkedList<Drawing> drawings;
+    private final ConcurrentLinkedDeque<Drawing> dead;
     private final Deque<KeyTaker> focus;
     private final DungeonService dungeonService;
     private final Game game;
+    private final DebugEvent debugEvent;
 
     public Dungeon(Game game) throws GameException {
         this.game = game;
@@ -24,7 +28,9 @@ public class Dungeon {
         dungeonService.setCurrentFloor(0);
         drawings.addAll(Arrays.asList(dungeonService.getHero(), dungeonService.getDialog(), dungeonService.getShortMenu()));
         focus = new ArrayDeque<>();
+        dead = new ConcurrentLinkedDeque<>();
         focus.add(dungeonService.getHero());
+        debugEvent = new DebugEvent(dungeonService);
 
         dungeonService.getEventFactory().get("onStart").run(dungeonService);
     }
@@ -42,6 +48,10 @@ public class Dungeon {
     }
 
     public void update(DungeonService dungeonService) {
+        for (Drawing deadElement : dead) {
+            drawings.remove(deadElement);
+            dead.remove(deadElement);
+        }
         for (Drawing drawing : drawings) {
             if (drawing instanceof Updating && !drawing.isPause()) {
                 ((Updating) drawing).update(dungeonService);
@@ -53,6 +63,7 @@ public class Dungeon {
         if (!focus.isEmpty()) {
             focus.getFirst().keyPressed(e);
         }
+        debugEvent.keyPressed(e);
     }
 
     public void notShortMenu() throws GameException {
@@ -69,7 +80,8 @@ public class Dungeon {
     }
 
     public void removeDrawing(Drawing drawing) {
-        drawings.remove(drawing);
+        dead.add(drawing);
+        // drawings.remove(drawing);
     }
 
     public void replaceDrawing(Drawing from, Drawing to) {

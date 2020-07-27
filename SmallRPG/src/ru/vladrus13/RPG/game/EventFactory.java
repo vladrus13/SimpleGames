@@ -8,7 +8,6 @@ import ru.vladrus13.RPG.core.main.frame.shop.Shop;
 import ru.vladrus13.RPG.core.person.Person;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.core.utils.ways.Direction;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
 import java.util.ArrayList;
