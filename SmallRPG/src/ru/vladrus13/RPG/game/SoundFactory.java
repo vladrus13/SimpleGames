@@ -1,6 +1,6 @@
 package ru.vladrus13.RPG.game;
 
-import javazoom.jl.decoder.JavaLayerException;
+import com.goxr3plus.streamplayer.stream.StreamPlayerException;
 import ru.vladrus13.RPG.core.sound.Sound;
 
 import java.io.File;
@@ -24,7 +24,19 @@ public class SoundFactory {
 
     public void play(String name) {
         played.add(sounds.get(name));
-        sounds.get(name).play();
+        try {
+            sounds.get(name).play();
+        } catch (StreamPlayerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void pause(String name) {
+        sounds.get(name).pause();
+    }
+
+    public void resume(String name) {
+        sounds.get(name).resume();
     }
 
     public void stop(String name) {

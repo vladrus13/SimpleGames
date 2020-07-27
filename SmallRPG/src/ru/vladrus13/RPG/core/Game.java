@@ -1,10 +1,14 @@
 package ru.vladrus13.RPG.core;
 
+import ru.vladrus13.RPG.Launcher;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.logging.LogManager;
 
 public class Game extends JPanel implements ActionListener, MouseListener, KeyListener {
 
@@ -20,6 +24,11 @@ public class Game extends JPanel implements ActionListener, MouseListener, KeyLi
     private STATUS_GAME statusGame = STATUS_GAME.MENU;
 
     public Game() throws GameException {
+        try {
+            LogManager.getLogManager().readConfiguration(new FileInputStream("resources/logging.properties"));
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
         int width = 800;
         int height = 800;
         dungeon = new Dungeon(this);

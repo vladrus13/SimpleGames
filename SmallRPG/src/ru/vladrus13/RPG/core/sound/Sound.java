@@ -1,64 +1,35 @@
 package ru.vladrus13.RPG.core.sound;
 
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
+import com.goxr3plus.streamplayer.stream.StreamPlayer;
+import com.goxr3plus.streamplayer.stream.StreamPlayerEvent;
+import com.goxr3plus.streamplayer.stream.StreamPlayerException;
+import com.goxr3plus.streamplayer.stream.StreamPlayerListener;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.util.Map;
 
-public class Sound implements AutoCloseable {
+public class Sound extends StreamPlayer implements StreamPlayerListener {
 
-    private boolean released = false;
-    private boolean playing = false;
-    private Thread thread;
-    private Player player;
-
-    public Sound(File f) {
+    public Sound(File file) {
         try {
-            FileInputStream fileInputStream = new FileInputStream(f);
-            player = new Player(fileInputStream);
-            released = true;
-        } catch (IOException | JavaLayerException exc) {
-            exc.printStackTrace();
-            released = false;
-            close();
+            open(file);
+        } catch (StreamPlayerException e) {
+            e.printStackTrace();
         }
-    }
-
-
-    public boolean isReleased() {
-        return released;
-    }
-
-    public boolean isPlaying() {
-        return player.isComplete();
-    }
-
-    public void play() {
-        Runnable runnable = () -> {
-            if (released) {
-                try {
-                    player.play();
-                } catch (JavaLayerException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        // TODO very bad. VERY VERY VERY
-        thread = new Thread(runnable);
-        thread.start();
-    }
-
-    public void stop() {
-        if (playing) {
-            player.close();
-        }
-        thread.interrupt();
     }
 
     @Override
-    public void close() {
-        player.close();
+    public void opened(Object o, Map<String, Object> map) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void progress(int i, long l, byte[] bytes, Map<String, Object> map) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void statusUpdated(StreamPlayerEvent streamPlayerEvent) {
+        throw new UnsupportedOperationException();
     }
 }

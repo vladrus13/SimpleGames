@@ -12,7 +12,12 @@ import ru.vladrus13.RPG.core.utils.event.EventService;
 
 import ru.vladrus13.RPG.core.utils.picture.FontService;
 
+import java.util.logging.Logger;
+
 public class DungeonService {
+
+    // TODO Logger
+    private final static Logger logger = Logger.getLogger(DungeonService.class.getName());
     private final Dungeon dungeon;
     private final ShortMenu shortMenu;
     private int currentFloor;
@@ -33,34 +38,34 @@ public class DungeonService {
         shortMenu = new ShortMenu(dungeon);
         shortMenu.setDrawing(false);
 
-        System.out.println("Loading picture service");
+        logger.info("Loading picture service");
         pictureService = new PictureService();
 
-        System.out.println("Loading fonts service...");
+        logger.info("Loading fonts service...");
         fontService = new FontService();
 
-        System.out.println("Loading items factory...");
+        logger.info("Loading items factory...");
         itemFactory = new ItemFactory();
 
-        System.out.println("Loading person service...");
+        logger.info("Loading person service...");
         personService = new PersonService();
 
-        System.out.println("Loading hero service...");
+        logger.info("Loading hero service...");
         heroService = new HeroService(this);
 
-        System.out.println("Loading events factory...");
+        logger.info("Loading events factory...");
         eventFactory = new EventFactory();
 
-        System.out.println("Loading floors factory...");
+        logger.info("Loading floors factory...");
         floorFactory = new FloorFactory(this);
 
-        System.out.println("Loading events service...");
+        logger.info("Loading events service...");
         eventService = new EventService();
 
-        System.out.println("Loading sound factory...");
+        logger.info("Loading sound factory...");
         soundFactory = new SoundFactory();
 
-        System.out.println("Loading shop service...");
+        logger.info("Loading shop service...");
         shopFactory = new ShopFactory(this);
     }
 
