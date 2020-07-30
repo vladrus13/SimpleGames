@@ -45,6 +45,10 @@ public class Hero extends Person implements KeyTaker, MouseTaker {
         return inventory;
     }
 
+    public Stats getStats() {
+        return stats;
+    }
+
     public void onPressEnter(DungeonService dungeonService) throws GameException {
         Hero hero = dungeonService.getHero();
         Floor floor = dungeonService.getCurrentFloor();

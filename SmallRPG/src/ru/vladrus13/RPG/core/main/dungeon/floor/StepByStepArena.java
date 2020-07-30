@@ -5,9 +5,12 @@ import ru.vladrus13.RPG.core.main.dungeon.event.Event;
 import ru.vladrus13.RPG.core.main.dungeon.item.DungeonItem;
 import ru.vladrus13.RPG.core.person.Enemy;
 import ru.vladrus13.RPG.core.person.Person;
+import ru.vladrus13.RPG.core.person.Stats;
 import ru.vladrus13.RPG.core.utils.DungeonService;
+import ru.vladrus13.RPG.core.utils.picture.ColorService;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -15,6 +18,18 @@ public class StepByStepArena extends Arena {
 
     private final HashSet<Point> used;
     private final DungeonService dungeonService;
+
+    @Override
+    public void draw(Graphics graphics) {
+        final int widthHP = 600;
+        final int heightHP = widthHP / 15;
+        super.draw(graphics);
+        Stats heroStats = dungeonService.getHero().getStats();
+        graphics.setColor(ColorService.underHPColor);
+        graphics.fillRoundRect((800 - widthHP) / 2, 700, widthHP, heightHP, heightHP / 2, heightHP / 2);
+        graphics.setColor(ColorService.HPColor);
+        graphics.fillRoundRect((800 - widthHP) / 2, 700, widthHP * heroStats.getHp() / heroStats.getMaxHp(), heightHP, heightHP / 2, heightHP / 2);
+    }
 
     public void enemyTurn() {
         dungeonService.getHero().setPause(true);

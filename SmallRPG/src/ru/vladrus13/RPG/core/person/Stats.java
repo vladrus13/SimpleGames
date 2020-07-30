@@ -64,7 +64,7 @@ public class Stats implements Cloneable {
     }
 
     @Override
-    protected Stats clone() {
+    public Stats clone() {
         return new Stats(hp, maxHp, armor, attack, mp);
     }
 }

@@ -51,10 +51,8 @@ public class Dungeon {
     }
 
     public void update(DungeonService dungeonService, long time) {
-        for (Drawing deadElement : dead) {
-            drawings.remove(deadElement);
-            dead.remove(deadElement);
-        }
+        drawings.removeAll(dead);
+        dead.clear();
         for (Drawing drawing : drawings) {
             if (drawing instanceof Updating && !drawing.isPause()) {
                 ((Updating) drawing).update(dungeonService, time);

@@ -21,4 +21,9 @@ public class Dummy extends Enemy {
     public Dummy(Point place, Direction direction) {
         super(3, place, direction, "Dummy", new Stats(100, 100, 0, 0, 0), 0, 0);
     }
+
+    @Override
+    public Dummy clone() {
+        return new Dummy(place.clone(), direction, name, stats.clone());
+    }
 }

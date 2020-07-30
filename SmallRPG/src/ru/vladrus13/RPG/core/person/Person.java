@@ -19,7 +19,7 @@ public class Person extends Placeable implements Updating, Cloneable {
     protected Point realPlace;
     protected Map<Direction, BufferedImage> picture;
     protected Direction direction;
-    protected int speed = 2;
+    protected int speed;
     protected final String name;
     protected final Queue<Direction> directionQueue;
 

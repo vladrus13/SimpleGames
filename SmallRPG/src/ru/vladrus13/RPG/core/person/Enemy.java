@@ -34,7 +34,7 @@ public class Enemy extends Person {
                 throw new IllegalStateException("Unexpected value: " + random);
         }
         Point future = getPlace().makePoint(direction);
-        if (used.contains(future)) {
+        if (!used.contains(future) && !dungeonService.getCurrentFloor().isCannotWalk(future)) {
             startWent(direction, dungeonService);
             return future;
         } else {
