@@ -17,12 +17,20 @@ public class StepByStepArena extends Arena {
     private final DungeonService dungeonService;
 
     public void enemyTurn() {
+        dungeonService.getHero().setPause(true);
+        HashSet<Person> deleted = new HashSet<>();
         for (Person person : actors) {
             if (person instanceof Enemy) {
                 used.remove(person.getPlace());
-                used.add(((Enemy) person).next(used, dungeonService));
+                if (((Enemy) person).isDead()) {
+                    deleted.add(person);
+                } else {
+                    used.add(((Enemy) person).next(used, dungeonService));
+                }
             }
         }
+        actors.removeAll(deleted);
+        dungeonService.getHero().setPause(false);
     }
 
     public StepByStepArena(String name, ArrayList<ArrayList<Tile>> tiles, ArrayList<Person> actors, ArrayList<DungeonItem> dungeonItems, ArrayList<Event> events, DungeonService dungeonService) {

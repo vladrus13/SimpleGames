@@ -5,6 +5,7 @@ import ru.vladrus13.RPG.core.inventory.Inventory;
 import ru.vladrus13.RPG.core.main.dungeon.floor.Arena;
 import ru.vladrus13.RPG.core.main.dungeon.floor.Floor;
 import ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent;
+import ru.vladrus13.RPG.core.main.dungeon.floor.StepByStepArena;
 import ru.vladrus13.RPG.core.person.Enemy;
 import ru.vladrus13.RPG.core.person.Person;
 import ru.vladrus13.RPG.core.person.Skills;
@@ -103,6 +104,9 @@ public class Hero extends Person implements KeyTaker, MouseTaker {
             Point attacked = getPlace().makePoint(getDirection());
             if (dungeonService.getCurrentFloor().isPerson(attacked) && dungeonService.getCurrentFloor().getPerson(attacked) instanceof Enemy) {
                 ((Enemy) dungeonService.getCurrentFloor().getPerson(attacked)).damage(stats.getAttack());
+            }
+            if (dungeonService.getCurrentFloor() instanceof StepByStepArena) {
+                ((StepByStepArena) dungeonService.getCurrentFloor()).enemyTurn();
             }
         }
     }

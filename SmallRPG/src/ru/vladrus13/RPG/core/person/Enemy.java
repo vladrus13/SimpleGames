@@ -51,7 +51,7 @@ public class Enemy extends Person {
 
     @Override
     public void draw(Graphics graphics) {
-        if (stats.getHp() > 0) {
+        if (!isDead()) {
             super.draw(graphics);
             graphics.setColor(ColorService.underHPColor);
             int posX = 32 * getPlace().getX(), posY = 32 * getPlace().getY();
@@ -68,5 +68,9 @@ public class Enemy extends Person {
     @Override
     public Enemy clone() {
         return new Enemy(id, place.clone(), direction, name, stats.clone(), speed, attackSpeed);
+    }
+
+    public boolean isDead() {
+        return stats.getHp() <= 0;
     }
 }

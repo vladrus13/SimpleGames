@@ -15,6 +15,7 @@ import ru.vladrus13.RPG.core.utils.ways.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.function.Consumer;
 
 import static ru.vladrus13.RPG.core.utils.ways.Direction.*;
 
@@ -87,7 +88,7 @@ public class FloorFactory {
         ArrayList<Event> events = new ArrayList<>(Arrays.asList(
                 new Event(0, new Point(1, 1), TypeActiveEvent.ON_STEP, dungeonService -> dungeonService.getEventService().teleport(0, new Point(3, 1), LEFT, dungeonService)),
                 new Event(1, new Point(1, 5), TypeActiveEvent.ON_STEP, dungeonService -> dungeonService.getEventService().teleport(2, new Point(1, 1), DOWN, dungeonService))
-                ));
+        ));
         return new Floor(name, tiles, actors, dungeonItems, events);
     }
 
@@ -111,11 +112,15 @@ public class FloorFactory {
         ArrayList<Event> events = new ArrayList<>(Arrays.asList(
                 new Event(0, new Point(1, 1), TypeActiveEvent.ON_STEP, dungeonService -> dungeonService.getEventService().teleport(1, new Point(1, 5), RIGHT, dungeonService)),
                 new Event(1, new Point(4, 1), TypeActiveEvent.ON_STEP, dungeonService -> {
-                    actors.add(dungeonService.getPersonService().get(3, new Point(1, 5), UP));
-                    actors.add(dungeonService.getPersonService().get(3, new Point(3, 5), UP));
-                    actors.add(dungeonService.getPersonService().get(3, new Point(5, 5), UP));
-                    actors.add(dungeonService.getPersonService().get(3, new Point(7, 5), UP));
-                    actors.add(dungeonService.getPersonService().get(3, new Point(9, 5), UP));
+                    Consumer<Point> make = point -> {
+                        if (!dungeonService.getCurrentFloor().isPerson(point)) {
+                            actors.add(dungeonService.getPersonService().get(3, point, UP));
+                        }
+                    };
+                    make.accept(new Point(1, 5));
+                    make.accept(new Point(3, 5));
+                    make.accept(new Point(5, 5));
+                    make.accept(new Point(7, 5));
                 })
         ));
         return new StepByStepArena(name, tiles, actors, dungeonItems, events, dungeonService);
