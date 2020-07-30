@@ -1,5 +1,6 @@
-package ru.vladrus13.RPG.core.main.dungeon;
+package ru.vladrus13.RPG.core.main.dungeon.floor;
 
+import ru.vladrus13.RPG.core.main.dungeon.Tile;
 import ru.vladrus13.RPG.core.main.dungeon.event.Event;
 import ru.vladrus13.RPG.core.main.dungeon.item.DungeonItem;
 import ru.vladrus13.RPG.core.person.Person;
@@ -13,15 +14,15 @@ import ru.vladrus13.RPG.core.utils.ways.Point;
 
 public class Floor extends Drawing {
 
-    private final String name;
-    private final ArrayList<ArrayList<Tile>> tiles;
+    protected final String name;
+    protected final ArrayList<ArrayList<Tile>> tiles;
     /*
         Why tiles is table, but actors and others just list with points? Because tiles.size = width * height,
         however very rarely when the number of actors is greater than the width or height
      */
-    private final ArrayList<Person> actors;
-    private final ArrayList<DungeonItem> dungeonItems;
-    private final ArrayList<Event> events;
+    protected final ArrayList<Person> actors;
+    protected final ArrayList<DungeonItem> dungeonItems;
+    protected final ArrayList<Event> events;
 
     public Floor(String name, ArrayList<ArrayList<Tile>> tiles, ArrayList<Person> actors, ArrayList<DungeonItem> dungeonItems, ArrayList<Event> events) {
         this.name = name;
@@ -95,7 +96,7 @@ public class Floor extends Drawing {
 
     public void eraseItem(Point a, DungeonItem item) {
         for (int i = 0; i < dungeonItems.size(); i++) {
-            if (dungeonItems.get(i).getPlace().equals(a) && dungeonItems.get(i).id == item.id) {
+            if (dungeonItems.get(i).getPlace().equals(a) && dungeonItems.get(i).getId() == item.getId()) {
                 dungeonItems.remove(i);
                 break;
             }

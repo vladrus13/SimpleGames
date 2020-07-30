@@ -3,11 +3,8 @@ package ru.vladrus13.RPG.core;
 import ru.vladrus13.RPG.core.inventory.Book;
 import ru.vladrus13.RPG.core.inventory.Inventory;
 import ru.vladrus13.RPG.core.inventory.Item;
-import ru.vladrus13.RPG.core.utils.picture.Drawing;
+import ru.vladrus13.RPG.core.utils.picture.*;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.core.utils.picture.FontService;
-import ru.vladrus13.RPG.core.utils.picture.KeyTaker;
-import ru.vladrus13.RPG.core.utils.picture.PictureService;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -93,7 +90,7 @@ public class ShortMenu extends Drawing implements KeyTaker {
 
     @Override
     public void draw(Graphics graphics) {
-        graphics.setColor(pictureService.getBackgroundShortMenuColor());
+        graphics.setColor(ColorService.backgroundShortMenuColor);
         graphics.fillRect(0, 0, 810, 800);
         switch (statusShortMenu) {
             case MAIN:

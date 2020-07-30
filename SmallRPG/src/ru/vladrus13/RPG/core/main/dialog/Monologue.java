@@ -1,6 +1,7 @@
 package ru.vladrus13.RPG.core.main.dialog;
 
 import ru.vladrus13.RPG.core.person.Person;
+import ru.vladrus13.RPG.core.utils.picture.ColorService;
 import ru.vladrus13.RPG.core.utils.picture.Drawing;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
@@ -35,7 +36,7 @@ public class Monologue extends Drawing {
     @Override
     public void draw(Graphics graphics) {
         text = fontService.splitByWidth(fullText, PixelFontGame, graphics);
-        graphics.setColor(new PictureService().getDialogColor());
+        graphics.setColor(ColorService.dialogColor);
         graphics.fillRect(0, 500, 800, 300);
         graphics.setColor(Color.BLACK);
         graphics.setFont(WriterFont);

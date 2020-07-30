@@ -111,11 +111,11 @@ public class ArrowGame extends Drawing implements KeyTaker, Updating {
     }
 
     @Override
-    public void update(DungeonService dungeonService) {
-        if (time > 0) {
-            time -= Math.min(20, time);
+    public void update(DungeonService dungeonService, long time) {
+        if (this.time > 0) {
+            this.time -= Math.min(time, this.time);
         }
-        if (time == 0) {
+        if (this.time == 0) {
             isFailed = true;
             try {
                 dungeonService.getDungeon().removeFocus(this);

@@ -15,11 +15,11 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
-public class Person extends Placeable implements Updating {
+public class Person extends Placeable implements Updating, Cloneable {
     protected Point realPlace;
     protected Map<Direction, BufferedImage> picture;
     protected Direction direction;
-    protected final int speed = 2;
+    protected int speed = 2;
     protected final String name;
     protected final Queue<Direction> directionQueue;
 
@@ -32,12 +32,17 @@ public class Person extends Placeable implements Updating {
     }
 
     public Person(int id, Point place, Direction direction, String name) {
+        this(id, place, direction, name, 2);
+    }
+
+    public Person(int id, Point place, Direction direction, String name, int speed) {
         super(id, place);
         this.name = name;
         this.picture = new PictureService().loadUnit(Path.of("assets/pictures/units/" + name.toLowerCase()));
         this.realPlace = new Point(place.getX() * 32, place.getY() * 32);
         this.direction = direction;
         directionQueue = new LinkedList<>();
+        this.speed = speed;
     }
 
     @Override
@@ -45,7 +50,7 @@ public class Person extends Placeable implements Updating {
         graphics.drawImage(picture.get(direction), realPlace.getX(), realPlace.getY(), 32, 32, null);
     }
 
-    public void update(DungeonService dungeonService) {
+    public void update(DungeonService dungeonService, long time) {
         if (isWent()) {
             went(dungeonService);
         } else {
@@ -83,7 +88,9 @@ public class Person extends Placeable implements Updating {
     }
 
     public void onPressEnter(DungeonService dungeonService) throws GameException {
-        dungeonService.getEventFactory().get("PirateDialog").run(dungeonService);
+        if (id == 2) {
+            dungeonService.getEventFactory().get("PirateDialog").run(dungeonService);
+        }
     }
 
     public void setPoint(Point place) {
@@ -94,5 +101,11 @@ public class Person extends Placeable implements Updating {
     public void teleport(Point place, Direction direction) {
         setPoint(place);
         this.direction = direction;
+    }
+
+    // TODO warnings ??????
+    @Override
+    public Person clone() {
+        return new Person(id, place.clone(), direction, name, speed);
     }
 }

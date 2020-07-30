@@ -1,6 +1,6 @@
 package ru.vladrus13.RPG.core.utils.ways;
 
-public class Point {
+public class Point implements Cloneable {
     private int x;
     private int y;
 
@@ -47,5 +47,19 @@ public class Point {
             case RIGHT: returned.incX(1); break;
         }
         return returned;
+    }
+
+    @Override
+    public Point clone() {
+        Point object;
+        try {
+            object = (Point) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
+        object.x = this.x;
+        object.y = this.y;
+        return object;
     }
 }

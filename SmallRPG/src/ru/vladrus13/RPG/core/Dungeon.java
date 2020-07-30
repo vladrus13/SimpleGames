@@ -5,6 +5,7 @@ import ru.vladrus13.RPG.core.utils.picture.Drawing;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.picture.KeyTaker;
+import ru.vladrus13.RPG.core.utils.picture.MouseTaker;
 import ru.vladrus13.RPG.core.utils.picture.Updating;
 
 import java.awt.*;
@@ -32,7 +33,7 @@ public class Dungeon {
         focus.add(dungeonService.getHero());
         debugEvent = new DebugEvent(dungeonService);
 
-        dungeonService.getSoundFactory().play("MainTheme");
+        // dungeonService.getSoundFactory().play("MainTheme");
 
         dungeonService.getEventFactory().get("onStart").run(dungeonService);
     }
@@ -49,14 +50,14 @@ public class Dungeon {
         }
     }
 
-    public void update(DungeonService dungeonService) {
+    public void update(DungeonService dungeonService, long time) {
         for (Drawing deadElement : dead) {
             drawings.remove(deadElement);
             dead.remove(deadElement);
         }
         for (Drawing drawing : drawings) {
             if (drawing instanceof Updating && !drawing.isPause()) {
-                ((Updating) drawing).update(dungeonService);
+                ((Updating) drawing).update(dungeonService, time);
             }
         }
     }
@@ -66,6 +67,12 @@ public class Dungeon {
             focus.getFirst().keyPressed(e);
         }
         debugEvent.keyPressed(e);
+    }
+
+    public void mousePressed(MouseEvent e) {
+        if (!focus.isEmpty() && focus.getFirst() instanceof MouseTaker) {
+            ((MouseTaker) focus.getFirst()).mousePressed(e);
+        }
     }
 
     public void notShortMenu() throws GameException {

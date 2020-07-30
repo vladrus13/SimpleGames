@@ -1,6 +1,5 @@
 package ru.vladrus13.RPG.core;
 
-import ru.vladrus13.RPG.Launcher;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 
 import javax.swing.*;
@@ -9,6 +8,7 @@ import java.awt.event.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 public class Game extends JPanel implements ActionListener, MouseListener, KeyListener {
 
@@ -19,6 +19,7 @@ public class Game extends JPanel implements ActionListener, MouseListener, KeyLi
     private final Dungeon dungeon;
     private final Menu menu;
     final Timer timer = new Timer(20, this);
+    long previousTime = 0;
     JFrame frame;
 
     private STATUS_GAME statusGame = STATUS_GAME.MENU;
@@ -60,6 +61,7 @@ public class Game extends JPanel implements ActionListener, MouseListener, KeyLi
             case DUNGEON:
                 menu.setVisible(false);
                 timer.start();
+                previousTime = System.currentTimeMillis();
                 frame.addMouseListener(this);
                 frame.addKeyListener(this);
                 frame.requestFocus();
@@ -83,8 +85,12 @@ public class Game extends JPanel implements ActionListener, MouseListener, KeyLi
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (System.currentTimeMillis() - previousTime > 1000) {
+            Logger.getLogger(Game.class.getName()).warning("Between updating been more than 1 second");
+        }
         if (statusGame == STATUS_GAME.DUNGEON) {
-            dungeon.update(dungeon.getDungeonService());
+            dungeon.update(dungeon.getDungeonService(), System.currentTimeMillis() - previousTime);
+            previousTime = System.currentTimeMillis();
             repaint();
         }
     }
@@ -104,7 +110,9 @@ public class Game extends JPanel implements ActionListener, MouseListener, KeyLi
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        if (statusGame == STATUS_GAME.DUNGEON) {
+            dungeon.mousePressed(e);
+        }
     }
 
     @Override

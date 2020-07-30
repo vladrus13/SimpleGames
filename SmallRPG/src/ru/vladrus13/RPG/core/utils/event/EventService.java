@@ -1,7 +1,8 @@
 package ru.vladrus13.RPG.core.utils.event;
 
-import ru.vladrus13.RPG.core.main.dungeon.Floor;
+import ru.vladrus13.RPG.core.main.dungeon.floor.Floor;
 import ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent;
+import ru.vladrus13.RPG.core.main.dungeon.floor.StepByStepArena;
 import ru.vladrus13.RPG.core.person.unit.Hero;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
@@ -20,6 +21,9 @@ public class EventService {
         Point to = hero.getPlace();
         if (floor.isEvent(to, element -> element.getTypeActiveEvent() == TypeActiveEvent.ON_STEP)) {
             floor.getEvent(to, element -> element.getTypeActiveEvent() == TypeActiveEvent.ON_STEP).run(dungeonService);
+        }
+        if (floor instanceof StepByStepArena) {
+            ((StepByStepArena) floor).enemyTurn();
         }
     }
 

@@ -4,7 +4,6 @@ import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -36,13 +35,5 @@ public class PictureService {
             e.printStackTrace();
         }
         return returned;
-    }
-
-    public Color getDialogColor() {
-        return new Color(97, 183, 207);
-    }
-
-    public Color getBackgroundShortMenuColor() {
-        return new Color(0, 64, 180, 200);
     }
 }

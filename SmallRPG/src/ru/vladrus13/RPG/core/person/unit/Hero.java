@@ -2,24 +2,28 @@ package ru.vladrus13.RPG.core.person.unit;
 
 import ru.vladrus13.RPG.core.ShortMenu;
 import ru.vladrus13.RPG.core.inventory.Inventory;
-import ru.vladrus13.RPG.core.main.dungeon.Floor;
+import ru.vladrus13.RPG.core.main.dungeon.floor.Arena;
+import ru.vladrus13.RPG.core.main.dungeon.floor.Floor;
 import ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent;
+import ru.vladrus13.RPG.core.person.Enemy;
 import ru.vladrus13.RPG.core.person.Person;
 import ru.vladrus13.RPG.core.person.Skills;
 import ru.vladrus13.RPG.core.person.Stats;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.picture.KeyTaker;
+import ru.vladrus13.RPG.core.utils.picture.MouseTaker;
 import ru.vladrus13.RPG.core.utils.picture.PictureService;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.nio.file.Path;
 
 import static ru.vladrus13.RPG.core.utils.ways.Direction.*;
 
-public class Hero extends Person implements KeyTaker {
+public class Hero extends Person implements KeyTaker, MouseTaker {
 
     protected final Stats stats;
     protected final Skills skills;
@@ -89,6 +93,17 @@ public class Hero extends Person implements KeyTaker {
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (dungeonService.getCurrentFloor() instanceof Arena) {
+            // TODO attack
+            Point attacked = getPlace().makePoint(getDirection());
+            if (dungeonService.getCurrentFloor().isPerson(attacked) && dungeonService.getCurrentFloor().getPerson(attacked) instanceof Enemy) {
+                ((Enemy) dungeonService.getCurrentFloor().getPerson(attacked)).damage(stats.getAttack());
+            }
         }
     }
 }

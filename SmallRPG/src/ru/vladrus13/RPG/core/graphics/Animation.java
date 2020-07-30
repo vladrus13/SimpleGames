@@ -73,15 +73,15 @@ public class Animation extends Drawing implements Updating {
     }
 
     @Override
-    public void update(DungeonService dungeonService) {
-        time += 20;
-        if (time > pause) {
+    public void update(DungeonService dungeonService, long time) {
+        this.time += time;
+        if (this.time > pause) {
             if (count + 1 == images.size()) {
                 isEnd = true;
                 dungeonService.getDungeon().removeDrawing(this);
             }
             count++;
-            time = 0;
+            this.time = 0;
         }
     }
 }
