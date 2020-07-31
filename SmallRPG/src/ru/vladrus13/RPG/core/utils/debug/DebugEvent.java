@@ -11,10 +11,22 @@ import java.nio.file.Path;
 
 import static java.awt.event.KeyEvent.VK_H;
 
+/**
+ * @author vladkuznetsov
+ * Special event for debug game
+ */
 public class DebugEvent implements KeyTaker {
 
+    /**
+     * {@link DungeonService}
+     */
     private final DungeonService dungeonService;
 
+    /**
+     * Constructor for class
+     *
+     * @param dungeonService {@link DungeonService}
+     */
     public DebugEvent(DungeonService dungeonService) {
         this.dungeonService = dungeonService;
     }

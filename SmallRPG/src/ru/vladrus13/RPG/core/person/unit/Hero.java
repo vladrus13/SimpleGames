@@ -2,9 +2,9 @@ package ru.vladrus13.RPG.core.person.unit;
 
 import ru.vladrus13.RPG.core.ShortMenu;
 import ru.vladrus13.RPG.core.inventory.Inventory;
+import ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent;
 import ru.vladrus13.RPG.core.main.dungeon.floor.Arena;
 import ru.vladrus13.RPG.core.main.dungeon.floor.Floor;
-import ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent;
 import ru.vladrus13.RPG.core.main.dungeon.floor.StepByStepArena;
 import ru.vladrus13.RPG.core.person.Enemy;
 import ru.vladrus13.RPG.core.person.Person;
@@ -24,13 +24,38 @@ import java.nio.file.Path;
 
 import static ru.vladrus13.RPG.core.utils.ways.Direction.*;
 
+/**
+ * @author vladkuznetsov
+ * Hero class for {@link ru.vladrus13.RPG.core.Dungeon}
+ */
 public class Hero extends Person implements KeyTaker, MouseTaker {
 
+    /**
+     * {@link Stats} - stats
+     */
     protected final Stats stats;
+    /**
+     * {@link Skills} - skills
+     */
     protected final Skills skills;
+    /**
+     * {@link Inventory} - inventory
+     */
     protected final Inventory inventory;
+    /**
+     * {@link DungeonService}
+     */
     protected final DungeonService dungeonService;
 
+    /**
+     * Constructor for class
+     *
+     * @param id             id
+     * @param place          {@link Point} - place
+     * @param direction      {@link Direction} - direction
+     * @param name           name of hero
+     * @param dungeonService {@link DungeonService}
+     */
     public Hero(int id, Point place, Direction direction, DungeonService dungeonService, String name) {
         super(id, place, direction, name);
         realPlace = new Point(place.getX() * 32, place.getY() * 32);
@@ -41,14 +66,30 @@ public class Hero extends Person implements KeyTaker, MouseTaker {
         this.dungeonService = dungeonService;
     }
 
+    /**
+     * Getter for inventory
+     *
+     * @return {@link Inventory} - inventory
+     */
     public Inventory getInventory() {
         return inventory;
     }
 
+    /**
+     * Getter for stats
+     *
+     * @return {@link Stats} - stats
+     */
     public Stats getStats() {
         return stats;
     }
 
+    /**
+     * Method on press enter in game
+     *
+     * @param dungeonService {@link DungeonService}
+     * @throws GameException if we have problem with item
+     */
     public void onPressEnter(DungeonService dungeonService) throws GameException {
         Hero hero = dungeonService.getHero();
         Floor floor = dungeonService.getCurrentFloor();
@@ -123,6 +164,11 @@ public class Hero extends Person implements KeyTaker, MouseTaker {
         }
     }
 
+    /**
+     * Getting damage
+     *
+     * @param damage how much damage
+     */
     public void damage(int damage) {
         this.getStats().setHp(Math.max(0, this.getStats().getHp() - Math.max(0, damage - this.getStats().getArmor())));
     }

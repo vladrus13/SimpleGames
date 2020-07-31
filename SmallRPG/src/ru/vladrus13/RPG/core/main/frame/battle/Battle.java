@@ -8,8 +8,11 @@ import ru.vladrus13.RPG.core.utils.picture.Updating;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+/**
+ * @author vladkuznetsov
+ * Abstract class for battle
+ */
 public class Battle extends Drawing implements KeyTaker, Updating {
-
 
     @Override
     public void draw(Graphics graphics) {

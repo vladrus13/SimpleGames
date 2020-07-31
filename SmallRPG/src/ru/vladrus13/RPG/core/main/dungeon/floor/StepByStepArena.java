@@ -14,9 +14,19 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+/**
+ * @author vladkuznetsov
+ * Class of step-by-step arena
+ */
 public class StepByStepArena extends Arena {
 
+    /**
+     * Using point
+     */
     private final HashSet<Point> used;
+    /**
+     * {@link DungeonService}
+     */
     private final DungeonService dungeonService;
 
     @SuppressWarnings("SuspiciousNameCombination")
@@ -32,6 +42,9 @@ public class StepByStepArena extends Arena {
         graphics.fillRoundRect((800 - widthHP) / 2, 700, widthHP * heroStats.getHp() / heroStats.getMaxHp(), heightHP, heightHP, heightHP);
     }
 
+    /**
+     * Method, calling move for all {@link Enemy}
+     */
     public void enemyTurn() {
         dungeonService.getHero().setPause(true);
         HashSet<Person> deleted = new HashSet<>();
@@ -49,6 +62,14 @@ public class StepByStepArena extends Arena {
         dungeonService.getHero().setPause(false);
     }
 
+    /**
+     * @param name           name of floor
+     * @param tiles          table of tiles
+     * @param actors         actors
+     * @param dungeonItems   items
+     * @param events         events
+     * @param dungeonService {@link DungeonService}
+     */
     public StepByStepArena(String name, ArrayList<ArrayList<Tile>> tiles, ArrayList<Person> actors, ArrayList<DungeonItem> dungeonItems, ArrayList<Event> events, DungeonService dungeonService) {
         super(name, tiles, actors, dungeonItems, events);
         this.used = new HashSet<>();

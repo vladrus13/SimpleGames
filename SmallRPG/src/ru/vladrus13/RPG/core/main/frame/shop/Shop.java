@@ -12,14 +12,36 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+/**
+ * @author vladkuznetsov
+ * Shop frame class
+ */
 public class Shop extends Drawing implements KeyTaker {
 
+    /**
+     * What we draw array
+     */
     private final ArrayList<Text> texts;
+    /**
+     * Items
+     */
     private final ArrayList<ShopItem> items;
+    /**
+     * {@link DungeonService}
+     */
     private final DungeonService dungeonService;
+    /**
+     * Which item chooses
+     */
     private int chooses = 0;
+    /**
+     * Text showing "not enough money"
+     */
     private Text notEnoughMoney = null;
 
+    /**
+     * Adding empty item for normal draw
+     */
     private void addEmptyItem() {
         try {
             texts.add(new Text("         ", new Point(20, 100), dungeonService.getFontService().getFont("Inventory", 18), 20, dungeonService));
@@ -28,6 +50,13 @@ public class Shop extends Drawing implements KeyTaker {
         }
     }
 
+    /**
+     * Constructor for class
+     *
+     * @param items          items
+     * @param dungeonService {@link DungeonService}
+     * @throws GameException if we get font failed
+     */
     public Shop(ArrayList<ShopItem> items, DungeonService dungeonService) throws GameException {
         this.items = items;
         this.dungeonService = dungeonService;
@@ -56,6 +85,9 @@ public class Shop extends Drawing implements KeyTaker {
         }
     }
 
+    /**
+     * Recalculate positions of items
+     */
     public void recalculatePosition() {
         int leftY = 100;
         for (Text text : texts) {
@@ -110,6 +142,11 @@ public class Shop extends Drawing implements KeyTaker {
         }
     }
 
+    /**
+     * Remove item from items and texts
+     *
+     * @param position position of removed item
+     */
     public void remove(int position) {
         texts.get(chooses).setChooses(false);
         items.remove(position);
@@ -122,6 +159,11 @@ public class Shop extends Drawing implements KeyTaker {
         recalculatePosition();
     }
 
+    /**
+     * Add item to end
+     *
+     * @param item {@link ShopItem}
+     */
     public void add(ShopItem item) {
         if (items.isEmpty()) {
             texts.remove(0);

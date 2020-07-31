@@ -1,10 +1,10 @@
 package ru.vladrus13.RPG.core.main.dialog;
 
 import ru.vladrus13.RPG.core.person.Person;
-import ru.vladrus13.RPG.core.utils.picture.ColorService;
-import ru.vladrus13.RPG.core.utils.picture.Drawing;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
+import ru.vladrus13.RPG.core.utils.picture.ColorService;
+import ru.vladrus13.RPG.core.utils.picture.Drawing;
 import ru.vladrus13.RPG.core.utils.picture.FontService;
 import ru.vladrus13.RPG.core.utils.picture.PictureService;
 
@@ -13,16 +13,48 @@ import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+/**
+ * Monologue class for dialogs
+ */
 public class Monologue extends Drawing {
 
+    /**
+     * Texts, parsed
+     */
     private ArrayList<String> text;
+    /**
+     * Text, not parsed
+     */
     private final String fullText;
+    /**
+     * {@link Font} pixel font for author
+     */
     private final Font PixelFontGame;
+    /**
+     * {@link Font} font for texts
+     */
     private final Font WriterFont;
+    /**
+     * {@link Person} author
+     */
     private final Person author;
+    /**
+     * Face for monologue
+     */
     private final BufferedImage faceAuthor;
+    /**
+     * {@link FontService} for fonts
+     */
     private final FontService fontService;
 
+    /**
+     * Constructor for class
+     *
+     * @param text           text
+     * @param author         {@link Person} author
+     * @param dungeonService {@link DungeonService}
+     * @throws GameException if load of font or image is failed
+     */
     public Monologue(String text, Person author, DungeonService dungeonService) throws GameException {
         fontService = dungeonService.getFontService();
         PixelFontGame = fontService.getFont("PixelFontGame", 36);

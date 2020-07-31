@@ -1,9 +1,9 @@
 package ru.vladrus13.RPG.game;
 
-import ru.vladrus13.RPG.core.main.dungeon.floor.Floor;
 import ru.vladrus13.RPG.core.main.dungeon.Tile;
 import ru.vladrus13.RPG.core.main.dungeon.event.Event;
 import ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent;
+import ru.vladrus13.RPG.core.main.dungeon.floor.Floor;
 import ru.vladrus13.RPG.core.main.dungeon.floor.StepByStepArena;
 import ru.vladrus13.RPG.core.main.dungeon.item.DungeonItem;
 import ru.vladrus13.RPG.core.person.Person;
@@ -18,11 +18,26 @@ import java.util.function.Consumer;
 
 import static ru.vladrus13.RPG.core.utils.ways.Direction.*;
 
+/**
+ * @author vladkuznetsov
+ * Floor factory
+ */
 public class FloorFactory {
 
+    /**
+     * Floors
+     */
     private final Floor[] floors;
+    /**
+     * {@link DungeonService}
+     */
     private final DungeonService dungeonService;
 
+    /**
+     * Constructor for class
+     *
+     * @param dungeonService {@link DungeonService}
+     */
     public FloorFactory(DungeonService dungeonService) {
         this.dungeonService = dungeonService;
         floors = new Floor[3];
@@ -31,6 +46,12 @@ public class FloorFactory {
         floors[2] = floor3();
     }
 
+    /**
+     * Get {@link Tile}'s array from just int-id table
+     *
+     * @param nonParsedTiles array of id's
+     * @return tiles array
+     */
     private ArrayList<ArrayList<Tile>> getTiles(int[][] nonParsedTiles) {
         int width = nonParsedTiles.length, height = 0;
         for (int[] nonParsedTile : nonParsedTiles) {
@@ -50,6 +71,11 @@ public class FloorFactory {
         return tiles;
     }
 
+    /**
+     * Floor 1 creator
+     *
+     * @return floor 1
+     */
     private Floor floor1() {
         String name = "First floor";
         ArrayList<ArrayList<Tile>> tiles;
@@ -66,6 +92,11 @@ public class FloorFactory {
         return new Floor(name, tiles, actors, dungeonItems, events);
     }
 
+    /**
+     * Floor 2 creator
+     *
+     * @return floor 2
+     */
     private Floor floor2() {
         String name = "Pirate floor";
         ArrayList<ArrayList<Tile>> tiles;
@@ -91,6 +122,11 @@ public class FloorFactory {
         return new Floor(name, tiles, actors, dungeonItems, events);
     }
 
+    /**
+     * Floor 3 creator
+     *
+     * @return floor 3
+     */
     private StepByStepArena floor3() {
         String name = "Training";
         int[][] nonParsedTitles = {
@@ -129,7 +165,14 @@ public class FloorFactory {
         return new StepByStepArena(name, tiles, actors, dungeonItems, events, dungeonService);
     }
 
-    public Floor getCurrentFloor(int floor) throws GameException {
+    /**
+     * Get floor
+     *
+     * @param floor number of floor
+     * @return {@link Floor}
+     * @throws GameException if get floor with wrong number
+     */
+    public Floor getFloor(int floor) throws GameException {
         if (floor < 0 || floors.length <= floor) {
             throw new GameException("Can't take " + floor + " floor from factory");
         }

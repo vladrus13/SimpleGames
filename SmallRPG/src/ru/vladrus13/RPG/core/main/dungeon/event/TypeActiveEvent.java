@@ -1,5 +1,9 @@
 package ru.vladrus13.RPG.core.main.dungeon.event;
 
+/**
+ * @author vladkuznetsov
+ * Type of {@link Event}
+ */
 public enum TypeActiveEvent {
     /**
      * ON_STEP - event triggered, if you step on tile

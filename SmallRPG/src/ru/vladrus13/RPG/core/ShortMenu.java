@@ -3,8 +3,8 @@ package ru.vladrus13.RPG.core;
 import ru.vladrus13.RPG.core.inventory.Book;
 import ru.vladrus13.RPG.core.inventory.Inventory;
 import ru.vladrus13.RPG.core.inventory.Item;
-import ru.vladrus13.RPG.core.utils.picture.*;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
+import ru.vladrus13.RPG.core.utils.picture.*;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -13,6 +13,10 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * @author vladkuznetsov
+ * Short menu class
+ */
 public class ShortMenu extends Drawing implements KeyTaker {
 
     public enum StatusShortMenu {
@@ -122,7 +126,7 @@ public class ShortMenu extends Drawing implements KeyTaker {
                 if (books.isEmpty()) {
                     graphics.drawString("Пусто!", 120, 30);
                 } else {
-                    graphics.drawString(books.get(countSkipBook).getTile(), 120, 30);
+                    graphics.drawString(books.get(countSkipBook).getTitle(), 120, 30);
                     graphics.setFont(writerFont);
                     drawBook(books.get(countSkipBook), 80, 40, 420, 20, graphics);
                 }

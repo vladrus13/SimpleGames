@@ -15,17 +15,57 @@ import java.util.LinkedList;
 
 import static java.awt.event.KeyEvent.*;
 
+/**
+ * @author vladkuznetsov
+ * Arrow game class
+ */
 public class ArrowGame extends Drawing implements KeyTaker, Updating {
 
+    /**
+     * Collections of sequence arrows
+     */
     private final LinkedList<Direction> arrows;
+    /**
+     * How much time
+     */
     private int time;
+    /**
+     * Position, where we start drawing arrows
+     */
     private int startDrawing;
-    private final int leftX = 30, fullTime;
+    /**
+     * Indent from left border
+     */
+    private final int leftX = 30;
+    /**
+     * Time limit.
+     */
+    private final int fullTime;
+    /**
+     * {@link BufferedImage} of arrows
+     */
     private final BufferedImage UP, DOWN, LEFT, RIGHT;
+    /**
+     * {@link DungeonService}
+     */
     private final DungeonService dungeonService;
+    /**
+     * Is failed game
+     */
     private boolean isFailed = false;
+    /**
+     * Is game successfully end
+     */
     private boolean isEnd = false;
 
+    /**
+     * Constructor for class
+     *
+     * @param arrows         collections of sequence arrows
+     * @param time           time limit
+     * @param dungeonService {@link DungeonService}
+     * @throws GameException if load arrows pictures was failed
+     */
     public ArrowGame(LinkedList<Direction> arrows, int time, DungeonService dungeonService) throws GameException {
         this.arrows = arrows;
         this.time = time;
@@ -64,6 +104,9 @@ public class ArrowGame extends Drawing implements KeyTaker, Updating {
         }
     }
 
+    /**
+     * Remove this from drawing list and no more take keyboard command
+     */
     public void returnDrawingAndFocus() {
         try {
             dungeonService.getDungeon().removeFocus(this);
@@ -127,10 +170,20 @@ public class ArrowGame extends Drawing implements KeyTaker, Updating {
         startDrawing = Math.max(leftX, startDrawing - 5);
     }
 
+    /**
+     * Is game failed
+     *
+     * @return boolean
+     */
     public boolean isFailed() {
         return isFailed;
     }
 
+    /**
+     * Is game successfully end
+     *
+     * @return boolean
+     */
     public boolean isEnd() {
         return isEnd;
     }

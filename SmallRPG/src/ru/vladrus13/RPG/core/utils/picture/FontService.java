@@ -5,15 +5,34 @@ import ru.vladrus13.RPG.core.utils.exception.GameException;
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * @author vladkuznetsov
+ * Font service
+ */
 public class FontService {
+    /**
+     * Fonts map
+     */
     final Map<String, Font> fonts;
 
+    /**
+     * Constructor
+     */
     public FontService() {
         fonts = new HashMap<>();
     }
 
+    /**
+     * Create font
+     *
+     * @param path path to file
+     * @return {@link Font}
+     * @throws GameException if we can't find file, or this is incorrect for this OS font
+     */
     private Font createFontFromFile(String path) throws GameException {
         try {
             return Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("assets/fonts/" + path + ".ttf"));
@@ -22,6 +41,13 @@ public class FontService {
         }
     }
 
+    /**
+     * Get font from created
+     *
+     * @param name name of font
+     * @return {@link Font}
+     * @throws GameException if we not found this font and choose create this, but on creating we 1. Can't find file. 2. Incorrect for this OS font
+     */
     public Font getFont(String name) throws GameException {
         if (!fonts.containsKey(name)) {
             fonts.put(name, createFontFromFile(name));
@@ -29,14 +55,38 @@ public class FontService {
         return fonts.get(name);
     }
 
+    /**
+     * Get font from created
+     *
+     * @param name name of font
+     * @param size size of font
+     * @return {@link Font}
+     * @throws GameException if we not found this font and choose create this, but on creating we 1. Can't find file. 2. Incorrect for this OS font
+     */
     public Font getFont(String name, int size) throws GameException {
         return getFont(name).deriveFont(Font.PLAIN, size);
     }
 
+    /**
+     * Get font width
+     *
+     * @param text     text
+     * @param font     {@link Font}
+     * @param graphics {@link Graphics}
+     * @return width
+     */
     public int fontWidth(String text, Font font, Graphics graphics) {
         return graphics.getFontMetrics(font).stringWidth(text);
     }
 
+    /**
+     * Split text by length 700
+     *
+     * @param text     text
+     * @param font     {@link Font}
+     * @param graphics {@link Graphics}
+     * @return array of text
+     */
     public ArrayList<String> splitByWidth(String text, Font font, Graphics graphics) {
         ArrayList<String> answer = new ArrayList<>();
         int current = 0, last = 0;

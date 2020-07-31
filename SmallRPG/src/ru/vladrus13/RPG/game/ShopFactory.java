@@ -10,9 +10,21 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author vladkuznetsov
+ * Shop factory
+ */
 public class ShopFactory {
+    /**
+     * Shops
+     */
     final Map<String, Shop> shops;
 
+    /**
+     * Constructor for class
+     *
+     * @param dungeonService {@link DungeonService}
+     */
     public ShopFactory(DungeonService dungeonService) {
         shops = new HashMap<>();
         try {
@@ -28,6 +40,13 @@ public class ShopFactory {
         }
     }
 
+    /**
+     * Get a shop by name
+     *
+     * @param name name of shop
+     * @return return {@link Shop}
+     * @throws GameException if we can't find whop with this name
+     */
     public Shop get(String name) throws GameException {
         if (!shops.containsKey(name)) {
             throw new GameException("Don't have shop with name: " + name);

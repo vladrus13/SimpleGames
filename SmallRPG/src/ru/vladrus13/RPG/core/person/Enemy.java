@@ -9,11 +9,31 @@ import java.awt.*;
 import java.util.HashSet;
 import java.util.Random;
 
+/**
+ * @author vladkuznetsov
+ * Enemy class for {@link ru.vladrus13.RPG.core.Dungeon}
+ */
 public class Enemy extends Person {
+    /**
+     * {@link Stats} - stats
+     */
     protected final Stats stats;
+    /**
+     * Attack speed
+     */
     protected final long attackSpeed;
+    /**
+     * Time form last attack
+     */
     protected long timeFromLastAttack;
 
+    /**
+     * Do random move
+     *
+     * @param used           used titles
+     * @param dungeonService {@link DungeonService}
+     * @return where we went
+     */
     public Point next(HashSet<Point> used, DungeonService dungeonService) {
         if (dungeonService.getHero().getPlace().distance(getPlace()) == 1) {
             dungeonService.getHero().damage(stats.getAttack());
@@ -47,6 +67,17 @@ public class Enemy extends Person {
         }
     }
 
+    /**
+     * Constructor for class
+     *
+     * @param id          id
+     * @param place       {@link Point} - place
+     * @param direction   {@link Direction} - direction
+     * @param name        name of enemy
+     * @param stats       {@link Stats} - stats
+     * @param speed       speed of walking
+     * @param attackSpeed attack speed
+     */
     public Enemy(int id, Point place, Direction direction, String name, Stats stats, int speed, long attackSpeed) {
         super(id, place, direction, name, speed);
         this.stats = stats;
@@ -67,6 +98,11 @@ public class Enemy extends Person {
         }
     }
 
+    /**
+     * Get damage
+     *
+     * @param damage how much we get
+     */
     public void damage(int damage) {
         this.stats.setHp(Math.max(0, stats.getHp() - Math.max(0, damage - stats.getArmor())));
     }
@@ -76,6 +112,11 @@ public class Enemy extends Person {
         return new Enemy(id, place.clone(), direction, name, stats.clone(), speed, attackSpeed);
     }
 
+    /**
+     * Is enemy dead
+     *
+     * @return true, if dead, false else
+     */
     public boolean isDead() {
         return stats.getHp() <= 0;
     }

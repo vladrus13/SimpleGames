@@ -10,22 +10,69 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.function.Consumer;
 
+/**
+ * Button-class
+ */
 public class Button extends Drawing implements KeyTaker {
+    /**
+     * {@link Consumer} if we click
+     */
     private final Consumer<DungeonService> atClick;
+    /**
+     * Text on button
+     */
     private final String text;
+    /**
+     * Left up position of button
+     */
     private final Point leftUp;
+    /**
+     * Size of button
+     */
     private final Point size;
+    /**
+     * Text position
+     */
     private Point textPosition;
+    /**
+     * Color of font
+     */
     private final Color color;
+    /**
+     * {@link DungeonService}
+     */
     private final DungeonService dungeonService;
+    /**
+     * {@link Font}
+     */
     private final Font font;
+    /**
+     * If this button chooses
+     */
     private boolean isChoose = false;
+    /**
+     * Font size
+     */
     private final int FONT_SIZE = 20;
 
+    /**
+     * Calculate text position
+     *
+     * @return text position
+     */
     private Point calculateTextPosition() {
         return new Point(0, (size.getY() + FONT_SIZE) / 2 + leftUp.getY());
     }
 
+    /**
+     * @param atClick        {@link Consumer} if we click
+     * @param text           Text on button
+     * @param leftUp         Left up position of button
+     * @param size           Size of button
+     * @param color          Color of font
+     * @param dungeonService {@link DungeonService}
+     * @throws GameException if we have problem with fonts on {@link ru.vladrus13.RPG.core.utils.picture.FontService} getFont method
+     */
     public Button(Consumer<DungeonService> atClick, String text, Point leftUp, Point size, Color color, DungeonService dungeonService) throws GameException {
         this.atClick = atClick;
         this.text = text;
@@ -37,6 +84,14 @@ public class Button extends Drawing implements KeyTaker {
         this.textPosition = calculateTextPosition();
     }
 
+    /**
+     * @param atClick        {@link Consumer} if we click
+     * @param text           Text on button
+     * @param leftUp         Left up position of button
+     * @param size           Size of button
+     * @param dungeonService {@link DungeonService}
+     * @throws GameException if we have problem with fonts on {@link ru.vladrus13.RPG.core.utils.picture.FontService} getFont method
+     */
     public Button(Consumer<DungeonService> atClick, String text, Point leftUp, Point size, DungeonService dungeonService) throws GameException {
         this.atClick = atClick;
         this.text = text;
@@ -73,6 +128,11 @@ public class Button extends Drawing implements KeyTaker {
         }
     }
 
+    /**
+     * Set, chooses button or not
+     *
+     * @param choose boolean
+     */
     public void setChoose(boolean choose) {
         isChoose = choose;
     }

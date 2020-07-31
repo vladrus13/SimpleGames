@@ -10,20 +10,52 @@ import java.io.IOException;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+/**
+ * @author vladkuznetsov
+ * Game class
+ */
 public class Game extends JPanel implements ActionListener, MouseListener, KeyListener {
 
+    /**
+     * Status of game
+     */
     public enum STATUS_GAME {
+        /**
+         * Statuses
+         */
         DUNGEON, MENU
     }
 
+    /**
+     * {@link Dungeon}
+     */
     private final Dungeon dungeon;
+    /**
+     * {@link Menu}
+     */
     private final Menu menu;
+    /**
+     * Updating timer
+     */
     final Timer timer = new Timer(20, this);
+    /**
+     * Previous updating time
+     */
     long previousTime = 0;
+    /**
+     * Game frame
+     */
     JFrame frame;
-
+    /**
+     * Status game
+     */
     private STATUS_GAME statusGame = STATUS_GAME.MENU;
 
+    /**
+     * Constructor of class
+     *
+     * @throws GameException if we got error on creating {@link Dungeon}
+     */
     public Game() throws GameException {
         try {
             LogManager.getLogManager().readConfiguration(new FileInputStream("resources/logging.properties"));
@@ -55,6 +87,11 @@ public class Game extends JPanel implements ActionListener, MouseListener, KeyLi
         repaint();
     }
 
+    /**
+     * Set status game
+     *
+     * @param statusGame {@link STATUS_GAME}
+     */
     public void setStatusGame(STATUS_GAME statusGame) {
         this.statusGame = statusGame;
         switch (statusGame) {
@@ -96,7 +133,8 @@ public class Game extends JPanel implements ActionListener, MouseListener, KeyLi
     }
 
     @Override
-    public void keyTyped(KeyEvent e) { }
+    public void keyTyped(KeyEvent e) {
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -106,7 +144,8 @@ public class Game extends JPanel implements ActionListener, MouseListener, KeyLi
     }
 
     @Override
-    public void keyReleased(KeyEvent e) { }
+    public void keyReleased(KeyEvent e) {
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -116,14 +155,18 @@ public class Game extends JPanel implements ActionListener, MouseListener, KeyLi
     }
 
     @Override
-    public void mousePressed(MouseEvent e) { }
+    public void mousePressed(MouseEvent e) {
+    }
 
     @Override
-    public void mouseReleased(MouseEvent e) { }
+    public void mouseReleased(MouseEvent e) {
+    }
 
     @Override
-    public void mouseEntered(MouseEvent e) { }
+    public void mouseEntered(MouseEvent e) {
+    }
 
     @Override
-    public void mouseExited(MouseEvent e) { }
+    public void mouseExited(MouseEvent e) {
+    }
 }

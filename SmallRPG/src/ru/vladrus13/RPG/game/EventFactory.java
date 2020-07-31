@@ -19,10 +19,20 @@ import java.util.function.Consumer;
 import static ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent.TRIGGERED;
 import static ru.vladrus13.RPG.core.utils.ways.Direction.*;
 
+/**
+ * @author vladkuznetsov
+ * Factory for events
+ */
 public class EventFactory {
 
+    /**
+     * Events by names map
+     */
     private final HashMap<String, Event> events;
 
+    /**
+     * Constructor for factory
+     */
     public EventFactory() {
         events = new HashMap<>();
         events.put("onStart", new Event(0, new Point(0, 0), TRIGGERED, dungeonService -> {
@@ -92,6 +102,12 @@ public class EventFactory {
         }));
     }
 
+    /**
+     * Get a event from name
+     *
+     * @param key name of event
+     * @return {@link Event}
+     */
     public Event get(String key) {
         return events.get(key);
     }

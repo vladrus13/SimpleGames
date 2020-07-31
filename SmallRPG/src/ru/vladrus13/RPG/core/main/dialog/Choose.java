@@ -11,15 +11,45 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
+/**
+ * Choose frame class
+ */
+@SuppressWarnings("FieldCanBeLocal")
 public class Choose extends Drawing implements KeyTaker {
 
+    /**
+     * Buttons on choose
+     */
     Button[] buttons;
+    /**
+     * {@link DungeonService}
+     */
     private final DungeonService dungeonService;
+    /**
+     * Which button we choose
+     */
     int chooses = 0;
+    /**
+     * Where button start on X-axis
+     */
     private final int X_START_BUTTON = 50;
+    /**
+     * Where button finish on X-axis
+     */
     private final int X_FINISH_BUTTON = 750;
+    /**
+     * Height of button
+     */
     private final int HEIGHT_BUTTON = 50;
 
+    /**
+     * Constructor of class
+     *
+     * @param texts          {@link ArrayList} of texts
+     * @param atClickArray   {@link ArrayList} of atClick actions
+     * @param dungeonService {@link DungeonService}
+     * @throws GameException if we have big (or too small) count of buttons or texts and atClickArray of different lengths
+     */
     public Choose(ArrayList<String> texts, ArrayList<Consumer<DungeonService>> atClickArray, DungeonService dungeonService) throws GameException {
         this.dungeonService = dungeonService;
         if (texts.size() > 5) {
