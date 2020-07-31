@@ -35,7 +35,7 @@ public class Hero extends Person implements KeyTaker, MouseTaker {
         super(id, place, direction, name);
         realPlace = new Point(place.getX() * 32, place.getY() * 32);
         this.picture = new PictureService().loadUnit(Path.of("assets/pictures/units/hero"));
-        this.stats = new Stats();
+        this.stats = new Stats(100, 200, 0, 10, 0);
         this.skills = new Skills();
         this.inventory = new Inventory();
         this.dungeonService = dungeonService;
@@ -65,6 +65,14 @@ public class Hero extends Person implements KeyTaker, MouseTaker {
                     floor.eraseItem(to, floor.getDungeonItem(to));
                 }
             }
+        }
+    }
+
+    @Override
+    public void went(DungeonService dungeonService) {
+        super.went(dungeonService);
+        if (!isWent()) {
+            dungeonService.getEventService().onTileStep(dungeonService);
         }
     }
 
@@ -104,7 +112,7 @@ public class Hero extends Person implements KeyTaker, MouseTaker {
     @Override
     public void mousePressed(MouseEvent e) {
         if (dungeonService.getCurrentFloor() instanceof Arena) {
-            // TODO attack
+            // TODO normal attack
             Point attacked = getPlace().makePoint(getDirection());
             if (dungeonService.getCurrentFloor().isPerson(attacked) && dungeonService.getCurrentFloor().getPerson(attacked) instanceof Enemy) {
                 ((Enemy) dungeonService.getCurrentFloor().getPerson(attacked)).damage(stats.getAttack());
@@ -114,4 +122,9 @@ public class Hero extends Person implements KeyTaker, MouseTaker {
             }
         }
     }
+
+    public void damage(int damage) {
+        this.getStats().setHp(Math.max(0, this.getStats().getHp() - Math.max(0, damage - this.getStats().getArmor())));
+    }
+
 }

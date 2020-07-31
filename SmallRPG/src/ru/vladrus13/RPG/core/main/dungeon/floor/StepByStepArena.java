@@ -19,16 +19,17 @@ public class StepByStepArena extends Arena {
     private final HashSet<Point> used;
     private final DungeonService dungeonService;
 
+    @SuppressWarnings("SuspiciousNameCombination")
     @Override
     public void draw(Graphics graphics) {
-        final int widthHP = 600;
+        final int widthHP = 700;
         final int heightHP = widthHP / 15;
         super.draw(graphics);
         Stats heroStats = dungeonService.getHero().getStats();
         graphics.setColor(ColorService.underHPColor);
-        graphics.fillRoundRect((800 - widthHP) / 2, 700, widthHP, heightHP, heightHP / 2, heightHP / 2);
+        graphics.fillRoundRect((800 - widthHP) / 2, 700, widthHP, heightHP, heightHP, heightHP);
         graphics.setColor(ColorService.HPColor);
-        graphics.fillRoundRect((800 - widthHP) / 2, 700, widthHP * heroStats.getHp() / heroStats.getMaxHp(), heightHP, heightHP / 2, heightHP / 2);
+        graphics.fillRoundRect((800 - widthHP) / 2, 700, widthHP * heroStats.getHp() / heroStats.getMaxHp(), heightHP, heightHP, heightHP);
     }
 
     public void enemyTurn() {

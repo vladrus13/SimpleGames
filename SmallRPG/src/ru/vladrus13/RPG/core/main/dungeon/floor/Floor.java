@@ -4,31 +4,34 @@ import ru.vladrus13.RPG.core.main.dungeon.Tile;
 import ru.vladrus13.RPG.core.main.dungeon.event.Event;
 import ru.vladrus13.RPG.core.main.dungeon.item.DungeonItem;
 import ru.vladrus13.RPG.core.person.Person;
+import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.picture.Drawing;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Predicate;
 
+import ru.vladrus13.RPG.core.utils.picture.Updating;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
-public class Floor extends Drawing {
+public class Floor extends Drawing implements Updating {
 
     protected final String name;
     protected final ArrayList<ArrayList<Tile>> tiles;
     /*
         Why tiles is table, but actors and others just list with points? Because tiles.size = width * height,
         however very rarely when the number of actors is greater than the width or height
-     */
-    protected final ArrayList<Person> actors;
-    protected final ArrayList<DungeonItem> dungeonItems;
+    */
+    protected final CopyOnWriteArrayList<Person> actors;
+    protected final CopyOnWriteArrayList<DungeonItem> dungeonItems;
     protected final ArrayList<Event> events;
 
     public Floor(String name, ArrayList<ArrayList<Tile>> tiles, ArrayList<Person> actors, ArrayList<DungeonItem> dungeonItems, ArrayList<Event> events) {
         this.name = name;
         this.tiles = tiles;
-        this.actors = actors;
-        this.dungeonItems = dungeonItems;
+        this.actors = new CopyOnWriteArrayList<>(actors);
+        this.dungeonItems = new CopyOnWriteArrayList<>(dungeonItems);
         this.events = events;
     }
 
@@ -56,8 +59,8 @@ public class Floor extends Drawing {
         return !getPlaceable(a).isWalked();
     }
 
-    public boolean isCannotWalk(Point a) {
-        return isWall(a) || isPerson(a);
+    public boolean isCanWalk(Point a) {
+        return !isWall(a) && !isPerson(a);
     }
 
     public boolean isPerson(Point a) {
@@ -70,12 +73,12 @@ public class Floor extends Drawing {
         return actors.stream().filter(placeable -> placeable.getPlace().equals(a)).findFirst().get();
     }
 
-    public boolean isEvent(Point a, Predicate <Event> filter) {
+    public boolean isEvent(Point a, Predicate<Event> filter) {
         return events.stream().filter(filter).anyMatch(element -> element.getPlace().equals(a));
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
-    public Event getEvent(Point a, Predicate <Event> filter) {
+    public Event getEvent(Point a, Predicate<Event> filter) {
         if (!isEvent(a, filter)) return null;
         return events.stream().filter(element -> element.getPlace().equals(a)).findFirst().get();
     }
@@ -101,5 +104,16 @@ public class Floor extends Drawing {
                 break;
             }
         }
+    }
+
+    @Override
+    public void update(DungeonService dungeonService, long time) {
+        for (Person person : actors) {
+            person.update(dungeonService, time);
+        }
+    }
+
+    public CopyOnWriteArrayList<Person> getActors() {
+        return actors;
     }
 }

@@ -67,9 +67,6 @@ public class Person extends Placeable implements Updating, Cloneable {
             case LEFT: realPlace.incX(-speed); break;
             case RIGHT: realPlace.incX(speed); break;
         }
-        if (!isWent()) {
-            dungeonService.getEventService().onTileStep(dungeonService);
-        }
     }
 
     public void startWent(Direction direction, DungeonService dungeonService) {
@@ -77,7 +74,7 @@ public class Person extends Placeable implements Updating, Cloneable {
         this.direction = direction;
         Point future = new Point(place.getX(), place.getY());
         future = future.makePoint(direction);
-        if (!dungeonService.getCurrentFloor().isCannotWalk(future)) {
+        if (dungeonService.getCurrentFloor().isCanWalk(future)) {
             place = place.makePoint(direction);
             went(dungeonService);
         }

@@ -108,18 +108,22 @@ public class FloorFactory {
         ArrayList<ArrayList<Tile>> tiles = getTiles(nonParsedTitles);
         ArrayList<Person> actors = new ArrayList<>();
         ArrayList<DungeonItem> dungeonItems = new ArrayList<>();
+        // никаких внешних связей не делать - иначе бан
         ArrayList<Event> events = new ArrayList<>(Arrays.asList(
                 new Event(0, new Point(1, 1), TypeActiveEvent.ON_STEP, dungeonService -> dungeonService.getEventService().teleport(1, new Point(1, 5), RIGHT, dungeonService)),
                 new Event(1, new Point(4, 1), TypeActiveEvent.ON_STEP, dungeonService -> {
                     Consumer<Point> make = point -> {
                         if (!dungeonService.getCurrentFloor().isPerson(point)) {
-                            actors.add(dungeonService.getPersonService().get(3, point, UP));
+                            dungeonService.getCurrentFloor().getActors().add(dungeonService.getPersonService().get(3, point, UP));
                         }
                     };
                     make.accept(new Point(1, 5));
                     make.accept(new Point(3, 5));
                     make.accept(new Point(5, 5));
                     make.accept(new Point(7, 5));
+                    if (!dungeonService.getCurrentFloor().isPerson(new Point(5, 7))) {
+                        dungeonService.getCurrentFloor().getActors().add(dungeonService.getPersonService().get(4, new Point(5, 5), UP));
+                    }
                 })
         ));
         return new StepByStepArena(name, tiles, actors, dungeonItems, events, dungeonService);

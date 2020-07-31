@@ -50,6 +50,12 @@ public class Dialog extends Drawing implements KeyTaker {
         this.afterEnd = afterEnd;
     }
 
+    public Dialog(String text, Person author, DungeonService dungeonService) throws GameException {
+        monologues = new ArrayList<>(Collections.singleton(new Monologue(text, author, dungeonService)));
+        this.dungeonService = dungeonService;
+        this.afterEnd = null;
+    }
+
     public boolean hasNext() {
         return current + 1 < monologues.size();
     }

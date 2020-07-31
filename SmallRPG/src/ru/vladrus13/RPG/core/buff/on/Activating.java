@@ -1,7 +1,7 @@
 package ru.vladrus13.RPG.core.buff.on;
 
-import ru.vladrus13.RPG.core.person.Stats;
+import ru.vladrus13.RPG.core.utils.DungeonService;
 
 public interface Activating {
-    Stats onActivate(Stats stats);
+    DungeonService onActivate(DungeonService dungeonService);
 }

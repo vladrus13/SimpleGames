@@ -15,30 +15,35 @@ public class Enemy extends Person {
     protected long timeFromLastAttack;
 
     public Point next(HashSet<Point> used, DungeonService dungeonService) {
-        int random = new Random().nextInt(4);
-        Direction direction;
-        switch (random) {
-            case 0:
-                direction = Direction.UP;
-                break;
-            case 1:
-                direction = Direction.DOWN;
-                break;
-            case 2:
-                direction = Direction.LEFT;
-                break;
-            case 3:
-                direction = Direction.RIGHT;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + random);
-        }
-        Point future = getPlace().makePoint(direction);
-        if (!used.contains(future) && !dungeonService.getCurrentFloor().isCannotWalk(future)) {
-            startWent(direction, dungeonService);
-            return future;
-        } else {
+        if (dungeonService.getHero().getPlace().distance(getPlace()) == 1) {
+            dungeonService.getHero().damage(stats.getAttack());
             return getPlace();
+        } else {
+            int random = new Random().nextInt(4);
+            Direction direction;
+            switch (random) {
+                case 0:
+                    direction = Direction.UP;
+                    break;
+                case 1:
+                    direction = Direction.DOWN;
+                    break;
+                case 2:
+                    direction = Direction.LEFT;
+                    break;
+                case 3:
+                    direction = Direction.RIGHT;
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + random);
+            }
+            Point future = getPlace().makePoint(direction);
+            if (!used.contains(future) && dungeonService.getCurrentFloor().isCanWalk(future)) {
+                startWent(direction, dungeonService);
+                return future;
+            } else {
+                return getPlace();
+            }
         }
     }
 
@@ -54,7 +59,8 @@ public class Enemy extends Person {
         if (!isDead()) {
             super.draw(graphics);
             graphics.setColor(ColorService.underHPColor);
-            int posX = 32 * getPlace().getX(), posY = 32 * getPlace().getY();
+            // int posX = 32 * getPlace().getX(), posY = 32 * getPlace().getY();
+            int posX = realPlace.getX(), posY = realPlace.getY();
             graphics.fillRect(posX, posY, 32, 8);
             graphics.setColor(ColorService.HPColor);
             graphics.fillRect(posX, posY, 32 * stats.getHp() / stats.getMaxHp(), 8);

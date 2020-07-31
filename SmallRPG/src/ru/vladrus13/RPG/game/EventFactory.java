@@ -27,7 +27,7 @@ public class EventFactory {
         events = new HashMap<>();
         events.put("onStart", new Event(0, new Point(0, 0), TRIGGERED, dungeonService -> {
             try {
-                dungeonService.setDialog(new Dialog(new String[]{"Где я?"}, new Person[]{dungeonService.getHero()}, dungeonService));
+                dungeonService.setDialog(new Dialog("Где я?", dungeonService.getHero(), dungeonService));
             } catch (GameException e) {
                 e.printStackTrace();
             }
@@ -36,11 +36,12 @@ public class EventFactory {
         events.put("PirateDialog", new Event(1, new Point(0, 0), TRIGGERED, dungeonService -> {
             Consumer<DungeonService> onHistoryClick = dungeonService1 -> {
                 try {
+                    Person pirate = dungeonService1.getPersonService().get(2, new Point(0, 0), DOWN);
                     dungeonService1.setDialog(new Dialog(new String[]{
                             "Привет",
                             "Это микро версия игры",
                             "Я кассир (это так то неважно, но пусть будет, надо же как то диалоги писать)"},
-                            new Person[]{dungeonService1.getHero(), dungeonService1.getHero(), dungeonService1.getHero()}, dungeonService1));
+                            new Person[]{pirate, pirate, pirate}, dungeonService1));
                 } catch (GameException e) {
                     e.printStackTrace();
                 }
