@@ -2,7 +2,7 @@ package ru.vladrus13.RPG.core.main.dungeon.floor;
 
 import ru.vladrus13.RPG.core.main.dungeon.Tile;
 import ru.vladrus13.RPG.core.main.dungeon.event.Event;
-import ru.vladrus13.RPG.core.main.dungeon.item.DungeonItem;
+import ru.vladrus13.RPG.core.main.dungeon.DungeonItem;
 import ru.vladrus13.RPG.core.person.Person;
 
 import java.util.ArrayList;

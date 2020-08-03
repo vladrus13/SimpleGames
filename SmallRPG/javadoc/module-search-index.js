@@ -1,0 +1,1 @@
+moduleSearchIndex = [{"l":"ru.vladrus13.RPG"}]

@@ -3,8 +3,8 @@ package ru.vladrus13.RPG.core.main.dialog;
 import ru.vladrus13.RPG.core.person.Person;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.core.utils.picture.Drawing;
-import ru.vladrus13.RPG.core.utils.picture.KeyTaker;
+import ru.vladrus13.RPG.core.graphics.Drawing;
+import ru.vladrus13.RPG.core.graphics.KeyTaker;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

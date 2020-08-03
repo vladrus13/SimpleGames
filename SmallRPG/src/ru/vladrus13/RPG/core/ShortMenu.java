@@ -1,16 +1,17 @@
 package ru.vladrus13.RPG.core;
 
+import ru.vladrus13.RPG.core.graphics.*;
 import ru.vladrus13.RPG.core.inventory.Book;
 import ru.vladrus13.RPG.core.inventory.Inventory;
 import ru.vladrus13.RPG.core.inventory.Item;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.core.utils.picture.*;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -19,25 +20,97 @@ import java.util.stream.Collectors;
  */
 public class ShortMenu extends Drawing implements KeyTaker {
 
+    /**
+     * Status of short menu
+     */
     public enum StatusShortMenu {
-        MAIN, BOOK, INVENTORY
+        /**
+         * In main menu
+         */
+        MAIN,
+        /**
+         * In book menu
+         */
+        BOOK,
+        /**
+         * In inventory
+         */
+        INVENTORY
     }
 
-    private final PictureService pictureService;
+    /**
+     * {@link Dungeon}
+     */
     private final Dungeon dungeon;
-    private final Font menuFont, inventoryFont, writerFont, bigWriterFont;
+    /**
+     * {@link Font} - menu font
+     */
+    private final Font menuFont;
+    /**
+     * {@link Font} - inventory font
+     */
+    private final Font inventoryFont;
+    /**
+     * {@link Font} - writer font
+     */
+    private final Font writerFont;
+    /**
+     * {@link Font} - big size writer font
+     */
+    private final Font bigWriterFont;
+    /**
+     * {@link StatusShortMenu}
+     */
     private StatusShortMenu statusShortMenu;
-    private Set<Inventory.Items> weaponItem, armorItem, poisonItem, specialItem;
+    /**
+     * Weapons
+     */
+    private Set<Inventory.Items> weaponItem;
+    /**
+     * Armors
+     */
+    private Set<Inventory.Items> armorItem;
+    /**
+     * Poisons
+     */
+    private Set<Inventory.Items> poisonItem;
+    /**
+     * Special items
+     */
+    private Set<Inventory.Items> specialItem;
+    /**
+     * Current item type
+     */
     private Item.ItemType itemType;
+    /**
+     * Position current item
+     */
     private int countSkipItem;
+    /**
+     * Books
+     */
     private ArrayList<Book> books;
-    private int countSkipBook, pageBook;
+    /**
+     * Position current book
+     */
+    private int countSkipBook;
+    /**
+     * Page of current book
+     */
+    private int pageBook;
+    /**
+     * Function to make from item string with name and count
+     */
     private final Function<Inventory.Items, String> fromItemToString = element -> element.getItem().getName() + " " + element.getCount();
 
+    /**
+     * Constructor for class
+     * @param dungeon {@link Dungeon}
+     * @throws GameException if get font is incorrect
+     */
     public ShortMenu(Dungeon dungeon) throws GameException {
         this.statusShortMenu = StatusShortMenu.MAIN;
         this.dungeon = dungeon;
-        this.pictureService = new PictureService();
         this.menuFont = new FontService().getFont("MK-90", 30);
         this.inventoryFont = new FontService().getFont("Inventory", 17);
         this.writerFont = new FontService().getFont("WriterFont", 20);
@@ -48,17 +121,38 @@ public class ShortMenu extends Drawing implements KeyTaker {
         pageBook = 0;
     }
 
+    /**
+     * Filter current hero inventory
+     * @param filter filter
+     * @return unmodifiable set
+     */
+    private Set<Inventory.Items> filter(Predicate<Inventory.Items> filter) {
+        return dungeon.getDungeonService().getHero().getInventory().getItems().stream().filter(filter).collect(Collectors.toUnmodifiableSet());
+    }
+
+    /**
+     * Reload items positions
+     */
     private void reloadBooksAndItems() {
-        weaponItem = dungeon.getDungeonService().getHero().getInventory().getItems().stream().filter(element -> element.getItem().getItemType() == Item.ItemType.WEAPON).collect(Collectors.toUnmodifiableSet());
-        armorItem = dungeon.getDungeonService().getHero().getInventory().getItems().stream().filter(element -> element.getItem().getItemType() == Item.ItemType.ARMOR).collect(Collectors.toUnmodifiableSet());
-        poisonItem = dungeon.getDungeonService().getHero().getInventory().getItems().stream().filter(element -> element.getItem().getItemType() == Item.ItemType.POISON).collect(Collectors.toUnmodifiableSet());
-        specialItem = dungeon.getDungeonService().getHero().getInventory().getItems().stream().filter(element -> element.getItem().getItemType() == Item.ItemType.SPECIAL).collect(Collectors.toUnmodifiableSet());
+        weaponItem = filter(element -> element.getItem().getItemType() == Item.ItemType.WEAPON);
+        armorItem = filter(element -> element.getItem().getItemType() == Item.ItemType.ARMOR);
+        poisonItem = filter(element -> element.getItem().getItemType() == Item.ItemType.POISON);
+        specialItem = filter(element -> element.getItem().getItemType() == Item.ItemType.SPECIAL);
         books = dungeon.getDungeonService().getHero().getInventory().getBooks();
         countSkipBook = 0;
         countSkipItem = 0;
         pageBook = 0;
     }
 
+    /**
+     * Draw strings
+     * @param array drawing strings
+     * @param startHeight start height - Y-axis
+     * @param firstRow first row X-axis
+     * @param secondRow second row X-axis
+     * @param height height of string
+     * @param graphics {@link Graphics}
+     */
     public void drawArray(String[] array, int startHeight, int firstRow, int secondRow, int height, Graphics graphics) {
         if (array.length == 0) {
             graphics.drawString("Пусто!!!", firstRow, startHeight);
@@ -72,6 +166,14 @@ public class ShortMenu extends Drawing implements KeyTaker {
         }
     }
 
+    /**
+     * Draw strings
+     * @param array drawing strings
+     * @param startHeight start height - Y-axis
+     * @param firstRow first row X-axis
+     * @param height height of string
+     * @param graphics {@link Graphics}
+     */
     public void drawArray(String[] array, int startHeight, int firstRow, int height, Graphics graphics) {
         if (array.length == 0) {
             graphics.drawString("Пусто!!!", firstRow, startHeight);
@@ -82,6 +184,15 @@ public class ShortMenu extends Drawing implements KeyTaker {
         }
     }
 
+    /**
+     * Draw book
+     * @param book book we draw
+     * @param startHeight start height - Y-axis
+     * @param firstRow first row X-axis
+     * @param secondRow second row X-axis
+     * @param height height of string
+     * @param graphics {@link Graphics}
+     */
     public void drawBook(Book book, int startHeight, int firstRow, int secondRow, int height, Graphics graphics) {
         int it = 0;
         for (; it < book.getEntry().length && startHeight + height * it < 800; it++) {
@@ -134,6 +245,7 @@ public class ShortMenu extends Drawing implements KeyTaker {
         }
     }
 
+    @Override
     public void keyPressed(KeyEvent keyEvent) {
         int keyCode = keyEvent.getKeyCode();
         switch (statusShortMenu) {

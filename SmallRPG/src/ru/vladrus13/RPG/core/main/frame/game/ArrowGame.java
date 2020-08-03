@@ -2,9 +2,9 @@ package ru.vladrus13.RPG.core.main.frame.game;
 
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.core.utils.picture.Drawing;
-import ru.vladrus13.RPG.core.utils.picture.KeyTaker;
-import ru.vladrus13.RPG.core.utils.picture.Updating;
+import ru.vladrus13.RPG.core.graphics.Drawing;
+import ru.vladrus13.RPG.core.graphics.KeyTaker;
+import ru.vladrus13.RPG.core.graphics.Updating;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
 
 import java.awt.*;
@@ -19,6 +19,7 @@ import static java.awt.event.KeyEvent.*;
  * @author vladkuznetsov
  * Arrow game class
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class ArrowGame extends Drawing implements KeyTaker, Updating {
 
     /**
@@ -42,9 +43,21 @@ public class ArrowGame extends Drawing implements KeyTaker, Updating {
      */
     private final int fullTime;
     /**
-     * {@link BufferedImage} of arrows
+     * {@link BufferedImage} of arrow UP
      */
-    private final BufferedImage UP, DOWN, LEFT, RIGHT;
+    private final BufferedImage UP;
+    /**
+     * {@link BufferedImage} of arrow DOWN
+     */
+    private final BufferedImage DOWN;
+    /**
+     * {@link BufferedImage} of arrow LEFT
+     */
+    private final BufferedImage LEFT;
+    /**
+     * {@link BufferedImage} of arrow RIGHT
+     */
+    private final BufferedImage RIGHT;
     /**
      * {@link DungeonService}
      */

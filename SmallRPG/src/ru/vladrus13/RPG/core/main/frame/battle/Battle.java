@@ -1,9 +1,9 @@
 package ru.vladrus13.RPG.core.main.frame.battle;
 
 import ru.vladrus13.RPG.core.utils.DungeonService;
-import ru.vladrus13.RPG.core.utils.picture.Drawing;
-import ru.vladrus13.RPG.core.utils.picture.KeyTaker;
-import ru.vladrus13.RPG.core.utils.picture.Updating;
+import ru.vladrus13.RPG.core.graphics.Drawing;
+import ru.vladrus13.RPG.core.graphics.KeyTaker;
+import ru.vladrus13.RPG.core.graphics.Updating;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

@@ -16,9 +16,21 @@ public class Item {
      */
     public enum ItemType {
         /**
-         * Types of items
+         * Item type - weapon
          */
-        WEAPON, ARMOR, POISON, SPECIAL
+        WEAPON,
+        /**
+         * Item type - armor
+         */
+        ARMOR,
+        /**
+         * Item type - poison
+         */
+        POISON,
+        /**
+         * Item type - special
+         */
+        SPECIAL
     }
 
     /**

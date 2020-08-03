@@ -6,7 +6,19 @@ package ru.vladrus13.RPG.core.utils.ways;
  */
 public enum Direction {
     /**
-     * All for directions
+     * Up direction
      */
-    UP, DOWN, RIGHT, LEFT
+    UP,
+    /**
+     * Down direction
+     */
+    DOWN,
+    /**
+     * Right direction
+     */
+    RIGHT,
+    /**
+     * Left direction
+     */
+    LEFT
 }

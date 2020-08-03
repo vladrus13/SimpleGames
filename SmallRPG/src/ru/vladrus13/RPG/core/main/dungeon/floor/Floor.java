@@ -2,11 +2,11 @@ package ru.vladrus13.RPG.core.main.dungeon.floor;
 
 import ru.vladrus13.RPG.core.main.dungeon.Tile;
 import ru.vladrus13.RPG.core.main.dungeon.event.Event;
-import ru.vladrus13.RPG.core.main.dungeon.item.DungeonItem;
+import ru.vladrus13.RPG.core.main.dungeon.DungeonItem;
 import ru.vladrus13.RPG.core.person.Person;
 import ru.vladrus13.RPG.core.utils.DungeonService;
-import ru.vladrus13.RPG.core.utils.picture.Drawing;
-import ru.vladrus13.RPG.core.utils.picture.Updating;
+import ru.vladrus13.RPG.core.graphics.Drawing;
+import ru.vladrus13.RPG.core.graphics.Updating;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
 import java.awt.*;

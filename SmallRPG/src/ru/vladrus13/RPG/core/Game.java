@@ -21,9 +21,13 @@ public class Game extends JPanel implements ActionListener, MouseListener, KeyLi
      */
     public enum STATUS_GAME {
         /**
-         * Statuses
+         * Status - in dungeon
          */
-        DUNGEON, MENU
+        DUNGEON,
+        /**
+         * Status - in menu
+         */
+        MENU
     }
 
     /**

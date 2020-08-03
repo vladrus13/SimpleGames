@@ -2,8 +2,6 @@ package ru.vladrus13.RPG.core.graphics;
 
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.core.utils.picture.Drawing;
-import ru.vladrus13.RPG.core.utils.picture.Updating;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
 import java.awt.*;

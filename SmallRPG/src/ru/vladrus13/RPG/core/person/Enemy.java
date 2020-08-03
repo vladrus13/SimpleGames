@@ -1,7 +1,7 @@
 package ru.vladrus13.RPG.core.person;
 
 import ru.vladrus13.RPG.core.utils.DungeonService;
-import ru.vladrus13.RPG.core.utils.picture.ColorService;
+import ru.vladrus13.RPG.core.graphics.ColorService;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 

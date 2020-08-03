@@ -4,6 +4,7 @@ package ru.vladrus13.RPG.core.person;
  * @author vladkuznetsov
  * Stats class for {@link Person}
  */
+@SuppressWarnings("MethodDoesntCallSuperMethod")
 public class Stats implements Cloneable {
     /**
      * Health Points

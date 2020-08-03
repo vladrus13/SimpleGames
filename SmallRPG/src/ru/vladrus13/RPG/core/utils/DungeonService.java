@@ -4,11 +4,11 @@ import ru.vladrus13.RPG.core.Dungeon;
 import ru.vladrus13.RPG.core.ShortMenu;
 import ru.vladrus13.RPG.core.main.dialog.Dialog;
 import ru.vladrus13.RPG.core.main.dungeon.floor.Floor;
-import ru.vladrus13.RPG.core.person.unit.Hero;
+import ru.vladrus13.RPG.core.person.Hero;
 import ru.vladrus13.RPG.core.utils.event.EventService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.core.utils.picture.FontService;
-import ru.vladrus13.RPG.core.utils.picture.PictureService;
+import ru.vladrus13.RPG.core.graphics.FontService;
+import ru.vladrus13.RPG.core.graphics.PictureService;
 import ru.vladrus13.RPG.game.*;
 
 import java.util.logging.Logger;

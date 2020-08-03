@@ -3,7 +3,7 @@ package ru.vladrus13.RPG.core.utils.event;
 import ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent;
 import ru.vladrus13.RPG.core.main.dungeon.floor.Floor;
 import ru.vladrus13.RPG.core.main.dungeon.floor.StepByStepArena;
-import ru.vladrus13.RPG.core.person.unit.Hero;
+import ru.vladrus13.RPG.core.person.Hero;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
 import ru.vladrus13.RPG.core.utils.ways.Point;
@@ -19,7 +19,7 @@ public class EventService {
      *
      * @param floor          destination floor number
      * @param point          {@link Point} - destination position
-     * @param direction      {@link Direction} - destionation direction
+     * @param direction      {@link Direction} - destination direction
      * @param dungeonService {@link DungeonService}
      */
     public void teleport(int floor, Point point, Direction direction, DungeonService dungeonService) {

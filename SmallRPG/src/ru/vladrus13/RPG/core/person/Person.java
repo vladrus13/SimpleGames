@@ -3,8 +3,8 @@ package ru.vladrus13.RPG.core.person;
 import ru.vladrus13.RPG.core.main.dungeon.Placeable;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.core.utils.picture.PictureService;
-import ru.vladrus13.RPG.core.utils.picture.Updating;
+import ru.vladrus13.RPG.core.graphics.PictureService;
+import ru.vladrus13.RPG.core.graphics.Updating;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
@@ -192,6 +192,7 @@ public class Person extends Placeable implements Updating, Cloneable {
     }
 
     // TODO warnings ??????
+    @SuppressWarnings("MethodDoesntCallSuperMethod")
     @Override
     public Person clone() {
         return new Person(id, place.clone(), direction, name, speed);

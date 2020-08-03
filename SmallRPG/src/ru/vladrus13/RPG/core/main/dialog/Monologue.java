@@ -3,10 +3,10 @@ package ru.vladrus13.RPG.core.main.dialog;
 import ru.vladrus13.RPG.core.person.Person;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.core.utils.picture.ColorService;
-import ru.vladrus13.RPG.core.utils.picture.Drawing;
-import ru.vladrus13.RPG.core.utils.picture.FontService;
-import ru.vladrus13.RPG.core.utils.picture.PictureService;
+import ru.vladrus13.RPG.core.graphics.ColorService;
+import ru.vladrus13.RPG.core.graphics.Drawing;
+import ru.vladrus13.RPG.core.graphics.FontService;
+import ru.vladrus13.RPG.core.graphics.PictureService;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

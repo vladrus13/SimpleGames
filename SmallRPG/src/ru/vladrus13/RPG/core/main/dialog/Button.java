@@ -1,9 +1,10 @@
 package ru.vladrus13.RPG.core.main.dialog;
 
+import ru.vladrus13.RPG.core.graphics.FontService;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.core.utils.picture.Drawing;
-import ru.vladrus13.RPG.core.utils.picture.KeyTaker;
+import ru.vladrus13.RPG.core.graphics.Drawing;
+import ru.vladrus13.RPG.core.graphics.KeyTaker;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
 import java.awt.*;
@@ -71,7 +72,7 @@ public class Button extends Drawing implements KeyTaker {
      * @param size           Size of button
      * @param color          Color of font
      * @param dungeonService {@link DungeonService}
-     * @throws GameException if we have problem with fonts on {@link ru.vladrus13.RPG.core.utils.picture.FontService} getFont method
+     * @throws GameException if we have problem with fonts on {@link FontService} getFont method
      */
     public Button(Consumer<DungeonService> atClick, String text, Point leftUp, Point size, Color color, DungeonService dungeonService) throws GameException {
         this.atClick = atClick;
@@ -90,7 +91,7 @@ public class Button extends Drawing implements KeyTaker {
      * @param leftUp         Left up position of button
      * @param size           Size of button
      * @param dungeonService {@link DungeonService}
-     * @throws GameException if we have problem with fonts on {@link ru.vladrus13.RPG.core.utils.picture.FontService} getFont method
+     * @throws GameException if we have problem with fonts on {@link FontService} getFont method
      */
     public Button(Consumer<DungeonService> atClick, String text, Point leftUp, Point size, DungeonService dungeonService) throws GameException {
         this.atClick = atClick;
