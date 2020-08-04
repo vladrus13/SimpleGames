@@ -3,7 +3,7 @@ package ru.vladrus13.RPG.game;
 import ru.vladrus13.RPG.core.person.Enemy;
 import ru.vladrus13.RPG.core.person.Person;
 import ru.vladrus13.RPG.core.person.Stats;
-import ru.vladrus13.RPG.core.person.enemies.Dummy;
+import ru.vladrus13.RPG.game.enemies.Dummy;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 

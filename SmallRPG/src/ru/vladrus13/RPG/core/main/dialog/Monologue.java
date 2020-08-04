@@ -59,7 +59,7 @@ public class Monologue extends Drawing {
         fontService = dungeonService.getFontService();
         PixelFontGame = fontService.getFont("PixelFontGame", 36);
         WriterFont = fontService.getFont("WriterFont", 36);
-        faceAuthor = new PictureService().loadImage(Path.of("assets/pictures/faces/" + author.getName().toLowerCase() + "/Usual.png"));
+        faceAuthor = new PictureService().loadImage(Path.of("resources/assets/pictures/faces/" + author.getName().toLowerCase() + "/Usual.png"));
         this.author = author;
         this.fullText = text;
         this.text = new ArrayList<>();

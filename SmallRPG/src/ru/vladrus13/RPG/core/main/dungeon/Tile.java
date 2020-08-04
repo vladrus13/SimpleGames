@@ -36,7 +36,7 @@ public class Tile extends Placeable {
      */
     public void loadPicture(PictureService pictureService) {
         try {
-            picture = pictureService.loadImage(Path.of("assets/pictures/tiles/" + id + ".png"));
+            picture = pictureService.loadImage(Path.of("resources/assets/pictures/tiles/" + id + ".png"));
         } catch (GameException e) {
             e.printStackTrace();
         }

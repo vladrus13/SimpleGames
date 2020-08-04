@@ -87,7 +87,7 @@ public class Person extends Placeable implements Updating, Cloneable {
     public Person(int id, Point place, Direction direction, String name, int speed) {
         super(id, place);
         this.name = name;
-        this.picture = new PictureService().loadUnit(Path.of("assets/pictures/units/" + name.toLowerCase()));
+        this.picture = new PictureService().loadUnit(Path.of("resources/assets/pictures/units/" + name.toLowerCase()));
         this.realPlace = new Point(place.getX() * 32, place.getY() * 32);
         this.direction = direction;
         directionQueue = new LinkedList<>();

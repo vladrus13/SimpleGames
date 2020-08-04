@@ -35,7 +35,7 @@ public class FontService {
      */
     private Font createFontFromFile(String path) throws GameException {
         try {
-            return Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("assets/fonts/" + path + ".ttf"));
+            return Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("resources/assets/fonts/" + path + ".ttf"));
         } catch (FontFormatException | IOException e) {
             throw new GameException("Error on loading font: " + path, e);
         }

@@ -31,7 +31,7 @@ public class DungeonItem extends Placeable {
      */
     public void loadPicture(PictureService pictureService) {
         try {
-            picture = pictureService.loadImage(Path.of("assets/pictures/items/" + id + ".png"));
+            picture = pictureService.loadImage(Path.of("resources/assets/pictures/items/" + id + ".png"));
         } catch (GameException e) {
             e.printStackTrace();
         }

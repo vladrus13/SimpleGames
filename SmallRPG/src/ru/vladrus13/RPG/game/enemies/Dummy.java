@@ -1,4 +1,4 @@
-package ru.vladrus13.RPG.core.person.enemies;
+package ru.vladrus13.RPG.game.enemies;
 
 import ru.vladrus13.RPG.core.person.Enemy;
 import ru.vladrus13.RPG.core.person.Stats;

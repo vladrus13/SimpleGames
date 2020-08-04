@@ -37,7 +37,7 @@ public class SoundFactory {
      * @param name name of file
      */
     private void loadMp3(String name) {
-        sounds.put(name, new Sound(new File("assets/sounds/" + name + ".mp3")));
+        sounds.put(name, new Sound(new File("resources/assets/sounds/" + name + ".mp3")));
     }
 
     /**

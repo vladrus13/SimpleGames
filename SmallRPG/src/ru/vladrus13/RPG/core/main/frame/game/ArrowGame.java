@@ -83,10 +83,10 @@ public class ArrowGame extends Drawing implements KeyTaker, Updating {
         this.arrows = arrows;
         this.time = time;
         this.fullTime = time;
-        this.UP = dungeonService.getPictureService().loadImage(Path.of("assets/pictures/games/arrows/up.png"));
-        this.DOWN = dungeonService.getPictureService().loadImage(Path.of("assets/pictures/games/arrows/down.png"));
-        this.LEFT = dungeonService.getPictureService().loadImage(Path.of("assets/pictures/games/arrows/left.png"));
-        this.RIGHT = dungeonService.getPictureService().loadImage(Path.of("assets/pictures/games/arrows/right.png"));
+        this.UP = dungeonService.getPictureService().loadImage(Path.of("resources/assets/pictures/games/arrows/up.png"));
+        this.DOWN = dungeonService.getPictureService().loadImage(Path.of("resources/assets/pictures/games/arrows/down.png"));
+        this.LEFT = dungeonService.getPictureService().loadImage(Path.of("resources/assets/pictures/games/arrows/left.png"));
+        this.RIGHT = dungeonService.getPictureService().loadImage(Path.of("resources/assets/pictures/games/arrows/right.png"));
         this.dungeonService = dungeonService;
     }
 

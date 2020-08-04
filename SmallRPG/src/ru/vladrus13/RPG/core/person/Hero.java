@@ -55,7 +55,7 @@ public class Hero extends Person implements KeyTaker, MouseTaker {
     public Hero(int id, Point place, Direction direction, DungeonService dungeonService, String name) {
         super(id, place, direction, name);
         realPlace = new Point(place.getX() * 32, place.getY() * 32);
-        this.picture = new PictureService().loadUnit(Path.of("assets/pictures/units/hero"));
+        this.picture = new PictureService().loadUnit(Path.of("resources/assets/pictures/units/hero"));
         this.stats = new Stats(100, 200, 0, 10, 0);
         this.skills = new Skills();
         this.inventory = new Inventory();
