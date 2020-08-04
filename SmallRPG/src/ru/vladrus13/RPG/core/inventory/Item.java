@@ -18,19 +18,69 @@ public class Item {
         /**
          * Item type - weapon
          */
-        WEAPON,
+        WEAPON {
+            @Override
+            public ItemType next() {
+                return ARMOR;
+            }
+
+            @Override
+            public ItemType previous() {
+                return SPECIAL;
+            }
+        },
         /**
          * Item type - armor
          */
-        ARMOR,
+        ARMOR {
+            @Override
+            public ItemType next() {
+                return POISON;
+            }
+
+            @Override
+            public ItemType previous() {
+                return WEAPON;
+            }
+        },
         /**
          * Item type - poison
          */
-        POISON,
+        POISON {
+            @Override
+            public ItemType next() {
+                return SPECIAL;
+            }
+
+            @Override
+            public ItemType previous() {
+                return ARMOR;
+            }
+        },
         /**
          * Item type - special
          */
-        SPECIAL
+        SPECIAL {
+            @Override
+            public ItemType next() {
+                return WEAPON;
+            }
+
+            @Override
+            public ItemType previous() {
+                return POISON;
+            }
+        };
+
+        /**
+         * @return next item type
+         */
+        public abstract ItemType next();
+
+        /**
+         * @return previous item type
+         */
+        public abstract ItemType previous();
     }
 
     /**

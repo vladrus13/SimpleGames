@@ -1,10 +1,10 @@
 package ru.vladrus13.RPG.core.main.frame.game;
 
-import ru.vladrus13.RPG.core.utils.DungeonService;
-import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.graphics.Drawing;
 import ru.vladrus13.RPG.core.graphics.KeyTaker;
 import ru.vladrus13.RPG.core.graphics.Updating;
+import ru.vladrus13.RPG.core.utils.DungeonService;
+import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
 
 import java.awt.*;

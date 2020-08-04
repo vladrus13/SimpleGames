@@ -1,12 +1,12 @@
 package ru.vladrus13.RPG.core;
 
-import ru.vladrus13.RPG.core.utils.DungeonService;
-import ru.vladrus13.RPG.core.utils.debug.DebugEvent;
-import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.graphics.Drawing;
 import ru.vladrus13.RPG.core.graphics.KeyTaker;
 import ru.vladrus13.RPG.core.graphics.MouseTaker;
 import ru.vladrus13.RPG.core.graphics.Updating;
+import ru.vladrus13.RPG.core.utils.DungeonService;
+import ru.vladrus13.RPG.core.utils.debug.DebugEvent;
+import ru.vladrus13.RPG.core.utils.exception.GameException;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

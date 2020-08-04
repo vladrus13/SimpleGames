@@ -1,9 +1,9 @@
 package ru.vladrus13.RPG.core.utils.debug;
 
 import ru.vladrus13.RPG.core.graphics.Animation;
+import ru.vladrus13.RPG.core.graphics.KeyTaker;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.core.graphics.KeyTaker;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
 import java.awt.event.KeyEvent;

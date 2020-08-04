@@ -1,10 +1,10 @@
 package ru.vladrus13.RPG.core.person;
 
+import ru.vladrus13.RPG.core.graphics.PictureService;
+import ru.vladrus13.RPG.core.graphics.Updating;
 import ru.vladrus13.RPG.core.main.dungeon.Placeable;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.core.graphics.PictureService;
-import ru.vladrus13.RPG.core.graphics.Updating;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 

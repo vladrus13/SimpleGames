@@ -1,11 +1,11 @@
 package ru.vladrus13.RPG.game;
 
+import ru.vladrus13.RPG.core.main.dungeon.DungeonItem;
 import ru.vladrus13.RPG.core.main.dungeon.Tile;
 import ru.vladrus13.RPG.core.main.dungeon.event.Event;
 import ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent;
 import ru.vladrus13.RPG.core.main.dungeon.floor.Floor;
 import ru.vladrus13.RPG.core.main.dungeon.floor.StepByStepArena;
-import ru.vladrus13.RPG.core.main.dungeon.DungeonItem;
 import ru.vladrus13.RPG.core.person.Person;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;

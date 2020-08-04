@@ -1,6 +1,9 @@
 package ru.vladrus13.RPG.core.person;
 
-import ru.vladrus13.RPG.core.ShortMenu;
+import ru.vladrus13.RPG.core.main.menu.ShortMenu;
+import ru.vladrus13.RPG.core.graphics.KeyTaker;
+import ru.vladrus13.RPG.core.graphics.MouseTaker;
+import ru.vladrus13.RPG.core.graphics.PictureService;
 import ru.vladrus13.RPG.core.inventory.Inventory;
 import ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent;
 import ru.vladrus13.RPG.core.main.dungeon.floor.Arena;
@@ -8,9 +11,6 @@ import ru.vladrus13.RPG.core.main.dungeon.floor.Floor;
 import ru.vladrus13.RPG.core.main.dungeon.floor.StepByStepArena;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
-import ru.vladrus13.RPG.core.graphics.KeyTaker;
-import ru.vladrus13.RPG.core.graphics.MouseTaker;
-import ru.vladrus13.RPG.core.graphics.PictureService;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
