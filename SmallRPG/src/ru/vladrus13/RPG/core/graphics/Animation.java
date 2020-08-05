@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author vladkuznetsov
  * Class for animation - pictures shown in certain sequence
  */
-public class Animation extends Drawing implements Updating {
+public class Animation extends Drawing implements Updating, Cloneable {
     /**
      * {@link ArrayList} of images
      */
@@ -32,7 +32,7 @@ public class Animation extends Drawing implements Updating {
     /**
      * Position of animation
      */
-    private final Point position;
+    private Point position;
     /**
      * Size of compression image
      */
@@ -54,6 +54,21 @@ public class Animation extends Drawing implements Updating {
         this.pause = pause;
         this.position = position;
         this.compact = null;
+    }
+
+    /**
+     * Constructor for class
+     *
+     * @param images   list of pictures
+     * @param pause    time for one picture shown
+     * @param position position of animation
+     * @param compact  size of compress picture
+     */
+    public Animation(ArrayList<BufferedImage> images, int pause, Point position, Point compact) {
+        this.images = images;
+        this.pause = pause;
+        this.position = position;
+        this.compact = compact;
     }
 
     /**
@@ -133,5 +148,19 @@ public class Animation extends Drawing implements Updating {
             count++;
             this.time = 0;
         }
+    }
+
+    /**
+     * Setter for point
+     * @param position position of animation
+     */
+    public void setPosition(Point position) {
+        this.position = position;
+    }
+
+    @SuppressWarnings("MethodDoesntCallSuperMethod")
+    @Override
+    public Animation clone() {
+        return new Animation(images, pause, position, compact);
     }
 }

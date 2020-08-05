@@ -1,11 +1,11 @@
 package ru.vladrus13.RPG.core.utils;
 
 import ru.vladrus13.RPG.core.Dungeon;
-import ru.vladrus13.RPG.core.main.menu.ShortMenu;
 import ru.vladrus13.RPG.core.graphics.FontService;
 import ru.vladrus13.RPG.core.graphics.PictureService;
 import ru.vladrus13.RPG.core.main.dialog.Dialog;
 import ru.vladrus13.RPG.core.main.dungeon.floor.Floor;
+import ru.vladrus13.RPG.core.main.menu.ShortMenu;
 import ru.vladrus13.RPG.core.person.Hero;
 import ru.vladrus13.RPG.core.utils.event.EventService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
@@ -79,6 +79,10 @@ public class DungeonService {
      * {@link SoundFactory} - sound factory
      */
     private final SoundFactory soundFactory;
+    /**
+     * {@link SkillFactory} - skill factory
+     */
+    private final SkillFactory skillFactory;
 
     /**
      * Constructor for class
@@ -101,9 +105,6 @@ public class DungeonService {
         logger.info("Loading person service...");
         personService = new PersonService();
 
-        logger.info("Loading hero service...");
-        heroService = new HeroService(this);
-
         logger.info("Loading events factory...");
         eventFactory = new EventFactory();
 
@@ -118,6 +119,12 @@ public class DungeonService {
 
         logger.info("Loading shop service...");
         shopFactory = new ShopFactory(this);
+
+        logger.info("Loading skill factory...");
+        skillFactory = new SkillFactory(this);
+
+        logger.info("Loading hero service...");
+        heroService = new HeroService(this);
 
         shortMenu = new ShortMenu(this);
         shortMenu.setDrawing(false);
@@ -271,5 +278,14 @@ public class DungeonService {
      */
     public SoundFactory getSoundFactory() {
         return soundFactory;
+    }
+
+    /**
+     * Getter for skill factory
+     *
+     * @return skill factory
+     */
+    public SkillFactory getSkillFactory() {
+        return skillFactory;
     }
 }

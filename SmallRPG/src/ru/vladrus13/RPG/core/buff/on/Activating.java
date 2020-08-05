@@ -12,7 +12,6 @@ public interface Activating {
      * Method for change {@link DungeonService} on activating skill or item
      *
      * @param dungeonService {@link DungeonService} - main dungeon service
-     * @return changed dungeon service
      */
-    DungeonService onActivate(DungeonService dungeonService);
+    void onActivate(DungeonService dungeonService);
 }

@@ -38,4 +38,22 @@ public class Skills {
     public ArrayList<Skill> getSkills() {
         return skills;
     }
+
+    /**
+     * Get skill by his keycode
+     * @param keyCode keycode
+     * @return {@link Skill}
+     */
+    public Skill getSkill(int keyCode) {
+        return skills.get(keyCode);
+    }
+
+    /**
+     * Set on keyCode this skill
+     * @param keyCode keyCode - {@link java.awt.event.KeyEvent}
+     * @param skill {@link Skill}
+     */
+    public void add(int keyCode, Skill skill) {
+        skills.add(keyCode, skill);
+    }
 }

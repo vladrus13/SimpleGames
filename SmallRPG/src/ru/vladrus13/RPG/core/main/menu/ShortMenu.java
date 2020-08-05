@@ -5,17 +5,11 @@ import ru.vladrus13.RPG.core.graphics.ColorService;
 import ru.vladrus13.RPG.core.graphics.Drawing;
 import ru.vladrus13.RPG.core.graphics.FontService;
 import ru.vladrus13.RPG.core.graphics.KeyTaker;
-import ru.vladrus13.RPG.core.inventory.Inventory;
-import ru.vladrus13.RPG.core.inventory.Item;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.Set;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * @author vladkuznetsov
@@ -63,6 +57,7 @@ public class ShortMenu extends Drawing implements KeyTaker {
      * {@link StatusShortMenu}
      */
     private StatusShortMenu statusShortMenu;
+
     /**
      * Return to main menu
      */

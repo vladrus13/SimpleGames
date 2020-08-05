@@ -8,32 +8,63 @@ import ru.vladrus13.RPG.core.utils.DungeonService;
  * @author vladkuznetsov
  * Class-skills for {@link ru.vladrus13.RPG.core.person.Person}
  */
-public class Skill implements Activating {
+public abstract class Skill implements Activating {
     /**
-     * {@link Animation} on using this skill
+     * {@link Animation} on using this skill on dungeon
      */
-    private final Animation animation;
+    protected final Animation dungeonAnimation;
+    /**
+     * {@link Animation} on using this skill on battle
+     */
+    protected final Animation battleAnimation;
 
     /**
-     * Constructor for Skill
-     *
-     * @param animation animation
+     * keyCode to activate skill
      */
-    Skill(Animation animation) {
-        this.animation = animation;
+    protected final int keyCode;
+    /**
+     * Constructor for Skill
+     *  @param dungeonAnimation dungeon animation. Must be null, if this skill not used on dungeon
+     * @param battleAnimation battle animation, Must be null, if this skill not used on battle
+     * @param keyCode keycode activate this skill
+     */
+    public Skill(Animation dungeonAnimation, Animation battleAnimation, int keyCode) {
+        this.dungeonAnimation = dungeonAnimation;
+        this.battleAnimation = battleAnimation;
+        this.keyCode = keyCode;
     }
 
     @Override
-    public DungeonService onActivate(DungeonService dungeonService) {
-        return dungeonService;
-    }
+    public abstract void onActivate(DungeonService dungeonService);
 
     /**
      * Getter for animation. Using if we need play animation.
      *
      * @return {@link Animation}
      */
-    public Animation getAnimation() {
-        return animation;
+    public Animation getDungeonAnimation() {
+        return dungeonAnimation;
+    }
+
+    /**
+     * Getter for animation. Using if we need play animation.
+     * @return {@link Animation}
+     */
+    public Animation getBattleAnimation() {
+        return battleAnimation;
+    }
+
+    /**
+     * @return used on battle or not
+     */
+    public boolean usedOnBattle() {
+        return battleAnimation != null;
+    }
+
+    /**
+     * @return used on dungeon or not
+     */
+    public boolean usedOnDungeon() {
+        return dungeonAnimation != null;
     }
 }

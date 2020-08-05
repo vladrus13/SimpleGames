@@ -47,7 +47,6 @@ public class BookMenu extends Drawing implements KeyTaker {
     /**
      * Book height
      */
-    @SuppressWarnings("FieldCanBeLocal")
     private final int bookHeight = 750;
 
     /**

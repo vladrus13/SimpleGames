@@ -90,8 +90,9 @@ public class ItemMenu extends Drawing implements KeyTaker {
 
     /**
      * Constructor of class
+     *
      * @param dungeonService {@link DungeonService}
-     * @param shortMenu {@link ShortMenu}
+     * @param shortMenu      {@link ShortMenu}
      * @throws GameException if font can't load
      */
     public ItemMenu(DungeonService dungeonService, ShortMenu shortMenu) throws GameException {
@@ -153,6 +154,7 @@ public class ItemMenu extends Drawing implements KeyTaker {
 
     /**
      * Get a unmodifiable array from set
+     *
      * @param itemsSet set
      * @return unmodifiable array
      */

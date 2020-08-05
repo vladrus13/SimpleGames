@@ -1,6 +1,6 @@
 package ru.vladrus13.RPG.core.person;
 
-import ru.vladrus13.RPG.core.main.menu.ShortMenu;
+import ru.vladrus13.RPG.core.buff.Skill;
 import ru.vladrus13.RPG.core.graphics.KeyTaker;
 import ru.vladrus13.RPG.core.graphics.MouseTaker;
 import ru.vladrus13.RPG.core.graphics.PictureService;
@@ -9,6 +9,7 @@ import ru.vladrus13.RPG.core.main.dungeon.event.TypeActiveEvent;
 import ru.vladrus13.RPG.core.main.dungeon.floor.Arena;
 import ru.vladrus13.RPG.core.main.dungeon.floor.Floor;
 import ru.vladrus13.RPG.core.main.dungeon.floor.StepByStepArena;
+import ru.vladrus13.RPG.core.main.menu.ShortMenu;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
@@ -50,14 +51,15 @@ public class Hero extends Person implements KeyTaker, MouseTaker {
      * @param place          {@link Point} - place
      * @param direction      {@link Direction} - direction
      * @param name           name of hero
+     * @param skills         {@link Skills} - skills
      * @param dungeonService {@link DungeonService}
      */
-    public Hero(int id, Point place, Direction direction, DungeonService dungeonService, String name) {
+    public Hero(int id, Point place, Direction direction, DungeonService dungeonService, String name, Skills skills) {
         super(id, place, direction, name);
         realPlace = new Point(place.getX() * 32, place.getY() * 32);
         this.picture = new PictureService().loadUnit(Path.of("resources/assets/pictures/units/hero"));
         this.stats = new Stats(100, 200, 0, 10, 0);
-        this.skills = new Skills();
+        this.skills = skills;
         this.inventory = new Inventory();
         this.dungeonService = dungeonService;
     }
@@ -149,10 +151,9 @@ public class Hero extends Person implements KeyTaker, MouseTaker {
     @Override
     public void mousePressed(MouseEvent e) {
         if (dungeonService.getCurrentFloor() instanceof Arena) {
-            // TODO normal attack
-            Point attacked = getPlace().makePoint(getDirection());
-            if (dungeonService.getCurrentFloor().isPerson(attacked) && dungeonService.getCurrentFloor().getPerson(attacked) instanceof Enemy) {
-                ((Enemy) dungeonService.getCurrentFloor().getPerson(attacked)).damage(stats.getAttack());
+            Skill skill = skills.getSkill(0);
+            if (skill != null) {
+                skill.onActivate(dungeonService);
             }
             if (dungeonService.getCurrentFloor() instanceof StepByStepArena) {
                 ((StepByStepArena) dungeonService.getCurrentFloor()).enemyTurn();
