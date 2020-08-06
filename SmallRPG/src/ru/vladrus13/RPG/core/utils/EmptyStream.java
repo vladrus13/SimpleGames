@@ -25,6 +25,7 @@ public class EmptyStream extends PrintStream {
 
     /**
      * No ignore println for emptyStream
+     *
      * @param s printed
      */
     public void noIgnorePrintln(String s) {

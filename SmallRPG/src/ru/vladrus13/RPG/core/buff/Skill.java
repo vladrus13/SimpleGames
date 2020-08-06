@@ -28,18 +28,27 @@ public abstract class Skill implements Activating {
      * keyCode to activate skill
      */
     protected final int keyCode;
+
+    /**
+     * Cooldown
+     */
+    protected final int cooldown;
+
     /**
      * Constructor for Skill
-     *  @param dungeonAnimation dungeon animation. Must be null, if this skill not used on dungeon
-     * @param battleAnimation battle animation, Must be null, if this skill not used on battle
-     * @param sound sound, that we play on use skill
-     * @param keyCode keycode activate this skill
+     *
+     * @param dungeonAnimation dungeon animation. Must be null, if this skill not used on dungeon
+     * @param battleAnimation  battle animation, Must be null, if this skill not used on battle
+     * @param sound            sound, that we play on use skill
+     * @param keyCode          keycode activate this skill
+     * @param cooldown         cooldown of skill
      */
-    public Skill(Animation dungeonAnimation, Animation battleAnimation, Sound sound, int keyCode) {
+    public Skill(Animation dungeonAnimation, Animation battleAnimation, Sound sound, int keyCode, int cooldown) {
         this.dungeonAnimation = dungeonAnimation;
         this.battleAnimation = battleAnimation;
         this.keyCode = keyCode;
         this.sound = sound;
+        this.cooldown = cooldown;
     }
 
     @Override
@@ -56,6 +65,7 @@ public abstract class Skill implements Activating {
 
     /**
      * Getter for animation. Using if we need play animation.
+     *
      * @return {@link Animation}
      */
     public Animation getBattleAnimation() {
@@ -74,5 +84,21 @@ public abstract class Skill implements Activating {
      */
     public boolean usedOnDungeon() {
         return dungeonAnimation != null;
+    }
+
+    /**
+     * Getter for keyCode
+     * @return keyCode
+     */
+    public int getKeyCode() {
+        return keyCode;
+    }
+
+    /**
+     * Getter for cooldown
+     * @return cooldown
+     */
+    public int getCooldown() {
+        return cooldown;
     }
 }

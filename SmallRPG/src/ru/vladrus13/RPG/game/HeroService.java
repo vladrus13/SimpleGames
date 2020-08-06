@@ -5,7 +5,7 @@ import ru.vladrus13.RPG.core.person.Skills;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 
-import java.util.Collections;
+import java.awt.event.KeyEvent;
 
 import static ru.vladrus13.RPG.core.utils.ways.Direction.UP;
 
@@ -27,7 +27,8 @@ public class HeroService {
      */
     public HeroService(DungeonService dungeonService) {
         Skills heroSkills = new Skills();
-        heroSkills.add(0, dungeonService.getSkillFactory().get("UsualAttack"));
+        heroSkills.set(0, dungeonService.getSkillFactory().get("UsualAttack"));
+        heroSkills.set(KeyEvent.VK_C, dungeonService.getSkillFactory().get("Combustion"));
         hero = new Hero(0, new Point(1, 1), UP, dungeonService, "Hero", heroSkills);
     }
 

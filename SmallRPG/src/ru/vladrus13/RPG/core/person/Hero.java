@@ -146,17 +146,30 @@ public class Hero extends Person implements KeyTaker, MouseTaker {
             default:
                 break;
         }
+        if (dungeonService.getCurrentFloor() instanceof Arena) {
+            Skill skill = skills.getSkill(keyCode);
+            if (skill != null && skills.canTake(keyCode)) {
+                if (skill.getKeyCode() == keyCode) {
+                    skill.onActivate(dungeonService);
+                    skills.use(keyCode);
+                    if (dungeonService.getCurrentFloor() instanceof StepByStepArena) {
+                        ((StepByStepArena) dungeonService.getCurrentFloor()).enemyTurn();
+                    }
+                }
+            }
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         if (dungeonService.getCurrentFloor() instanceof Arena) {
             Skill skill = skills.getSkill(0);
-            if (skill != null) {
+            if (skill != null  && skills.canTake(0)) {
+                skills.use(0);
                 skill.onActivate(dungeonService);
-            }
-            if (dungeonService.getCurrentFloor() instanceof StepByStepArena) {
-                ((StepByStepArena) dungeonService.getCurrentFloor()).enemyTurn();
+                if (dungeonService.getCurrentFloor() instanceof StepByStepArena) {
+                    ((StepByStepArena) dungeonService.getCurrentFloor()).enemyTurn();
+                }
             }
         }
     }

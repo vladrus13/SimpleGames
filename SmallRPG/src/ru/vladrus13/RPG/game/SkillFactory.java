@@ -3,6 +3,7 @@ package ru.vladrus13.RPG.game;
 import ru.vladrus13.RPG.core.buff.Skill;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
+import ru.vladrus13.RPG.game.skills.Combustion;
 import ru.vladrus13.RPG.game.skills.UsualAttack;
 
 import java.util.HashMap;
@@ -19,12 +20,14 @@ public class SkillFactory {
 
     /**
      * Constructor for class
+     *
      * @param dungeonService {@link DungeonService}
      */
     public SkillFactory(DungeonService dungeonService) {
         skills = new HashMap<>();
         try {
             skills.put("UsualAttack", new UsualAttack(dungeonService));
+            skills.put("Combustion", new Combustion(dungeonService));
         } catch (GameException e) {
             e.printStackTrace();
         }
@@ -32,6 +35,7 @@ public class SkillFactory {
 
     /**
      * Getter for skills
+     *
      * @param name skill name
      * @return skill
      */

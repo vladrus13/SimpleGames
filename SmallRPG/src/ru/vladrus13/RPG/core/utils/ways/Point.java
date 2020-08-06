@@ -1,5 +1,7 @@
 package ru.vladrus13.RPG.core.utils.ways;
 
+import java.util.Objects;
+
 /**
  * @author vladkuznetsov
  * Point class for game. Can be position of point, size of any, etc.
@@ -63,6 +65,11 @@ public class Point implements Cloneable {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -77,10 +84,18 @@ public class Point implements Cloneable {
      * @param a another point
      * @return distance
      */
-    public int distance(Point a) {
+    public int ManhattanDistance(Point a) {
         return Math.abs(a.x - this.x) + Math.abs(a.y - this.y);
     }
 
+    /**
+     * Distance from this point and given point
+     * @param a another point
+     * @return distance
+     */
+    public double distance(Point a) {
+        return Math.sqrt(Math.pow(a.x - this.x, 2) + Math.pow(this.y  - a.y, 2));
+    }
     /**
      * Get a neighboring point of this
      *

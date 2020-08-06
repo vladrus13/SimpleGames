@@ -4,7 +4,6 @@ import com.goxr3plus.streamplayer.stream.StreamPlayerException;
 import ru.vladrus13.RPG.core.sound.Sound;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +36,7 @@ public class SoundFactory {
 
     /**
      * Get mp3 sound
+     *
      * @param name name of file
      * @return {@link Sound}
      */

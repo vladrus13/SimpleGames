@@ -4,13 +4,9 @@ import com.goxr3plus.streamplayer.stream.StreamPlayer;
 import com.goxr3plus.streamplayer.stream.StreamPlayerEvent;
 import com.goxr3plus.streamplayer.stream.StreamPlayerException;
 import com.goxr3plus.streamplayer.stream.StreamPlayerListener;
-import ru.vladrus13.RPG.core.utils.EmptyStream;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Map;
-import java.util.stream.Stream;
 
 /**
  * @author vladkuznetsov
@@ -67,11 +63,15 @@ public class Sound extends StreamPlayer implements StreamPlayerListener {
 
     /**
      * Play sound with gain
+     *
      * @param gain gain
-     * @throws StreamPlayerException if playing have some problems
      */
-    public void play(double gain) throws StreamPlayerException {
-        this.play();
+    public void play(double gain) {
+        try {
+            this.play();
+        } catch (StreamPlayerException e) {
+            e.printStackTrace();
+        }
         this.setGain(gain);
     }
 }

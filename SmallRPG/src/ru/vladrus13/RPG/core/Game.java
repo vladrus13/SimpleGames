@@ -68,6 +68,7 @@ public class Game extends JPanel implements ActionListener, MouseListener, KeyLi
         } catch (IOException exception) {
             exception.printStackTrace();
         }
+        Logger.getLogger(Game.class.getName()).info("Running game...");
         int width = 800;
         int height = 800;
         dungeon = new Dungeon(this);

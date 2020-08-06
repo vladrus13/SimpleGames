@@ -152,6 +152,7 @@ public class Animation extends Drawing implements Updating, Cloneable {
 
     /**
      * Setter for point
+     *
      * @param position position of animation
      */
     public void setPosition(Point position) {

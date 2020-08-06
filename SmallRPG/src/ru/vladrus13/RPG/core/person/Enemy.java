@@ -35,7 +35,7 @@ public class Enemy extends Person {
      * @return where we went
      */
     public Point next(HashSet<Point> used, DungeonService dungeonService) {
-        if (dungeonService.getHero().getPlace().distance(getPlace()) == 1) {
+        if (dungeonService.getHero().getPlace().ManhattanDistance(getPlace()) == 1) {
             dungeonService.getHero().damage(stats.getAttack());
             return getPlace();
         } else {

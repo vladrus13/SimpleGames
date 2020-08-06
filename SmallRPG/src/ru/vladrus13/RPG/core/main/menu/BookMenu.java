@@ -99,6 +99,7 @@ public class BookMenu extends Drawing implements KeyTaker {
                 if (inventory.getBooks().size() != 0 && inventory.getBooks().get(countBook).getTitle().length() > countPage * 2 * (bookHeight / writerFont.getSize())) {
                     countPage++;
                 }
+                dungeonService.getSoundFactory().getCloned("effects/TurnBook").play(0.5D);
                 break;
             case KeyEvent.VK_LEFT:
                 if (inventory.getBooks().size() != 0 && countPage > 0) {
@@ -110,6 +111,7 @@ public class BookMenu extends Drawing implements KeyTaker {
                     countBook--;
                     countPage = 0;
                 }
+                dungeonService.getSoundFactory().getCloned("effects/TurnBook").play(0.5D);
                 break;
             case KeyEvent.VK_E:
                 if (countBook + 1 < inventory.getBooks().size()) {
