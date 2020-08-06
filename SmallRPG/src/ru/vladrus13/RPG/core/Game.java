@@ -1,5 +1,6 @@
 package ru.vladrus13.RPG.core;
 
+import ru.vladrus13.RPG.core.utils.EmptyStream;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 
 import javax.swing.*;
@@ -61,6 +62,7 @@ public class Game extends JPanel implements ActionListener, MouseListener, KeyLi
      * @throws GameException if we got error on creating {@link Dungeon}
      */
     public Game() throws GameException {
+        System.setOut(new EmptyStream());
         try {
             LogManager.getLogManager().readConfiguration(new FileInputStream("resources/logging.properties"));
         } catch (IOException exception) {

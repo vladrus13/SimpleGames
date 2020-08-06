@@ -35,11 +35,8 @@ public class UsualAttack extends Skill {
     public void onActivate(DungeonService dungeonService) {
         Point attackPoint = dungeonService.getHero().getPlace().makePoint(dungeonService.getHero().getDirection());
         Animation animation = dungeonAnimation.clone();
-        if (sound.isPlaying()) {
-            sound.stop();
-        }
         try {
-            sound.play();
+            sound.play(0.5D);
         } catch (StreamPlayerException e) {
             e.printStackTrace();
         }
