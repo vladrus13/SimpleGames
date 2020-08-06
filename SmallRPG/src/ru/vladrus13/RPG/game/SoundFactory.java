@@ -17,17 +17,12 @@ public class SoundFactory {
      * Sounds map
      */
     private final Map<String, Sound> sounds;
-    /**
-     * Played sounds
-     */
-    private final ArrayList<Sound> played;
 
     /**
      * Constructor for class
      */
     public SoundFactory() {
         sounds = new HashMap<>();
-        played = new ArrayList<>();
         loadMp3("MainTheme");
     }
 
@@ -37,7 +32,16 @@ public class SoundFactory {
      * @param name name of file
      */
     private void loadMp3(String name) {
-        sounds.put(name, new Sound(new File("resources/assets/sounds/" + name + ".mp3")));
+        sounds.put(name, getMp3(name));
+    }
+
+    /**
+     * Get mp3 sound
+     * @param name name of file
+     * @return {@link Sound}
+     */
+    private Sound getMp3(String name) {
+        return new Sound(new File("resources/assets/sounds/" + name + ".mp3"));
     }
 
     /**
@@ -46,7 +50,6 @@ public class SoundFactory {
      * @param name name
      */
     public void play(String name) {
-        played.add(sounds.get(name));
         try {
             sounds.get(name).play();
         } catch (StreamPlayerException e) {
@@ -78,9 +81,16 @@ public class SoundFactory {
      * @param name name
      */
     public void stop(String name) {
-        if (played.contains(sounds.get(name))) {
-            played.remove(sounds.get(name));
+        if (sounds.get(name).isPlaying()) {
             sounds.get(name).stop();
         }
+    }
+
+    /**
+     * @param name name of sound
+     * @return {@link Sound} - cloned element
+     */
+    public Sound getCloned(String name) {
+        return getMp3(name);
     }
 }

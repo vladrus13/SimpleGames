@@ -1,5 +1,6 @@
 package ru.vladrus13.RPG.game.skills;
 
+import com.goxr3plus.streamplayer.stream.StreamPlayerException;
 import ru.vladrus13.RPG.core.buff.Skill;
 import ru.vladrus13.RPG.core.graphics.Animation;
 import ru.vladrus13.RPG.core.person.Enemy;
@@ -25,6 +26,7 @@ public class UsualAttack extends Skill {
                         100, new Point(0, 0), new Point(192, 192), new Point(32, 32)),
                 new Animation(dungeonService.getPictureService().loadImage(Path.of("resources/assets/pictures/animations/UsualAttack.png")),
                         100, new Point(0, 0), new Point(192, 192)),
+                dungeonService.getSoundFactory().getCloned("skills/UsualAttack"),
                 0
         );
     }
@@ -33,6 +35,14 @@ public class UsualAttack extends Skill {
     public void onActivate(DungeonService dungeonService) {
         Point attackPoint = dungeonService.getHero().getPlace().makePoint(dungeonService.getHero().getDirection());
         Animation animation = dungeonAnimation.clone();
+        if (sound.isPlaying()) {
+            sound.stop();
+        }
+        try {
+            sound.play();
+        } catch (StreamPlayerException e) {
+            e.printStackTrace();
+        }
         animation.setPosition(new Point(attackPoint.getX() * 32, attackPoint.getY() * 32));
         dungeonService.getDungeon().addDrawing(animation);
         if (dungeonService.getCurrentFloor().isPerson(attackPoint) && dungeonService.getCurrentFloor().getPerson(attackPoint) instanceof Enemy) {

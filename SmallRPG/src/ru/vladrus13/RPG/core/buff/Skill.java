@@ -2,6 +2,7 @@ package ru.vladrus13.RPG.core.buff;
 
 import ru.vladrus13.RPG.core.buff.on.Activating;
 import ru.vladrus13.RPG.core.graphics.Animation;
+import ru.vladrus13.RPG.core.sound.Sound;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 
 /**
@@ -19,6 +20,11 @@ public abstract class Skill implements Activating {
     protected final Animation battleAnimation;
 
     /**
+     * Sound of used
+     */
+    protected final Sound sound;
+
+    /**
      * keyCode to activate skill
      */
     protected final int keyCode;
@@ -26,12 +32,14 @@ public abstract class Skill implements Activating {
      * Constructor for Skill
      *  @param dungeonAnimation dungeon animation. Must be null, if this skill not used on dungeon
      * @param battleAnimation battle animation, Must be null, if this skill not used on battle
+     * @param sound sound, that we play on use skill
      * @param keyCode keycode activate this skill
      */
-    public Skill(Animation dungeonAnimation, Animation battleAnimation, int keyCode) {
+    public Skill(Animation dungeonAnimation, Animation battleAnimation, Sound sound, int keyCode) {
         this.dungeonAnimation = dungeonAnimation;
         this.battleAnimation = battleAnimation;
         this.keyCode = keyCode;
+        this.sound = sound;
     }
 
     @Override
