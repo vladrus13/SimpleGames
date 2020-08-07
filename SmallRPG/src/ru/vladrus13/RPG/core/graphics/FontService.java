@@ -85,13 +85,14 @@ public class FontService {
      * @param text     text
      * @param font     {@link Font}
      * @param graphics {@link Graphics}
+     * @param width width
      * @return array of text
      */
-    public ArrayList<String> splitByWidth(String text, Font font, Graphics graphics) {
+    public ArrayList<String> splitByWidth(String text, Font font, Graphics graphics, int width) {
         ArrayList<String> answer = new ArrayList<>();
         int current = 0, last = 0;
         while (current != text.length()) {
-            if (graphics.getFontMetrics(font).stringWidth(text.substring(last, current)) > 700) {
+            if (graphics.getFontMetrics(font).stringWidth(text.substring(last, current)) > width) {
                 answer.add(text.substring(last, current));
                 last = current;
             }

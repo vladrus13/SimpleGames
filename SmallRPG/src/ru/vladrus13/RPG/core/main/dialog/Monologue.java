@@ -67,7 +67,7 @@ public class Monologue extends Drawing {
 
     @Override
     public void draw(Graphics graphics) {
-        text = fontService.splitByWidth(fullText, PixelFontGame, graphics);
+        text = fontService.splitByWidth(fullText, PixelFontGame, graphics, 700);
         graphics.setColor(ColorService.dialogColor);
         graphics.fillRect(0, 500, 800, 300);
         graphics.setColor(Color.BLACK);

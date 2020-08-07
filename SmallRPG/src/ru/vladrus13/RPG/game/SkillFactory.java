@@ -16,7 +16,7 @@ public class SkillFactory {
     /**
      * Skills map by name
      */
-    HashMap<String, Skill> skills;
+    final HashMap<String, Skill> skills;
 
     /**
      * Constructor for class

@@ -1,6 +1,7 @@
 package ru.vladrus13.RPG.game.enemies;
 
 import ru.vladrus13.RPG.core.person.Enemy;
+import ru.vladrus13.RPG.core.person.Skills;
 import ru.vladrus13.RPG.core.person.Stats;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
@@ -27,7 +28,7 @@ public class Dummy extends Enemy {
      * @param stats     {@link Stats} - stats
      */
     public Dummy(Point place, Direction direction, String name, Stats stats) {
-        super(3, place, direction, name, stats, 0, 0);
+        super(3, place, direction, name, stats, new Skills(), 0);
     }
 
     /**
@@ -37,7 +38,7 @@ public class Dummy extends Enemy {
      * @param direction {@link Direction} - direction
      */
     public Dummy(Point place, Direction direction) {
-        super(3, place, direction, "Dummy", new Stats(100, 100, 0, 0, 0), 0, 0);
+        super(3, place, direction, "Dummy", new Stats(100, 100, 0, 0, 0), new Skills(), 0);
     }
 
     @Override

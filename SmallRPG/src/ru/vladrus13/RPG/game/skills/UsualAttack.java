@@ -22,7 +22,7 @@ public class UsualAttack extends Skill {
      */
     public UsualAttack(DungeonService dungeonService) throws GameException {
         super(
-                new Animation(dungeonService.getPictureService().loadImage(Path.of("resources/assets/pictures/animations/UsualAttack.png")),
+                "Usual attack", "Usual attack", new Animation(dungeonService.getPictureService().loadImage(Path.of("resources/assets/pictures/animations/UsualAttack.png")),
                         100, new Point(0, 0), new Point(192, 192), new Point(32, 32)),
                 new Animation(dungeonService.getPictureService().loadImage(Path.of("resources/assets/pictures/animations/UsualAttack.png")),
                         100, new Point(0, 0), new Point(192, 192)),

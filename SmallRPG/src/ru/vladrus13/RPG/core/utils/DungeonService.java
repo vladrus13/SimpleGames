@@ -102,8 +102,14 @@ public class DungeonService {
         logger.info("Loading items factory...");
         itemFactory = new ItemFactory();
 
+        logger.info("Loading sound factory...");
+        soundFactory = new SoundFactory();
+
+        logger.info("Loading skill factory...");
+        skillFactory = new SkillFactory(this);
+
         logger.info("Loading person service...");
-        personService = new PersonService();
+        personService = new PersonService(this);
 
         logger.info("Loading events factory...");
         eventFactory = new EventFactory();
@@ -114,14 +120,8 @@ public class DungeonService {
         logger.info("Loading events service...");
         eventService = new EventService();
 
-        logger.info("Loading sound factory...");
-        soundFactory = new SoundFactory();
-
         logger.info("Loading shop service...");
         shopFactory = new ShopFactory(this);
-
-        logger.info("Loading skill factory...");
-        skillFactory = new SkillFactory(this);
 
         logger.info("Loading hero service...");
         heroService = new HeroService(this);

@@ -25,7 +25,7 @@ public class Combustion extends Skill {
      */
     public Combustion(DungeonService dungeonService) throws GameException {
         super(
-                new Animation(dungeonService.getPictureService().loadImage(Path.of("resources/assets/pictures/animations/Combustion.png")),
+                "Combustion", "Fire-element attack", new Animation(dungeonService.getPictureService().loadImage(Path.of("resources/assets/pictures/animations/Combustion.png")),
                         70, new Point(0, 0), new Point(192, 192), new Point(96, 96)),
                 new Animation(dungeonService.getPictureService().loadImage(Path.of("resources/assets/pictures/animations/Combustion.png")),
                         70, new Point(0, 0), new Point(192, 192)),

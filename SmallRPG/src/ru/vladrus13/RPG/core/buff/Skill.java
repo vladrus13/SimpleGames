@@ -10,6 +10,8 @@ import ru.vladrus13.RPG.core.utils.DungeonService;
  * Class-skills for {@link ru.vladrus13.RPG.core.person.Person}
  */
 public abstract class Skill implements Activating {
+    protected final String name;
+    protected final String description;
     /**
      * {@link Animation} on using this skill on dungeon
      */
@@ -37,13 +39,17 @@ public abstract class Skill implements Activating {
     /**
      * Constructor for Skill
      *
+     * @param name             name of skill
+     * @param description       description of skill
      * @param dungeonAnimation dungeon animation. Must be null, if this skill not used on dungeon
      * @param battleAnimation  battle animation, Must be null, if this skill not used on battle
      * @param sound            sound, that we play on use skill
      * @param keyCode          keycode activate this skill
      * @param cooldown         cooldown of skill
      */
-    public Skill(Animation dungeonAnimation, Animation battleAnimation, Sound sound, int keyCode, int cooldown) {
+    public Skill(String name, String description, Animation dungeonAnimation, Animation battleAnimation, Sound sound, int keyCode, int cooldown) {
+        this.name = name;
+        this.description = description;
         this.dungeonAnimation = dungeonAnimation;
         this.battleAnimation = battleAnimation;
         this.keyCode = keyCode;
@@ -88,6 +94,7 @@ public abstract class Skill implements Activating {
 
     /**
      * Getter for keyCode
+     *
      * @return keyCode
      */
     public int getKeyCode() {
@@ -96,6 +103,7 @@ public abstract class Skill implements Activating {
 
     /**
      * Getter for cooldown
+     *
      * @return cooldown
      */
     public int getCooldown() {

@@ -4,8 +4,10 @@ import ru.vladrus13.RPG.core.graphics.Drawing;
 import ru.vladrus13.RPG.core.graphics.KeyTaker;
 import ru.vladrus13.RPG.core.inventory.Inventory;
 import ru.vladrus13.RPG.core.inventory.Item;
+import ru.vladrus13.RPG.core.main.dialog.BigText;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
+import ru.vladrus13.RPG.core.utils.ways.Point;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -62,32 +64,30 @@ public class ItemMenu extends Drawing implements KeyTaker {
      * Function to make from item string with name and count
      */
     private final Function<Inventory.Items, String> fromItemToString = element -> element.getItem().getName() + " " + element.getCount();
-
     /**
      * Showing items
      */
     private ArrayList<Inventory.Items> showing;
-
     /**
      * Number of first showing item
      */
     private int showingFirstItem;
-
     /**
      * Height items window
      */
     private final int heightItems = 750;
-
     /**
      * Height description
      */
     private final int heightDescription = 50;
-
     /**
      * Width of items
      */
     private final int widthItems = 500;
-
+    /**
+     * Description of item
+     */
+    private BigText description;
     /**
      * Constructor of class
      *
@@ -119,7 +119,6 @@ public class ItemMenu extends Drawing implements KeyTaker {
     private Set<Inventory.Items> filter(Predicate<Inventory.Items> filter) {
         return dungeonService.getHero().getInventory().getItems().stream().filter(filter).collect(Collectors.toUnmodifiableSet());
     }
-
     /**
      * Reload items
      */
@@ -130,8 +129,8 @@ public class ItemMenu extends Drawing implements KeyTaker {
         specials = filter(element -> element.getItem().getItemType() == Item.ItemType.SPECIAL);
         countItem = 0;
         fillShowing();
+        reloadDescription();
     }
-
     /**
      * Fill showing array
      */
@@ -149,6 +148,15 @@ public class ItemMenu extends Drawing implements KeyTaker {
             case SPECIAL:
                 showing = toArray(specials);
                 break;
+        }
+    }
+
+    /**
+     * Reload description of current item
+     */
+    private void reloadDescription() {
+        if (showing.size() > countItem) {
+            description = new BigText(showing.get(countItem).getItem().getDescription(), new Point(widthItems + 20, heightDescription), new Point(770 - widthItems, 0), dungeonService, inventoryFont, Color.WHITE);
         }
     }
 
@@ -180,7 +188,7 @@ public class ItemMenu extends Drawing implements KeyTaker {
             graphics.drawString(fromItemToString.apply(showing.get(position)), 20, position * inventoryFont.getSize() + 50);
         }
         graphics.drawString(showing.get(countItem).getItem().getName(), widthItems + 20, 30);
-        graphics.drawString(showing.get(countItem).getItem().getDescription(), widthItems + 20, heightDescription);
+        description.draw(graphics);
     }
 
     @Override
@@ -193,6 +201,7 @@ public class ItemMenu extends Drawing implements KeyTaker {
                     if (countItem - showingFirstItem > heightItems / inventoryFont.getSize() && showingFirstItem + 1 < showing.size()) {
                         showingFirstItem++;
                     }
+                    reloadDescription();
                 }
                 break;
             case KeyEvent.VK_UP:
@@ -201,15 +210,20 @@ public class ItemMenu extends Drawing implements KeyTaker {
                     if (countItem - 1 < showingFirstItem && showingFirstItem > 0) {
                         showingFirstItem--;
                     }
+                    reloadDescription();
                 }
                 break;
             case KeyEvent.VK_Q:
                 itemType = itemType.previous();
                 fillShowing();
+                countItem = 0;
+                reloadDescription();
                 break;
             case KeyEvent.VK_E:
                 itemType = itemType.next();
                 fillShowing();
+                countItem = 0;
+                reloadDescription();
                 break;
             case KeyEvent.VK_ESCAPE:
                 shortMenu.returnToMenu();

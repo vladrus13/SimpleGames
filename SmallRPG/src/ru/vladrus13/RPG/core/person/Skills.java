@@ -53,6 +53,9 @@ public class Skills {
      * @return {@link Skill}
      */
     public Skill getSkill(int keyCode) {
+        if (keyCode >= skills.size()) {
+            return null;
+        }
         return skills.get(keyCode);
     }
 
@@ -77,7 +80,7 @@ public class Skills {
     }
 
     /**
-     * @param keyCode keyCode
+     * @param keyCode keyCode. Skill must be not null
      * @return true, if we can use this skill, else false (because cooldown)
      */
     public boolean canTake(int keyCode) {
@@ -85,7 +88,7 @@ public class Skills {
     }
 
     /**
-     * Reset last using skill
+     * Reset last using skill. Skill must be not null
      * @param keyCode keyCode
      */
     public void use(int keyCode) {
