@@ -47,7 +47,7 @@ public class BigText extends Drawing {
      * @param size size of text
      * @param dungeonService {@link DungeonService}
      * @param font {@link Font} - font
-     * @param color {@link Color} - Color
+     * @param color {@link Color} - color
      */
     public BigText(String text, Point position, Point size, DungeonService dungeonService, Font font, Color color) {
         this.notParsedText = text;
