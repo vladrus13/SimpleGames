@@ -3,6 +3,7 @@ package ru.vladrus13.RPG.core.main.frame.game;
 import ru.vladrus13.RPG.core.graphics.Drawing;
 import ru.vladrus13.RPG.core.graphics.KeyTaker;
 import ru.vladrus13.RPG.core.graphics.Updating;
+import ru.vladrus13.RPG.core.main.dialog.KeyTakerReturner;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
@@ -20,7 +21,7 @@ import static java.awt.event.KeyEvent.*;
  * Arrow game class
  */
 @SuppressWarnings("FieldCanBeLocal")
-public class ArrowGame extends Drawing implements KeyTaker, Updating {
+public class ArrowGame extends KeyTakerReturner implements Updating {
 
     /**
      * Collections of sequence arrows
@@ -66,10 +67,6 @@ public class ArrowGame extends Drawing implements KeyTaker, Updating {
      * Is failed game
      */
     private boolean isFailed = false;
-    /**
-     * Is game successfully end
-     */
-    private boolean isEnd = false;
 
     /**
      * Constructor for class
@@ -190,14 +187,5 @@ public class ArrowGame extends Drawing implements KeyTaker, Updating {
      */
     public boolean isFailed() {
         return isFailed;
-    }
-
-    /**
-     * Is game successfully end
-     *
-     * @return boolean
-     */
-    public boolean isEnd() {
-        return isEnd;
     }
 }
