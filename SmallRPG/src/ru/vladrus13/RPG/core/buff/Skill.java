@@ -10,7 +10,13 @@ import ru.vladrus13.RPG.core.utils.DungeonService;
  * Class-skills for {@link ru.vladrus13.RPG.core.person.Person}
  */
 public abstract class Skill implements Activating {
+    /**
+     * Name of skill
+     */
     protected final String name;
+    /**
+     * Description of skill
+     */
     protected final String description;
     /**
      * {@link Animation} on using this skill on dungeon
@@ -40,7 +46,7 @@ public abstract class Skill implements Activating {
      * Constructor for Skill
      *
      * @param name             name of skill
-     * @param description       description of skill
+     * @param description      description of skill
      * @param dungeonAnimation dungeon animation. Must be null, if this skill not used on dungeon
      * @param battleAnimation  battle animation, Must be null, if this skill not used on battle
      * @param sound            sound, that we play on use skill

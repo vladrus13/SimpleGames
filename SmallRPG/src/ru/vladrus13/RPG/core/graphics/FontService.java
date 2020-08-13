@@ -85,7 +85,7 @@ public class FontService {
      * @param text     text
      * @param font     {@link Font}
      * @param graphics {@link Graphics}
-     * @param width width
+     * @param width    width
      * @return array of text
      */
     public ArrayList<String> splitByWidth(String text, Font font, Graphics graphics, int width) {

@@ -4,6 +4,7 @@ import ru.vladrus13.RPG.core.buff.Skill;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.exception.GameException;
 import ru.vladrus13.RPG.game.skills.Combustion;
+import ru.vladrus13.RPG.game.skills.Heal;
 import ru.vladrus13.RPG.game.skills.UsualAttack;
 
 import java.util.HashMap;
@@ -28,6 +29,7 @@ public class SkillFactory {
         try {
             skills.put("UsualAttack", new UsualAttack(dungeonService));
             skills.put("Combustion", new Combustion(dungeonService));
+            skills.put("Heal", new Heal(dungeonService));
         } catch (GameException e) {
             e.printStackTrace();
         }

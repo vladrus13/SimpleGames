@@ -66,13 +66,14 @@ public class Enemy extends Person {
 
     /**
      * Constructor for class
-     *  @param id          id
-     * @param place       {@link Point} - place
-     * @param direction   {@link Direction} - direction
-     * @param name        name of enemy
-     * @param stats       {@link Stats} - stats
-     * @param skills      {@link Skills} - skills
-     * @param speed       speed of walking
+     *
+     * @param id        id
+     * @param place     {@link Point} - place
+     * @param direction {@link Direction} - direction
+     * @param name      name of enemy
+     * @param stats     {@link Stats} - stats
+     * @param skills    {@link Skills} - skills
+     * @param speed     speed of walking
      */
     public Enemy(int id, Point place, Direction direction, String name, Stats stats, Skills skills, int speed) {
         super(id, place, direction, name, speed);

@@ -37,11 +37,12 @@ public class BattlePerson extends Drawing {
 
     /**
      * Constructor for class
-     * @param image image of person
-     * @param position position of image
-     * @param skills {@link Skills}
+     *
+     * @param image          image of person
+     * @param position       position of image
+     * @param skills         {@link Skills}
      * @param dungeonService {@link DungeonService}
-     * @param stats {@link Stats}
+     * @param stats          {@link Stats}
      */
     public BattlePerson(BufferedImage image, Point position, Skills skills, DungeonService dungeonService, Stats stats) {
         this.image = image;
@@ -54,5 +55,21 @@ public class BattlePerson extends Drawing {
     @Override
     public void draw(Graphics graphics) {
         graphics.drawImage(image, position.getX(), position.getY(), null);
+    }
+
+    /**
+     * Getter for Skills
+     * @return {@link Skills}
+     */
+    public Skills getSkills() {
+        return skills;
+    }
+
+    /**
+     * Getter for Stats
+     * @return {@link Stats}
+     */
+    public Stats getStats() {
+        return stats;
     }
 }

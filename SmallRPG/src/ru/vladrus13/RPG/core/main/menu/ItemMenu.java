@@ -88,6 +88,7 @@ public class ItemMenu extends Drawing implements KeyTaker {
      * Description of item
      */
     private BigText description;
+
     /**
      * Constructor of class
      *
@@ -119,6 +120,7 @@ public class ItemMenu extends Drawing implements KeyTaker {
     private Set<Inventory.Items> filter(Predicate<Inventory.Items> filter) {
         return dungeonService.getHero().getInventory().getItems().stream().filter(filter).collect(Collectors.toUnmodifiableSet());
     }
+
     /**
      * Reload items
      */
@@ -131,6 +133,7 @@ public class ItemMenu extends Drawing implements KeyTaker {
         fillShowing();
         reloadDescription();
     }
+
     /**
      * Fill showing array
      */

@@ -29,6 +29,7 @@ public class HeroService {
         Skills heroSkills = new Skills();
         heroSkills.set(0, dungeonService.getSkillFactory().get("UsualAttack"));
         heroSkills.set(KeyEvent.VK_C, dungeonService.getSkillFactory().get("Combustion"));
+        heroSkills.set(KeyEvent.VK_H, dungeonService.getSkillFactory().get("Heal"));
         hero = new Hero(0, new Point(1, 1), UP, dungeonService, "Hero", heroSkills);
     }
 

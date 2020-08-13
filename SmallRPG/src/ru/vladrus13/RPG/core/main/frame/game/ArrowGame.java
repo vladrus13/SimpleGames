@@ -1,7 +1,5 @@
 package ru.vladrus13.RPG.core.main.frame.game;
 
-import ru.vladrus13.RPG.core.graphics.Drawing;
-import ru.vladrus13.RPG.core.graphics.KeyTaker;
 import ru.vladrus13.RPG.core.graphics.Updating;
 import ru.vladrus13.RPG.core.main.dialog.KeyTakerReturner;
 import ru.vladrus13.RPG.core.utils.DungeonService;

@@ -13,9 +13,25 @@ public abstract class KeyTakerReturner extends Drawing implements KeyTaker {
     protected boolean isEnd;
 
     /**
+     * Is this accepted
+     */
+    protected boolean isAccepted;
+
+    /**
+     * Is this end
+     *
      * @return is KeyTaker end
      */
     public boolean isEnd() {
         return isEnd;
+    }
+
+    /**
+     * Is this accepted
+     *
+     * @return is KeyTaker accepted
+     */
+    public boolean isAccepted() {
+        return isAccepted;
     }
 }

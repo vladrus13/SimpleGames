@@ -90,12 +90,14 @@ public class Point implements Cloneable {
 
     /**
      * Distance from this point and given point
+     *
      * @param a another point
      * @return distance
      */
     public double distance(Point a) {
-        return Math.sqrt(Math.pow(a.x - this.x, 2) + Math.pow(this.y  - a.y, 2));
+        return Math.sqrt(Math.pow(a.x - this.x, 2) + Math.pow(this.y - a.y, 2));
     }
+
     /**
      * Get a neighboring point of this
      *

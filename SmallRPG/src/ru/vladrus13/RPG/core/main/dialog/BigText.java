@@ -42,12 +42,13 @@ public class BigText extends Drawing {
 
     /**
      * Constructor of class
-     * @param text text, which we show
-     * @param position position of text - {@link Point}
-     * @param size size of text
+     *
+     * @param text           text, which we show
+     * @param position       position of text - {@link Point}
+     * @param size           size of text
      * @param dungeonService {@link DungeonService}
-     * @param font {@link Font} - font
-     * @param color {@link Color} - color
+     * @param font           {@link Font} - font
+     * @param color          {@link Color} - color
      */
     public BigText(String text, Point position, Point size, DungeonService dungeonService, Font font, Color color) {
         this.notParsedText = text;

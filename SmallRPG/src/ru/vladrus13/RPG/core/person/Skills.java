@@ -89,6 +89,7 @@ public class Skills {
 
     /**
      * Reset last using skill. Skill must be not null
+     *
      * @param keyCode keyCode
      */
     public void use(int keyCode) {

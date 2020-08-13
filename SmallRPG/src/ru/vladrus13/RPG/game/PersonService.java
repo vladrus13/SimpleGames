@@ -1,16 +1,11 @@
 package ru.vladrus13.RPG.game;
 
-import ru.vladrus13.RPG.core.person.Enemy;
 import ru.vladrus13.RPG.core.person.Person;
-import ru.vladrus13.RPG.core.person.Skills;
-import ru.vladrus13.RPG.core.person.Stats;
 import ru.vladrus13.RPG.core.utils.DungeonService;
 import ru.vladrus13.RPG.core.utils.ways.Direction;
 import ru.vladrus13.RPG.core.utils.ways.Point;
 import ru.vladrus13.RPG.game.enemies.Dummy;
 import ru.vladrus13.RPG.game.enemies.Goblin;
-
-import java.util.Collections;
 
 /**
  * @author vladkuznetsov
@@ -24,6 +19,7 @@ public class PersonService {
 
     /**
      * Constructor for class
+     *
      * @param dungeonService {@link DungeonService}
      */
     public PersonService(DungeonService dungeonService) {

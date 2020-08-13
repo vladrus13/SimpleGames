@@ -1,6 +1,9 @@
 package ru.vladrus13.RPG.core.utils.ways;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -9,7 +12,8 @@ import java.util.stream.Collectors;
 public class WayService {
     /**
      * Find all points on distance of x
-     * @param x point
+     *
+     * @param x        point
      * @param distance distance
      * @return list of points
      */

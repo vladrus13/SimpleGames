@@ -16,6 +16,7 @@ import java.util.Collections;
 public class Goblin extends Enemy {
     /**
      * Constructor for class
+     *
      * @param dungeonService {@link DungeonService}
      */
     public Goblin(DungeonService dungeonService) {
