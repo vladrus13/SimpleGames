@@ -38,10 +38,6 @@ public class ArrowGame extends KeyTakerReturner implements Updating {
      */
     private final int leftX = 30;
     /**
-     * Time limit.
-     */
-    private final int fullTime;
-    /**
      * {@link BufferedImage} of arrow UP
      */
     private final BufferedImage UP;
@@ -77,7 +73,6 @@ public class ArrowGame extends KeyTakerReturner implements Updating {
     public ArrowGame(LinkedList<Direction> arrows, int time, DungeonService dungeonService) throws GameException {
         this.arrows = arrows;
         this.time = time;
-        this.fullTime = time;
         this.UP = dungeonService.getPictureService().loadImage(Path.of("resources/assets/pictures/games/arrows/up.png"));
         this.DOWN = dungeonService.getPictureService().loadImage(Path.of("resources/assets/pictures/games/arrows/down.png"));
         this.LEFT = dungeonService.getPictureService().loadImage(Path.of("resources/assets/pictures/games/arrows/left.png"));
@@ -167,6 +162,7 @@ public class ArrowGame extends KeyTakerReturner implements Updating {
             this.time -= Math.min(time, this.time);
         }
         if (this.time == 0) {
+            isEnd = true;
             isFailed = true;
             try {
                 dungeonService.getDungeon().removeFocus(this);
@@ -179,11 +175,14 @@ public class ArrowGame extends KeyTakerReturner implements Updating {
     }
 
     /**
-     * Is game failed
-     *
-     * @return boolean
+     * @return return object
+     * @throws GameException if this not end
      */
-    public boolean isFailed() {
-        return isFailed;
+    @Override
+    public Object returner() throws GameException {
+        if (!isEnd) {
+            throw new GameException("Game is continue");
+        }
+        return !isFailed;
     }
 }
