@@ -12,7 +12,8 @@ import java.awt.event.KeyEvent;
  */
 public class BattleMenu extends KeyTakerReturner {
 
-
+    BattleItemMenu battleItemMenu;
+    BattleSkillMenu battleSkillMenu;
 
 
     @Override
@@ -31,5 +32,9 @@ public class BattleMenu extends KeyTakerReturner {
             throw new GameException("Battle menu not end");
         }
         return null;
+    }
+
+    public void returnToMenu() {
+
     }
 }
